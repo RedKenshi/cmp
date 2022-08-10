@@ -1,0 +1,24 @@
+type Structure{
+    _id: String
+    entityUID: Int
+    fields: [StructureField]
+    label: String
+    name: String
+}
+type StructureField{
+    _id: String
+    label: String
+    name: String
+    type: String
+}
+
+type Query{
+    structure(uid:Int): Structure
+    structures : [Structure]
+}
+
+type Mutation{
+    addStructure(label: String, name: String): [QueryResultMessage]
+    addFieldToStructure(_id: String!,label: String, name: String, type: String!): [QueryResultMessage]
+    deleteStructure(_id: String!): [QueryResultMessage]
+}

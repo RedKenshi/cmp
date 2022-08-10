@@ -1,0 +1,105 @@
+/*COLORS FROM FLAT UI COLOR PALETTE 1*/
+$flat-teal-light:#1abc9c;
+$flat-teal-dark:#16a085;
+$flat-green-light:#2ecc71;
+$flat-green-dark:#27ae60;
+$flat-blue-light:#3498db;
+$flat-blue-dark:#2980b9;
+$flat-violet-light:#9b59b6;
+$flat-violet-dark:#8e44ad;
+$flat-dark-light:#34495e;
+$flat-dark-dark:#2c3e50;
+$flat-yellow-light:#f1c40f;
+$flat-yellow-dark:#f39c12;
+$flat-orange-light:#e67e22;
+$flat-orange-dark:#d35400;
+$flat-red-light:#e74c3c;
+$flat-red-dark:#c0392b;
+$flat-white-light:#e0e0e5;
+$flat-white-dark:#bdc3c7;
+$flat-grey-light:#95a5a6;
+$flat-grey-dark:#7f8c8d;
+
+/*COLORS FROM SEMANTIC UI REACT BUTTONS*/
+$sui-base:#e0e1e2;
+$sui-base-light:#cacbcd;
+$sui-green:#21ba45;
+$sui-green-light:#16ab39;
+$sui-blue:#2185d0;
+$sui-blue-light:#1678c2;
+$sui-red:#db2828;
+$sui-red-light:#d01919;
+$sui-yellow:#fbbd08;
+$sui-yellow-light:#eaae00;
+$sui-orange:#f2711c;
+$sui-orange-light:#f26202;
+$sui-teal:#00b5ad;
+$sui-teal-light:#009c95;
+$sui-olive:#b5cc18;
+$sui-olive-light:#a7bd0d;
+$sui-purple:#a333c8;
+$sui-purple-light:#9627ba;
+$sui-violet:#6435c9;
+$sui-violet-light:#5829bb;
+$sui-pink:#e03997;
+$sui-pink-light:#e61a8d;
+$sui-grey:#767676;
+$sui-grey-light:#838383;
+$sui-brown:#a5673f;
+$sui-brown-light:#975b33;
+$sui-black:#1b1c1d;
+$sui-black-light:#27292a;
+
+$text:$flat-dark-light;
+$text-light:#f1f2f5;
+
+/*3 COLORS THEME*/
+$light-bg:#FCFCFC;
+$light-panel:#E8E8E8;
+$light-details:#D8D8D8;
+$light-text:$text;
+
+$dark-bg:#101016;
+$dark-details:#161621;
+$dark-panel:#202026;
+$dark-text:$text-light;
+
+$theme-bg: $light-bg;
+$theme-details: $light-details;
+$theme-panel: $light-panel;
+$theme-text: $light-text;
+
+/*SELECTED COLORS*/
+$base : $sui-base;
+$base-light : $sui-base-light;
+$green : $sui-green;
+$green-light : $sui-green-light;
+$blue : $sui-blue;
+$blue-light : $sui-blue-light;
+$red : $sui-red;
+$red-light : $sui-red-light;
+$yellow : $sui-yellow;
+$yellow-light : $sui-yellow-light;
+$orange : $sui-orange;
+$orange-light : $sui-orange-light;
+$teal : $sui-teal;
+$teal-light : $sui-teal-light;
+$olive : $sui-olive;
+$olive-light : $sui-olive-light;
+$purple : $sui-purple;
+$purple-light : $sui-purple-light;
+$violet : $sui-violet;
+$violet-light : $sui-violet-light;
+$pink : $sui-pink;
+$pink-light : $sui-pink-light;
+$grey : $sui-grey;
+$grey-light : $sui-grey-light;
+$brown : $sui-brown;
+$brown-light : $sui-brown-light;
+
+$black : $sui-black;
+$black-light : $sui-black-light;
+$full-white:#fff;
+$full-black:#000;
+$navbar-arrow-one:#0002;
+$navbar-arrow-two:#0006;

@@ -1,0 +1,14 @@
+type Layout{
+    _id: String
+    name: String
+}
+
+type Query{
+    layout: Layout
+    layouts : [Layout]
+}
+
+type Mutation{
+    addLayout(title: String, icon: String): [QueryResultMessage]
+    deleteLayout(_id: String!): [QueryResultMessage]
+}

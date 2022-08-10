@@ -1,0 +1,6 @@
+{
+    "plugins":[
+        "babel-plugin-import-graphql",
+        "babel-plugin-inline-import"
+    ]
+}

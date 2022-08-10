@@ -1,0 +1,26 @@
+type Page{
+    _id: String
+    entityUID: Int
+    parentUID: Int
+    sub: [Page]
+    title: String
+    icon: String
+    url: String
+    name: String
+    active: Boolean
+    layout: Layout
+}
+
+type Query{
+    page: Page
+    pages : [Page]
+    pagesTree : [Page]
+    pageAndSubTree : Page
+}
+
+type Mutation{
+    addPage(title: String, parentUID: Int, icon: String): [QueryResultMessage]
+    toggleActive(_id: String!): [QueryResultMessage]
+    deletePage(_id: String!): [QueryResultMessage]
+    setLayout(_id:String!,layout:String!): [QueryResultMessage]
+}
