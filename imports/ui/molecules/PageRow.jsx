@@ -70,7 +70,7 @@ export const PageRow = props => {
                     <div className="page-row-wrapper" onClick={()=>setDisplaySubs(!displaySubs)}>
                         <div className="page-row-content">
                             {getDisplaySubsButton()}
-                            <i className={"fa-"+props.fastyle+" fa-file"}/>
+                            <i className={"fa-duotone fa-file"}/>
                             <p>{props.page.title}</p>
                         </div>
                         <div className="page-row-content">

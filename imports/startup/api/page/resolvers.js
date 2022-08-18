@@ -90,7 +90,7 @@ export default {
             }
             throw new Error('Unauthorized')
         },
-        async toggleActive(obj,{_id,layout},{user}){
+        async setLayout(obj,{_id,layout},{user}){
             if(user._id){
                 const admin = Meteor.users.findOne({_id:user._id});
                 if(admin.settings.isAdmin){

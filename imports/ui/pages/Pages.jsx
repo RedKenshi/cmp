@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
 import PageRow from "../molecules/PageRow";
+import FontAwesomePicker from "../atoms/FontAwesomePicker";
 import AdministrationMenu from "../molecules/AdministrationMenu";
 import _ from 'lodash';
 import { Fragment } from "react/cjs/react.production.min";
@@ -78,6 +79,12 @@ const Pages = props => {
     setFormValues({
         ...formValues,
         [e.target.name] : e.target.value
+    })
+  }
+  const selectIcon = icon => {
+    setFormValues({
+      ...formValues,
+      icon : icon
     })
   }
   const addPage = () => {
@@ -177,7 +184,7 @@ const Pages = props => {
               <div className="field">
                 <label className="label">Icon</label>
                 <div className="control">
-                  <input className="input" type="text" onChange={handleFormChange} name="icon"/>
+                  <FontAwesomePicker selectIcon={selectIcon} />
                 </div>
               </div>
             </section>
