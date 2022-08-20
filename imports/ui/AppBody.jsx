@@ -13,13 +13,26 @@ import Structures from './pages/Structures.jsx'
 import Structure from './pages/Structure.jsx'
 import Accounts from './pages/Accounts.jsx';
 
-import { gql } from 'graphql-tag';
-
-
-
 export const AppBody = props => {
 
-    const getRoutes = () => props.pagesTree.map(p=><Route exact path={p.url} element={withNavbar(CustomPage)({...props})}/>)
+    const getRoutes = () => {
+        let routes = [];
+        props.pagesTree.map(p=>{
+            routes.push(...extractSubRoutes(p));
+        })
+        //console.log(routes.map(r=>r.props.path))// - UNCOMMENT TO CONSOLE LOG AVAILABLE ROUTES
+        return routes;
+    }
+    const extractSubRoutes = p => {
+        let routes = [];
+        if(p.active){
+            routes.push(<Route exact path={p.fullpath} element={withNavbar(CustomPage)({...props})}/>)
+            if(p.sub){
+                p.sub.map(s=>{routes.push(...extractSubRoutes(s));})
+            }
+        }
+        return routes;
+    }
 
     if(Meteor.userId() != null){
         if(props.isActivated == "loading"){

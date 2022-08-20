@@ -30,7 +30,7 @@ export const Humans = props => {
                     <input className='input' type="text"/>
                 </div>
                 <div>
-                    <button className='button is-light is-info' onClick={()=>setOpenModalAdd(true)}>
+                    <button className='button is-light is-link' onClick={()=>setOpenModalAdd(true)}>
                         <i className='fa-regular fa-plus'/>
                     </button>
                 </div>

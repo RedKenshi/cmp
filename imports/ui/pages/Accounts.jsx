@@ -47,23 +47,25 @@ const Accounts = props => {
         <div className="box">
           <input className="input is-large" name="usersFilter" onChange={e=>handleFilter(e.target.value)} placeholder='Search account by name or mail ...'/>
         </div>
-        <table className="table is-fullwidth is-stripped is-hoverable">
-          <thead>
-            <tr>
-              <td>#</td>
-              <td></td>
-              <td>Name</td>
-              <td>Mail</td>
-              <td>Activated</td>
-              <td>isAdmin</td>
-              <td>isOwner</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>
-            {accounts().map((a,i) => <AccountRow key={a._id} loadAccounts={loadAccounts} account={a} index={i}/>)}
-          </tbody>
-        </table>
+        <div className="box">
+          <table className="table is-fullwidth is-stripped is-hoverable">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td></td>
+                <td>Name</td>
+                <td>Mail</td>
+                <td>Activated</td>
+                <td>isAdmin</td>
+                <td>isOwner</td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              {accounts().map((a,i) => <AccountRow key={a._id} loadAccounts={loadAccounts} account={a} index={i}/>)}
+            </tbody>
+          </table>
+          </div>
       </div>
     </div>
   )

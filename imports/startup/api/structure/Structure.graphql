@@ -4,6 +4,7 @@ type Structure{
     fields: [StructureField]
     label: String
     name: String
+    icon: String
 }
 type StructureField{
     _id: String
@@ -18,7 +19,7 @@ type Query{
 }
 
 type Mutation{
-    addStructure(label: String, name: String): [QueryResultMessage]
+    addStructure(label: String, name: String, icon: String): [QueryResultMessage]
     addFieldToStructure(_id: String!,label: String, name: String, type: String!): [QueryResultMessage]
     deleteStructure(_id: String!): [QueryResultMessage]
 }

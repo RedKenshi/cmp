@@ -20,13 +20,14 @@ export default {
         },
     },
     Mutation:{
-        async addStructure(obj,{label,name},{user}){
+        async addStructure(obj,{label,name,icon},{user}){
             if(user._id){
                 Structures.insert({
                     _id:new Mongo.ObjectID(),
                     entityUID: Math.floor(Math.random()*999999),
                     label: label,
-                    name: name.toLowerCase().replace(" ","-")
+                    name: name.toLowerCase().replace(" ","-"),
+                    icon: icon.toLowerCase()
                 });
                 return [{status:"success",message:'Création réussie'}];
             }

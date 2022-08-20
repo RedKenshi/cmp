@@ -4,11 +4,10 @@ import { UserContext } from "../../contexts/UserContext";
 import { gql } from 'graphql-tag';
 import Button from "../elements/Button";
 
-export const PageRow = props => {
+const PageRow = props => {
 
     //HOOK STATE
-    const [displaySubs, setDisplaySubs] = useState(false);
-    const [displayContextualMenu, setDisplayContextualMenu] = useState(false);
+    const [displaySubs, setDisplaySubs] = useState(true);
 
     //GRAPHQL QUERIES AND MUTATIONS
     const toggleActiveQuery = gql`mutation toggleActive($_id:String!){
@@ -26,7 +25,6 @@ export const PageRow = props => {
                 _id:props.page._id,
             }
         }).then((data)=>{
-            props.loadPages();
             props.toastQRM(data.data.toggleActive)
             props.loadPages();
         })
@@ -39,7 +37,7 @@ export const PageRow = props => {
                 <ul className="subs is-fullwidth">
                     {
                         props.page.sub.map((p,i) =>
-                            <PageRow key={p._id} loadPages={props.loadPages} addSubPage={props.addSubPage} showModalDelete={props.showModalDelete} page={p} index={i}/>
+                            <PageRowContext key={p._id} loadPages={props.loadPages} addSubPage={props.addSubPage} showModalDelete={props.showModalDelete} page={p} index={i}/>
                         )
                     }
                 </ul>
@@ -55,44 +53,29 @@ export const PageRow = props => {
             return ""
         }
     }
-    const getActiveIndicator = () => {
-        if(props.page.active){
-            return <span className="tag is-success">Active</span>
-        }else{
-            return <span className="tag is-danger">Inactive</span>
-        }
-    }
 
     return (
         <Fragment>
             <li>
                 <div className={"page-and-subs-wrapper" + (props.page.sub ? " has-subs" : " has-no-subs") }>
-                    <div className="page-row-wrapper" onClick={()=>setDisplaySubs(!displaySubs)}>
+                    <div className="page-row-wrapper">
                         <div className="page-row-content">
                             {getDisplaySubsButton()}
-                            <i className={"fa-duotone fa-file"}/>
+                            <i className={(props.page.active ? "has-text-success " : "has-text-warning ") + "fa-duotone fa-file"}/>
                             <p>{props.page.title}</p>
                         </div>
-                        <div className="page-row-content">
-                            {getActiveIndicator()}
-                            <div className={"dropdown is-hoverable is-right " + (displayContextualMenu ? "is-active" : "")}>
-                                <div className="dropdown-trigger">
-                                    <i className="fa-solid fa-ellipsis" onClick={()=>setDisplayContextualMenu(!displayContextualMenu)}/>
-                                </div>
-                                <div className="dropdown-menu" id="dropdown-menu" role="menu">
-                                    <div className="dropdown-content">
-                                        <a onClick={()=>props.addSubPage(props.page.entityUID)} className="dropdown-item">
-                                            Ajouter une sous page
-                                        </a>
-                                        <a onClick={toggleActive} className="dropdown-item">
-                                            {(props.page.active ? "Désactiver la page" : "Activer la page")}
-                                        </a>
-                                        <a onClick={()=>props.showModalDelete(props.page._id)} className="dropdown-item">
-                                            Supprimer la page
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="page-row-actions">
+
+                            <button onClick={()=>props.addSubPage(props.page.entityUID)} className="button is-small is-link is-light">
+                                <i className="fa-light fa-fw fa-plus"></i>
+                            </button>
+                            <button onClick={toggleActive} className={"button is-small is-light " +(props.page.active ? "is-warning" : "is-success")}>
+                                {(props.page.active ? <i className="fa-light fa-fw fa-cancel"></i> : <i className="fa-light fa-fw fa-check"></i>)}
+                            </button>
+                            <button onClick={()=>props.showModalDelete(props.page._id)} className="button is-small is-danger is-light">
+                                <i className="fa-light fa-fw fa-trash"></i>
+                            </button>
+
                         </div>
                     </div>
                     {getSubPages()}
@@ -107,5 +90,6 @@ const withUserContext = WrappedComponent => props => (
         {ctx => <WrappedComponent {...ctx} {...props}/>}
     </UserContext.Consumer>
 )
-  
+
+export const PageRowContext = withUserContext(PageRow)
 export default wrappedInUserContext = withUserContext(PageRow);

@@ -161,49 +161,49 @@ export const AccountRow = props => {
             }
             case "activate":{
                 return(
-                    <div className="is-info">
+                    <div className="is-link">
                         Activate {props.account.firstname} {props.account.lastname}'s account ?
                     </div>
                 )
             }
             case "deactivate":{
                 return(
-                    <div className="is-info">
+                    <div className="is-link">
                         Deactivate {props.account.firstname} {props.account.lastname}'s account ?
                     </div>
                 )
             }
             case "admin":{
                 return(
-                    <div className="is-info">
+                    <div className="is-link">
                         Give {props.account.firstname} {props.account.lastname}'s account administrator power ?
                     </div>
                 )
             }
             case "unadmin":{
                 return(
-                    <div className="is-info">
+                    <div className="is-link">
                         Remove {props.account.firstname} {props.account.lastname}'s account its administrator power ?
                     </div>
                 )
             }
             case "owner":{
                 return(
-                    <div className="is-info">
+                    <div className="is-link">
                         Give {props.account.firstname} {props.account.lastname}'s account the ownership of the platform ?
                     </div>
                 )
             }
             case "unowner":{
                 return(
-                    <div className="is-info">
+                    <div className="is-link">
                         Remove {props.account.firstname} {props.account.lastname}'s account its ownership of the platform ?
                     </div>
                 )
             }
             case "delete":{
                 return(
-                    <div className="is-info">
+                    <div className="is-link">
                         Delete {props.account.firstname} {props.account.lastname}'s account ?
                     </div>
                 )
@@ -355,7 +355,7 @@ export const AccountRow = props => {
                 <td>{props.account.mail}</td>
                 <td>{(props.account.activated ? <span className="tag is-success">Yes</span> : <span className="tag is-danger">No</span>)}</td>
                 <td>{(props.account.isAdmin ? <span className="tag is-success">Yes</span> : <span className="tag is-dark">No</span>)}</td>
-                <td>{(props.account.isOwner ? <span className="tag is-info">Yes</span> : <span className="tag is-dark">No</span>)}</td>
+                <td>{(props.account.isOwner ? <span className="tag is-link">Yes</span> : <span className="tag is-dark">No</span>)}</td>
                 <td className="is-narrow">
                     <Button color="info" size="small" light onClick={()=>setModalState("user")} icon="far fa-user"/>
                     <div className={"modal" + (modalState != false ? " is-active" : "")}>

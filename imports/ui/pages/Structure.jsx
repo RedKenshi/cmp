@@ -29,6 +29,7 @@ const Structure = props => {
         structure(uid:$uid) {
             _id
             entityUID
+            icon
             fields{
                 _id
                 label
@@ -131,9 +132,11 @@ const Structure = props => {
                 <div className="structure padded columns">
                     <div className="column is-narrow">
                         <AdministrationMenu active="structures"/>
-                        <button  className="button is-danger is-fullwidth">
-                            Delete structure
-                        </button>
+                        <div className="box rows">
+                            <button  className="button is-danger is-fullwidth">
+                                Delete structure
+                            </button>
+                        </div>
                     </div>
                     <div className="column rows">
                         <h1 className="block title is-1" >{structureRaw.label}</h1>

@@ -15,10 +15,10 @@ export const StructureRow = props => {
     return (
         <Fragment>
             <li>
-                <div className="structure-row-wrapper">
+                <div className="structure-row-wrapper box">
                     <div className="columns">
                         <div className="is-narrow column flex align">
-                            <i className={"fa fa-"+props.fastyle+" fa-cube"}/>
+                            <i className={"fa fa-"+props.fastyle+" fa-"+props.structure.icon}/>
                         </div>
                         <div className="column flex align">
                             <h3>{props.structure.label}</h3>
@@ -26,11 +26,15 @@ export const StructureRow = props => {
                     </div>
                     <div className="details-and-actions columns">
                         <div className="details column is-half">
-                            <i className="tag is-medium is-info">xxx instances</i>
+                            <i className="tag is-small is-link is-light">0 instances</i>
                         </div>
                         <div className="actions column is-half">
-                            <button className="button is-small is-danger" onClick={()=>props.showModalDelete(props.structure._id)}>Delete</button>
-                            <button className="button is-small is-info" onClick={()=>navigate(props.structure.entityUID.toString())} >Details</button>
+                            <button className="button is-small is-danger is-light" onClick={()=>props.showModalDelete(props.structure._id)}>
+                                <i className={"fa-" + props.fastyle + " fa-trash"}></i>
+                            </button>
+                            <button className="button is-small is-link is-light" onClick={()=>navigate(props.structure.entityUID.toString())} >
+                                <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -30,6 +30,7 @@ export const UserProvider = props => {
         title
         name
         url
+        fullpath
         icon
         active
         sub{
@@ -39,6 +40,7 @@ export const UserProvider = props => {
             title
             name
             url
+            fullpath
             icon
             active
             sub{
@@ -48,6 +50,7 @@ export const UserProvider = props => {
                 title
                 name
                 url
+                fullpath
                 icon
                 active
                 sub{
@@ -57,6 +60,7 @@ export const UserProvider = props => {
                     title
                     name
                     url
+                    fullpath
                     icon
                     active
                     }

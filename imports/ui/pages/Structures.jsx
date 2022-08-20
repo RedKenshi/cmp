@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
 import StructureRow from "../molecules/StructureRow";
+import FontAwesomePicker from "../atoms/FontAwesomePicker";
 import AdministrationMenu from "../molecules/AdministrationMenu";
 import _ from 'lodash';
 import { Fragment } from "react/cjs/react.production.min";
@@ -11,7 +12,8 @@ const Structures = props => {
   const [structureFilter, setStructureFilter] = useState('');
   const [formValues, setFormValues] = useState({
         label:'',
-        name:''
+        name:'',
+        icon:''
   });
   const [deleteTargetId, setDeleteTargetId] = useState("");
   const [openModalAdd,setOpenModalAdd] = useState(false);
@@ -22,6 +24,7 @@ const Structures = props => {
     structures {
       _id
       entityUID
+      icon
       fields{
         _id
         label
@@ -32,8 +35,8 @@ const Structures = props => {
       name
     }
   }`;
-  const addStructureQuery = gql`mutation addStructure($label: String, $name: String){
-    addStructure(label:$label,name:$name){
+  const addStructureQuery = gql`mutation addStructure($label: String, $name: String, $icon: String){
+    addStructure(label:$label,name:$name,icon:$icon){
         status
         message
     }
@@ -51,6 +54,12 @@ const Structures = props => {
     }
   }`;
 
+const selectIcon = icon => {
+  setFormValues({
+    ...formValues,
+    icon : icon
+  })
+}
   const handleFormChange = e => {
     setFormValues({
         ...formValues,
@@ -62,7 +71,8 @@ const Structures = props => {
         mutation:addStructureQuery,
         variables:{
             label:formValues.label,
-            name:formValues.name
+            name:formValues.name,
+            icon:formValues.icon
         }
     }).then((data)=>{
         loadStructures();
@@ -130,9 +140,11 @@ const Structures = props => {
           </ul>
         </div>
         <div className="column is-narrow">
-          <button className='button is-light is-info' onClick={()=>showModalAdd(0)}>
-              <i className='fa-regular fa-plus'/>
-          </button>
+          <div className="is-fullwidth box">
+            <button className='button is-light is-link' onClick={()=>showModalAdd(0)}>
+                <i className='fa-regular fa-plus'/>
+            </button>
+          </div>
         </div>
       </div>
       <div className={"modal" + (openModalAdd != false ? " is-active" : "")}>
@@ -155,6 +167,12 @@ const Structures = props => {
                   <input className="input" type="text" onChange={handleFormChange} name="name"/>
                 </div>
               </div>
+              <div className="field">
+                  <label className="label">Icon</label>
+                  <div className="control">
+                    <FontAwesomePicker selectIcon={selectIcon} />
+                  </div>
+                </div>
             </section>
             <footer className="modal-card-foot">
                 <button className='button' onClick={closeModalAdd}>

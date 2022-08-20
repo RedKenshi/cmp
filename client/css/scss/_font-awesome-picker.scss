@@ -1,0 +1,46 @@
+.font-awesome-picker{
+    .input.selected-code{
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .input.search{
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-radius: initial initial 0 0;
+        font-size: .75rem;
+    }
+    .selected{
+        display:flex;
+        width:100%;
+        justify-content: center;
+        align-items: center;
+        margin:.5rem 0;
+        gap:.75rem .5rem;
+        i{
+            font-size: 2.5rem;
+            padding: .25rem;
+        }
+    }
+    .icons-preview{
+        display:grid;
+        grid-template-columns:repeat(8,auto);
+        grid-template-rows:repeat(2,auto);
+        width:100%;
+        margin-top:.75rem;
+        gap:.75rem .5rem;
+        .icon-tile{
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: .25rem;
+            border-radius: .25rem;
+            &:hover{
+                background: #0002;
+            }
+        }
+    }
+    .no-result{
+        grid-column-end: span 8;
+        grid-row-end: span 2;
+        place-self: center;
+    }
+}

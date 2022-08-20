@@ -3142,31 +3142,48 @@ export const FontAwesomePicker = props => {
         {code:"yin-yang",name:"yin-yang"},
         {code:"z",name:"z"}
     ]
+
     const [search, setSearch] = useState('');
+    const [selected, setSelected] = useState('');
+    const selectIcon = code => {
+        setSelected(code)
+        props.selectIcon(code)
+    }
     const getPreviews = () => {
         let res = [];
-        console.log(search.length)
         if(search.length > 0){
-            icons.filter(i=> i.code.includes(search)).slice(0,8).map(x=>{
+            icons.filter(i=> i.code.includes(search)).slice(0,16).map(x=>{
                 res.push(
-                    <i style={{cursor:"pointer",flex:"1 1 20%",fontSize:"2rem"}} className={'fa-light fa-fw fa-'+x.code} onClick={()=>{props.selectIcon(x.code)}}></i>
+                    <div className="icon-tile">
+                        <i className={'fa-light fa-fw fa-'+x.code} onClick={()=>{selectIcon(x.code)}}></i>
+                    </div>
                 )
             })
-            return <div style={{display:"flex",width:"100%",marginTop:".75rem",gap:".75rem .5rem"}}>
+            return <div className="icons-preview">
                 {res.map(x=>x)}
             </div>
         }
-        return <p>At least 1 characters</p>
+        return <div className="icons-preview">
+                <p className='no-result'>At least 1 characters</p>
+            </div>
     }
     const handleFormChange = e => {
         setSearch(e.target.value)
     }
 
     return (
-        <Fragment>
-            <input className="input" type="text" onChange={handleFormChange} name="icon"/>
+        <div className='font-awesome-picker'>
+            <div className="selected">
+                <i className={"fa-solid fa-"+selected}></i>
+                <i className={"fa-regular fa-"+selected}></i>
+                <i className={"fa-light fa-"+selected}></i>
+                <i className={"fa-thin fa-"+selected}></i>
+                <i className={"fa-duotone fa-"+selected}></i>
+            </div>
+            <input className="input selected-code" disabled value={"fa-"+selected} type="text" name="icon"/>
+            <input placeholder="Rechercher un icone ..." className="input search" type="text" onChange={handleFormChange} name="icon"/>
             {getPreviews()}
-        </Fragment>
+        </div>
     )
 }
 

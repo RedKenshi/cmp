@@ -6,16 +6,19 @@ type Page{
     title: String
     icon: String
     url: String
+    fullpath:String
     name: String
     active: Boolean
     layout: Layout
 }
 
 type Query{
-    page: Page
+    page(_id: String!): Page
     pages : [Page]
     pagesTree : [Page]
+    pageAndSubs(url: String!) : Page
     pageAndSubTree : Page
+    parentsPageToTop(url: String!) : [Page]
 }
 
 type Mutation{

@@ -99,7 +99,6 @@ const Pages = props => {
         loadPages();
         closeModalAdd()
         props.toastQRM(data.data.addPage)
-        props.loadPages();
     })
   }
   const deletePage = () => {
@@ -162,9 +161,11 @@ const Pages = props => {
           </ul>
         </div>
         <div className="column is-narrow">
-          <button className='button is-light is-info' onClick={()=>showModalAdd(0)}>
-              <i className='fa-regular fa-plus'/>
-          </button>
+          <div className="is-fullwidth box">
+            <button className='button is-light is-link' onClick={()=>showModalAdd(0)}>
+                <i className='fa-regular fa-plus'/>
+            </button>
+          </div>
         </div>
       </div>
       <div className={"modal" + (openModalAdd != false ? " is-active" : "")}>
@@ -181,12 +182,14 @@ const Pages = props => {
                   <input className="input" type="text" onChange={handleFormChange} name="title"/>
                 </div>
               </div>
-              <div className="field">
-                <label className="label">Icon</label>
-                <div className="control">
-                  <FontAwesomePicker selectIcon={selectIcon} />
+              {(currentParentUID == 0 ?
+                <div className="field">
+                  <label className="label">Icon</label>
+                  <div className="control">
+                    <FontAwesomePicker selectIcon={selectIcon} />
+                  </div>
                 </div>
-              </div>
+              : "")}
             </section>
             <footer className="modal-card-foot">
                 <button className='button' onClick={closeModalAdd}>
