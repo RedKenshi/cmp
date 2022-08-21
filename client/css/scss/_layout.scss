@@ -247,12 +247,27 @@
         margin-bottom: 1rem;
     }
 }
-.box {
-    margin: .5rem;
+.box, .panel {
+    margin: 0 .5rem .5rem .5rem;
     &:not(:last-child){
         margin-bottom: .5rem;
     }
 }
 .column {
     padding: 0.25rem !important;
+}
+.tabs.vertical{
+    & ul {
+        flex-direction: column;
+        border-bottom: none;
+        border-right: 1px solid $link;
+        & li{
+            width: 100%;
+            display: flex;
+            & a{
+                justify-content: stretch;
+                border: none;
+            }
+        }
+    }
 }

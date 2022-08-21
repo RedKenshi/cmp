@@ -9,8 +9,76 @@ import { Fragment } from "react/cjs/react.production.min";
 
 const Structure = props => {
 
+    const fieldTypes = [
+        {
+            typeName:"basic", icon:"brackets-curly", label:"Basic",
+            types:[
+                {name:"basic1",label:"Basic 1"},
+                {name:"basic2",label:"Basic 2"},
+                {name:"basic3",label:"Basic 3"}
+            ]
+        },
+        {
+            typeName:"physic", icon:"ruler-triangle", label:"Mesures physique",
+            types:[
+                {name:"physic1",label:"Physic 1"},
+                {name:"physic2",label:"Physic 2"},
+                {name:"physic3",label:"Physic 3"}
+            ]
+        },
+        {
+            typeName:"time", icon:"calendar-clock", label:"Temporel",
+            types:[
+                {name:"time1",label:"Time 1"},
+                {name:"time2",label:"Time 2"},
+                {name:"time3",label:"Time 3"}
+            ]
+        },
+        {
+            typeName:"coord", icon:"at", label:"Coordonées",
+            types:[
+                {name:"coord1",label:"Coord 1"},
+                {name:"coord2",label:"Coord 2"},
+                {name:"coord3",label:"Coord 3"}
+            ]
+        },
+        {
+            typeName:"money", icon:"coin", label:"Monétaire",
+            types:[
+                {name:"money1",label:"Money 1"},
+                {name:"money2",label:"Money 2"},
+                {name:"money3",label:"Money 3"}
+            ]
+        },
+        {
+            typeName:"complex",icon:"file-alt", label:"Complèxe",
+            types:[
+                {name:"complex1",label:"Complex 1"},
+                {name:"complex2",label:"Complex 2"},
+                {name:"complex3",label:"Complex 3"}
+            ]
+        },
+        {
+            typeName:"doc",icon:"square-list", label:"Documents",
+            types:[
+                {name:"doc1",label:"Doc 1"},
+                {name:"doc2",label:"Doc 2"},
+                {name:"doc3",label:"Doc 3"}
+            ]
+        },
+        {
+            typeName:"custom",icon:"atom", label:"Custom",
+            types:[
+                {name:"custom1",label:"Custom 1"},
+                {name:"custom2",label:"Custom 2"},
+                {name:"custom3",label:"Custom 3"}
+            ]
+        },
+    ]
+
     const { uid } = useParams();
     const [loading, setLoading] = useState(true)
+    const [modalActiveFieldType, setModalActiveFieldType] = useState("basic")
     const [formValues, setFormValues] = useState({
         label:'',
         name:''
@@ -53,14 +121,14 @@ const Structure = props => {
         }
     }`;
 
-    const addFieldToStructure = () => {
+    const addFieldToStructure = type => {
         props.client.mutate({
             mutation:addFieldToStructureQuery,
             variables:{
                 _id:structureRaw._id,
                 label:fieldValues.label,
-                name:fieldValues.name,
-                type:fieldValues.type
+                name:fieldValues.label.toLowerCase().replace(" ",""),
+                type:type
             }
         }).then((data)=>{
             loadStructure();
@@ -120,6 +188,40 @@ const Structure = props => {
             setLoading(false)
         })
     }
+    const getFieldTypeMenu = () => {
+        return (
+            <ul >
+                {fieldTypes.map(ft=>{
+                    return (
+                        <li className={(modalActiveFieldType == ft.typeName ? "is-active" : "")}>
+                            <a onClick={()=>setModalActiveFieldType(ft.typeName)}>
+                                <span className="icon">
+                                    <i className={"fa-"+props.fastyle + " fa-"+ft.icon} aria-hidden="true"></i>
+                                </span>
+                                <span>{ft.label}</span>
+                            </a>
+                        </li>
+                    )
+                })}
+            </ul>
+        )
+    }
+    const getSelectedFieldTypeSubtype = () => {
+        return (
+            <tbody>
+                {fieldTypes.filter(ft=>ft.typeName == modalActiveFieldType)[0].types.map(type=>{
+                    return(
+                        <tr>
+                            <td>{type.label}</td>
+                            <td>
+                                <button className="button is-small is-primary" onClick={()=>addFieldToStructure(type.name)}>Ajouter</button>
+                            </td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        )
+    }
     useEffect(() => {
         loadStructure();
     })
@@ -139,19 +241,23 @@ const Structure = props => {
                         </div>
                     </div>
                     <div className="column rows">
-                        <h1 className="block title is-1" >{structureRaw.label}</h1>
-                        <nav className="panel is-primary">
-                            <p className="panel-heading">
+                        <div className="box">
+                            <h1 className="block title is-1" >{structureRaw.label}</h1>
+                        </div>
+                        <nav className="panel is-link">
+                            <p className="panel-heading has-background-link-light has-text-link">
                                 Fields
                             </p>
                             <div className="panel-block">
                                 <p className="control has-icons-left">
                                     <input className="input" type="text" placeholder="Search"/>
                                     <span className="icon is-left">
-                                        <i className="fas fa-search" aria-hidden="true"></i>
+                                        <i className={"fa-"+props.fastyle + " fa-search"} aria-hidden="true"></i>
                                     </span>
                                 </p>
-                                <button className="button is-primary" onClick={()=>showModalAdd(0)}>Add</button>
+                                <button className="button is-light is-link" onClick={()=>showModalAdd(0)}>
+                                    <i className={"fa-"+props.fastyle+" fa-plus"}></i>
+                                </button>
                             </div>
                             {
                                 structureRaw.fields.map(f=>{
@@ -168,56 +274,34 @@ const Structure = props => {
                         </nav>
                     </div>
                 </div>
-
                 <div className={"modal" + (openModalAdd != false ? " is-active" : "")}>
                     <div className="modal-background"></div>
                     <div className="modal-card">
                         <header className="modal-card-head">
-                            <p className="modal-card-title">Créer une structure</p>
+                            <p className="modal-card-title">Ajouter un champ à la structure</p>
                             <button className="delete" aria-label="close" onClick={closeModalAdd}/>
                         </header>
-                        <section className="modal-card-body">
-                        <div className="field">
-                            <label className="label">Label</label>
-                            <div className="control">
-                                <input className="input" type="text" onChange={handleFieldChange} name="label"/>
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Nom</label>
-                            <div className="control">
-                                <input className="input" type="text" onChange={handleFieldChange} name="name"/>
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Type</label>
-                            <div className="control">
-                                <div className="select">
-                                    <select name="type" onChange={handleFieldChange}>
-                                        <option>String</option>
-                                        <option>Int</option>
-                                        <option>Float</option>
-                                        <option>Date</option>
-                                        <option>Time</option>
-                                        <option>Date & Time</option>
-                                        <option>Currency</option>
-                                        <option>Money</option>
-                                        <option>Color</option>
-                                    </select>
+                        <section className="modal-card-body is-fullwidth">
+                            <input className="input is-link is-fullwidth" type="text" placeholder="Nom de la structure" onChange={handleFieldChange} name="label"/>
+                            <div className="columns">
+                                <div className="column is-narrow">
+                                    <div className="tabs vertical margined-top16 fullwidth">
+                                        {getFieldTypeMenu()}
+                                    </div>
+                                </div>
+                                <div className="column">
+                                    <table className="table is-fullwidth is-hoverable">
+                                        <thead>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th className="is-narrow">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        {getSelectedFieldTypeSubtype()}                                        
+                                    </table>
                                 </div>
                             </div>
-                        </div>
                         </section>
-                        <footer className="modal-card-foot">
-                            <button className='button' onClick={closeModalAdd}>
-                                <i className='fa-light fa-arrow-left'/>
-                                Annuler
-                            </button>
-                            <button className="button is-primary" onClick={addFieldToStructure}>
-                                <i className='fa-light fa-check'/>
-                                Créer
-                            </button>
-                        </footer>
                     </div>
                 </div>
                 <div className={"modal" + (openModalDelete != false ? " is-active" : "")}>
