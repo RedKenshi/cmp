@@ -41,12 +41,6 @@ const Structures = props => {
         message
     }
   }`;
-  const addFieldToStructureQuery = gql`mutation addFieldToStructure($_id: String!,$label: String, $name: String, $type: String!){
-    addFieldToStructure(label:$label,name:$name){
-        status
-        message
-    }
-  }`;
   const deleteStructureQuery = gql`mutation deleteStructure($_id:String!){
     deleteStructure(_id:$_id){
         status

@@ -11,6 +11,7 @@ type StructureField{
     label: String
     name: String
     type: String
+    requieredAtCreation: Boolean
 }
 
 type Query{
@@ -20,6 +21,6 @@ type Query{
 
 type Mutation{
     addStructure(label: String, name: String, icon: String): [QueryResultMessage]
-    addFieldToStructure(_id: String!,label: String, name: String, type: String!): [QueryResultMessage]
+    addFieldToStructure(_id: String!,label: String, name: String, type: String!, requieredAtCreation: Boolean!): [QueryResultMessage]
     deleteStructure(_id: String!): [QueryResultMessage]
 }

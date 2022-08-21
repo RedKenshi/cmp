@@ -23,11 +23,12 @@ body{
     margin:0;
     font-family: 'Montserrat', sans-serif;
     //background-color: $theme-bg;
+    //background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%); // PEACH TO WHITE
+    background-image: linear-gradient(315deg, #e9eaf7 0%, #f6f0ea 74%); // PICK WHITE TO LIGHT BLEU
+    //background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%); // BLEU GREY DARK TO LIGHT
     //background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%); // BLEU TO VIOLET DISNEY
     //background-image: linear-gradient(315deg, #ebbe9b 0%, #e7a977 74%); // ORANGE TO JAUNE ROI LION
-    //background-image: linear-gradient(315deg, #bdd4e7 0%, #8693ab 74%); // BLEU GREY DARK TO LIGHT
     //background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
-    background-image: linear-gradient(315deg, #f1dfd1 0%, #f6f0ea 74%); //PEACH TO WHITE
     background-attachment: fixed;
     //background-image: linear-gradient(315deg, #f9d29d 0%, #ffd8cb 74%); // PEACH TO YELLOW CHILL
     min-height: 100vh;
@@ -229,4 +230,8 @@ ul,li { margin:0; padding:0; }
     animation-name: bounce;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
+}
+
+input.checkbox{
+    margin: 0 .5rem;
 }

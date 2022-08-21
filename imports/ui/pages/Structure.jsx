@@ -13,57 +13,67 @@ const Structure = props => {
         {
             typeName:"basic", icon:"brackets-curly", label:"Basic",
             types:[
-                {name:"basic1",label:"Basic 1"},
-                {name:"basic2",label:"Basic 2"},
-                {name:"basic3",label:"Basic 3"}
+                {name:"string",label:"Texte"},
+                {name:"int",label:"Nombre entier"},
+                {name:"float",label:"Nombre décimal"},
+                {name:"percent",label:"Pourcentage"},
             ]
         },
         {
             typeName:"physic", icon:"ruler-triangle", label:"Mesures physique",
             types:[
-                {name:"physic1",label:"Physic 1"},
-                {name:"physic2",label:"Physic 2"},
-                {name:"physic3",label:"Physic 3"}
+                {name:"weight",label:"Poid"},
+                {name:"volume",label:"Volume"},
+                {name:"gps",label:"Coordonées GPS"},
+                {name:"distance",label:"Distance"},
+                {name:"angle",label:"Angle"},
+                {name:"length",label:"Longeur"},
+                {name:"height",label:"Hauteur"},
+                {name:"width",label:"Largeur"}
             ]
         },
         {
             typeName:"time", icon:"calendar-clock", label:"Temporel",
             types:[
-                {name:"time1",label:"Time 1"},
-                {name:"time2",label:"Time 2"},
-                {name:"time3",label:"Time 3"}
+                {name:"date",label:"Date"},
+                {name:"time",label:"Heure"},
+                {name:"timestamp",label:"Instant"},
+                {name:"duration",label:"Durée"},
+                {name:"range",label:"Tranche horaire"}
             ]
         },
         {
             typeName:"coord", icon:"at", label:"Coordonées",
             types:[
-                {name:"coord1",label:"Coord 1"},
-                {name:"coord2",label:"Coord 2"},
-                {name:"coord3",label:"Coord 3"}
+                {name:"phone",label:"Téléphone"},
+                {name:"link",label:"Lien"},
+                {name:"mail",label:"Adresse e-mail"},
+                {name:"address",label:"Adresse"},
+                {name:"instagram",label:"Instagram"},
+                {name:"twitter",label:"Twitter"},
+                {name:"discord",label:"Discord"}
             ]
         },
         {
             typeName:"money", icon:"coin", label:"Monétaire",
             types:[
-                {name:"money1",label:"Money 1"},
-                {name:"money2",label:"Money 2"},
-                {name:"money3",label:"Money 3"}
+                {name:"amount",label:"Montant"},
+                {name:"currency",label:"Monnaie"}
             ]
         },
         {
-            typeName:"complex",icon:"file-alt", label:"Complèxe",
+            typeName:"complex",icon:"file-alt", label:"Complexe",
             types:[
-                {name:"complex1",label:"Complex 1"},
-                {name:"complex2",label:"Complex 2"},
-                {name:"complex3",label:"Complex 3"}
+                {name:"rating",label:"Notation"},
+                {name:"user",label:"Utilisateur"},
+                {name:"step",label:"Processus"}
             ]
         },
         {
             typeName:"doc",icon:"square-list", label:"Documents",
             types:[
-                {name:"doc1",label:"Doc 1"},
-                {name:"doc2",label:"Doc 2"},
-                {name:"doc3",label:"Doc 3"}
+                {name:"pdf",label:"Fichier PDF"},
+                {name:"file",label:"Fichier tout format"}
             ]
         },
         {
@@ -86,7 +96,8 @@ const Structure = props => {
     const [fieldValues, setFieldValues] = useState({
         label:'',
         name:'',
-        type:'String'
+        type:'string',
+        requieredAtCreation: "off"
     });
     const [deleteTargetId, setDeleteTargetId] = useState("");
     const [openModalAdd,setOpenModalAdd] = useState(false);
@@ -108,8 +119,8 @@ const Structure = props => {
             name
         }
     }`;
-    const addFieldToStructureQuery = gql`mutation addFieldToStructure($_id: String!,$label: String, $name: String, $type: String!){
-        addFieldToStructure(_id:$_id, label:$label, name:$name, type:$type){
+    const addFieldToStructureQuery = gql`mutation addFieldToStructure($_id: String!,$label: String, $name: String, $type: String!, $requieredAtCreation: Boolean!){
+        addFieldToStructure(_id:$_id, label:$label, name:$name, type:$type, requieredAtCreation:$requieredAtCreation){
             status
             message
         }
@@ -128,7 +139,8 @@ const Structure = props => {
                 _id:structureRaw._id,
                 label:fieldValues.label,
                 name:fieldValues.label.toLowerCase().replace(" ",""),
-                type:type
+                type:type,
+                requieredAtCreation:(fieldValues.requieredAtCreation == "on" ? true : false)
             }
         }).then((data)=>{
             loadStructure();
@@ -144,13 +156,18 @@ const Structure = props => {
         })
     }
     const handleFieldChange = e => {
-        console.log(e)
-        console.log(e.target)
         setFieldValues({
             ...fieldValues,
             [e.target.name] : e.target.value
         })
     }
+    const resetRequieredAtCreation = () => {
+        setFieldValues({
+            ...fieldValues,
+            requieredAtCreation : "off"
+        })
+    }
+    setFieldValues
     const deleteStructure = () => {
         props.client.mutate({
             mutation:deleteStructureQuery,
@@ -167,6 +184,7 @@ const Structure = props => {
         setOpenModalAdd(true)
     }
     const closeModalAdd = () => {
+        resetRequieredAtCreation();
         setOpenModalAdd(false)
     }
     const showModalDelete = _id => {
@@ -246,7 +264,7 @@ const Structure = props => {
                         </div>
                         <nav className="panel is-link">
                             <p className="panel-heading has-background-link-light has-text-link">
-                                Fields
+                                Propriétés
                             </p>
                             <div className="panel-block">
                                 <p className="control has-icons-left">
@@ -278,11 +296,21 @@ const Structure = props => {
                     <div className="modal-background"></div>
                     <div className="modal-card">
                         <header className="modal-card-head">
-                            <p className="modal-card-title">Ajouter un champ à la structure</p>
+                            <p className="modal-card-title">Ajouter une propriété à la structure</p>
                             <button className="delete" aria-label="close" onClick={closeModalAdd}/>
                         </header>
                         <section className="modal-card-body is-fullwidth">
-                            <input className="input is-link is-fullwidth" type="text" placeholder="Nom de la structure" onChange={handleFieldChange} name="label"/>
+                            <div className="columns is-fullwidth">
+                                <div className="column">
+                                    <input className="input is-link is-fullwidth" type="text" placeholder="Nom de la propriété" onChange={handleFieldChange} name="label"/>
+                                </div>
+                                <div className="column is-narrow flex">
+                                    <label className="checkbox flex align">
+                                        <input className="checkbox" type="checkbox" onChange={handleFieldChange} name="requieredAtCreation"/>
+                                        Requis à la création
+                                    </label>
+                                </div>
+                            </div>
                             <div className="columns">
                                 <div className="column is-narrow">
                                     <div className="tabs vertical margined-top16 fullwidth">
