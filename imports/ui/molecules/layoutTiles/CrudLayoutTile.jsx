@@ -29,24 +29,24 @@ const CrudLayoutTile = props => {
 
     return (
         <Fragment>
-            <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">
+            <div className="card">
+                <header className="card-header">
+                    <p className="card-header-title">
                         CRUD
                     </p>
-                    <button class="card-header-icon" aria-label="more options">
-                    <span class="icon">
-                        <i class="fa-duotone fa-table-layout" aria-hidden="true"></i>
+                    <button className="card-header-icon" aria-label="more options">
+                    <span className="icon">
+                        <i className="fa-duotone fa-table-layout" aria-hidden="true"></i>
                     </span>
                     </button>
                 </header>
-                <div class="card-content">
-                    <div class="content">
+                <div className="card-content">
+                    <div className="content">
                         Ce type de page sert à afficher les instances d'une structure, d'en créer, d'en supprimer et d'en modifier.
                     </div>
                 </div>
-                <footer class="card-footer">
-                    <a onClick={showModalOptions} class="card-footer-item">Choisir</a>
+                <footer className="card-footer">
+                    <a onClick={showModalOptions} className="card-footer-item">Choisir</a>
                 </footer>
             </div>
             <div className={"modal" + (openModalOptions != false ? " is-active" : "")}>

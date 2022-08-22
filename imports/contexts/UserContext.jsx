@@ -72,7 +72,6 @@ export const UserProvider = props => {
 
     const warnContext = url => {
         setLocation(url)
-        console.log(location)
     }
     
     const toast = ({message,type}) => {

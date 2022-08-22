@@ -41,7 +41,7 @@ const StructurePicker = props => {
     })
     
     return (
-        <div class="select is-link">
+        <div className="select is-link">
             <select onChange={props.onChange}>
                 <option value="" selected disabled hidden>Choisir une structure ...</option>
                 {structuresRaw.map(x=>{

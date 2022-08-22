@@ -92,7 +92,7 @@ export const Crud = props => {
                     <section className="modal-card-body">
                         {!loading && structureRaw.fields.map(f=>{
                             return(
-                                <div className='field'>
+                                <div key={f._id} className='field'>
                                     <label className='label'>{}</label>
                                     <input placeholder={f.label} type="text" className='input' />
                                 </div>

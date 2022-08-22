@@ -118,7 +118,7 @@ const CustomPage = props => {
             <li onClick={()=>navigate("/")} style={{cursor:"pointer"}}><a>Home</a></li>
             {breadcrumbs.map(p=>{
               return(
-                <li onClick={()=>navigate(p.fullpath)} style={{cursor:"pointer"}} className={p.fullpath == location.pathname ? "is-active" : ""} aria-current={p.fullpath == location.pathname ? "is-active" : ""}><a>{p.title}</a></li>
+                <li key={"bclocation" +p.fullpath} onClick={()=>navigate(p.fullpath)} style={{cursor:"pointer"}} className={p.fullpath == location.pathname ? "is-active" : ""} aria-current={p.fullpath == location.pathname ? "is-active" : ""}><a>{p.title}</a></li>
               )
             })}
           </ul>
@@ -148,7 +148,7 @@ const CustomPage = props => {
                   <ul className="menu-list">
                     {pageRaw.sub.map(sub=>{
                       return(
-                        <li>
+                        <li key={sub._id}>
                           <a onClick={()=>navigate(sub.fullpath)} className={props.active == "pages" ? "is-active" : ""}>{sub.title}</a>
                       </li>
                       )

@@ -10,11 +10,11 @@ const LayoutPicker = props => {
     return (
         <div className="box">
             <div className="is-fullwidth">
-                <article class="message is-link">
-                <div class="message-header">
+                <article className="message is-link">
+                <div className="message-header">
                     <p>Aucun type de page affecté</p>
                 </div>
-                <div class="message-body">
+                <div className="message-body">
                     Aucun type n'est affecté à cette page.
                     Le type d'une page sert à détérminer la fonction de la page ainsi que l'interface qui sera utilisé dessus. 
                     Sélectionnez un type de page pour commencer à utiliser cette page.
