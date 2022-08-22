@@ -257,10 +257,13 @@
     padding: 0.25rem !important;
 }
 .tabs.vertical{
+    height: 100%;
+    margin: 0;
     & ul {
         flex-direction: column;
         border-bottom: none;
         border-right: 1px solid $link;
+        margin: 1rem 1rem 1rem 0;
         & li{
             width: 100%;
             display: flex;

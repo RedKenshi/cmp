@@ -755,10 +755,15 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   padding: 0.25rem !important;
 }
 
+.tabs.vertical {
+  height: 100%;
+  margin: 0;
+}
 .tabs.vertical ul {
   flex-direction: column;
   border-bottom: none;
   border-right: 1px solid hsl(229deg, 53%, 53%);
+  margin: 1rem 1rem 1rem 0;
 }
 .tabs.vertical ul li {
   width: 100%;

@@ -100,6 +100,8 @@ const Structure = props => {
     const [deleteTargetId, setDeleteTargetId] = useState("");
     const [openModalAdd,setOpenModalAdd] = useState(false);
     const [openModalDelete,setOpenModalDelete] = useState(false);
+    const [openModalDeleteField,setOpenModalDeleteField] = useState(false);
+    const [deleteFieldTarget,setDeleteFieldTarget] = useState(false);
     const [structureRaw, setStructureRaw] = useState(null);
 
     const structureQuery = gql` query structure($uid: Int!) {
@@ -130,6 +132,12 @@ const Structure = props => {
             message
         }
     }`;
+    const deleteFieldFromStructureQuery = gql`mutation deleteFieldFromStructure($_id:String!){
+        deleteFieldFromStructure(_id:$_id){
+            status
+            message
+        }
+    }`;
 
     const addFieldToStructure = type => {
         props.client.mutate({
@@ -145,6 +153,18 @@ const Structure = props => {
             loadStructure();
             closeModalAdd()
             props.toastQRM(data.data.addFieldToStructure)
+        })
+    }
+    const deleteFieldFromStructure = type => {
+        props.client.mutate({
+            mutation:deleteFieldFromStructureQuery,
+            variables:{
+                _id:deleteFieldTarget
+            }
+        }).then((data)=>{
+            loadStructure();
+            closeModalDeleteField()
+            props.toastQRM(data.data.deleteFieldFromStructure)
         })
     }
 
@@ -169,7 +189,6 @@ const Structure = props => {
             requiredAtCreation: "off"
         })
     }
-    setFieldValues
     const deleteStructure = () => {
         props.client.mutate({
             mutation:deleteStructureQuery,
@@ -195,6 +214,13 @@ const Structure = props => {
     }
     const closeModalDelete = () => {
         setOpenModalDelete(false)
+    }
+    const showModalDeleteField = _id => {
+        setDeleteFieldTarget(_id)
+        setOpenModalDeleteField(true)
+    }
+    const closeModalDeleteField = () => {
+        setOpenModalDeleteField(false)
     }
     const loadStructure = () => {
         props.client.query({
@@ -256,7 +282,7 @@ const Structure = props => {
                         <AdministrationMenu active="structures"/>
                         <div className="box rows">
                             <button  className="button is-danger is-fullwidth">
-                                Delete structure
+                                Action 1
                             </button>
                         </div>
                     </div>
@@ -279,25 +305,29 @@ const Structure = props => {
                                     <i className={"fa-"+props.fastyle+" fa-plus"}></i>
                                 </button>
                             </div>
-                            {
-                                structureRaw.fields.map(f=>{
-                                    console.log(f);
-                                    return(
-                                        <a className="panel-block">
+                            {Array.from(structureRaw.fields).sort((a,b) => (a.requiredAtCreation === b.requiredAtCreation)? 0 : a.requiredAtCreation? -1 : 1).map(f=>{
+                                return(
+                                    <a className="panel-block flex flex-between">
+                                        <div className="flex align center">
                                             <span className="panel-icon">
-                                            <i className={"fa-"+props.fastyle+" fa-brackets-curly"} aria-hidden="true"></i>
+                                                <i className={"fa-"+props.fastyle+" fa-brackets-curly has-text-link"} aria-hidden="true"></i>
                                             </span>
                                             {f.label}
                                             {
                                                 f.requiredAtCreation ? 
-                                                <i className={"margined-left8 has-text-link fa-" + props.fastyle + " fa-circle-exclamation"} />
+                                                <i className={"margined-left8 has-text-primary fa-" + props.fastyle + " fa-circle-exclamation"} />
                                                 :
                                                 ""
                                             }
-                                        </a>
-                                    )
-                                })
-                            }
+                                        </div>
+                                        <div>
+                                            <button onClick={()=>showModalDeleteField(f._id)} className="button is-small is-danger is-light">
+                                                <i className={"fa-" + props.fastyle + " fa-trash"}/>
+                                            </button>
+                                        </div>
+                                    </a>
+                                )
+                            })}
                         </nav>
                     </div>
                 </div>
@@ -334,7 +364,7 @@ const Structure = props => {
                                                 <th className="is-narrow">Actions</th>
                                             </tr>
                                         </thead>
-                                        {getSelectedFieldTypeSubtype()}                                        
+                                        {getSelectedFieldTypeSubtype()}
                                     </table>
                                 </div>
                             </div>
@@ -354,6 +384,25 @@ const Structure = props => {
                                 Annuler
                             </button>
                             <button className="button is-danger" onClick={deleteStructure}>
+                                <i className='fa-light fa-trash'/>
+                                Supprimer
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+                <div className={"modal" + (openModalDeleteField != false ? " is-active" : "")}>
+                    <div className="modal-background"></div>
+                    <div className="modal-card">
+                        <header className="modal-card-head">
+                            <p className="modal-card-title">Supprimer le champs de la structure ?</p>
+                            <button className="delete" aria-label="close" onClick={closeModalDeleteField}/>
+                        </header>
+                        <footer className="modal-card-foot">
+                            <button className='button' onClick={closeModalDeleteField}>
+                                <i className='fa-light fa-arrow-left'/>
+                                Annuler
+                            </button>
+                            <button className="button is-danger" onClick={deleteFieldFromStructure}>
                                 <i className='fa-light fa-trash'/>
                                 Supprimer
                             </button>

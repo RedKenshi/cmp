@@ -22,5 +22,6 @@ type Query{
 type Mutation{
     addStructure(label: String, name: String, icon: String): [QueryResultMessage]
     addFieldToStructure(_id: String!,label: String, name: String, type: String!, requiredAtCreation: Boolean!): [QueryResultMessage]
+    deleteFieldFromStructure(_id: String!): [QueryResultMessage]
     deleteStructure(_id: String!): [QueryResultMessage]
 }

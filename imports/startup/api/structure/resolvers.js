@@ -58,5 +58,14 @@ export default {
             }
             throw new Error('Unauthorized');
         },
+        async deleteFieldFromStructure (obj,{_id},{user}){
+            if(user._id){
+                StructureFields.remove({
+                    _id:new Mongo.ObjectID(_id),
+                });
+                return [{status:"success",message:'Suppression réussie'}];
+            }
+            throw new Error('Unauthorized');
+        },
     }
 }
