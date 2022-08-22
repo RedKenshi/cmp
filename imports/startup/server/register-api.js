@@ -19,7 +19,7 @@ import StructureResolvers from '../api/structure/resolvers.js';
 import LayoutSchema from '../api/layout/Layout.graphql';
 import LayoutResolvers from '../api/layout/resolvers.js';
 
-// #0618
+// #0619
 
 const typeDefs = [
     UserSchema,

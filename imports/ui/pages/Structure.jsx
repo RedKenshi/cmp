@@ -97,7 +97,7 @@ const Structure = props => {
         label:'',
         name:'',
         type:'string',
-        requieredAtCreation: "off"
+        requiredAtCreation: "off"
     });
     const [deleteTargetId, setDeleteTargetId] = useState("");
     const [openModalAdd,setOpenModalAdd] = useState(false);
@@ -114,13 +114,14 @@ const Structure = props => {
                 label
                 name
                 type
+                requiredAtCreation
             }
             label
             name
         }
     }`;
-    const addFieldToStructureQuery = gql`mutation addFieldToStructure($_id: String!,$label: String, $name: String, $type: String!, $requieredAtCreation: Boolean!){
-        addFieldToStructure(_id:$_id, label:$label, name:$name, type:$type, requieredAtCreation:$requieredAtCreation){
+    const addFieldToStructureQuery = gql`mutation addFieldToStructure($_id: String!,$label: String, $name: String, $type: String!, $requiredAtCreation: Boolean!){
+        addFieldToStructure(_id:$_id, label:$label, name:$name, type:$type, requiredAtCreation:$requiredAtCreation){
             status
             message
         }
@@ -140,7 +141,7 @@ const Structure = props => {
                 label:fieldValues.label,
                 name:fieldValues.label.toLowerCase().replace(" ",""),
                 type:type,
-                requieredAtCreation:(fieldValues.requieredAtCreation == "on" ? true : false)
+                requiredAtCreation:(fieldValues.requiredAtCreation == "on" ? true : false)
             }
         }).then((data)=>{
             loadStructure();
@@ -161,10 +162,13 @@ const Structure = props => {
             [e.target.name] : e.target.value
         })
     }
-    const resetRequieredAtCreation = () => {
+    const resetFieldsValue = () => {
+        document.getElementById("fieldCreationRequired").checked = false;
         setFieldValues({
-            ...fieldValues,
-            requieredAtCreation : "off"
+            label:'',
+            name:'',
+            type:'string',
+            requiredAtCreation: "off"
         })
     }
     setFieldValues
@@ -184,7 +188,7 @@ const Structure = props => {
         setOpenModalAdd(true)
     }
     const closeModalAdd = () => {
-        resetRequieredAtCreation();
+        resetFieldsValue();
         setOpenModalAdd(false)
     }
     const showModalDelete = _id => {
@@ -279,12 +283,19 @@ const Structure = props => {
                             </div>
                             {
                                 structureRaw.fields.map(f=>{
+                                    console.log(f);
                                     return(
                                         <a className="panel-block">
                                             <span className="panel-icon">
                                             <i className={"fa-"+props.fastyle+" fa-brackets-curly"} aria-hidden="true"></i>
                                             </span>
                                             {f.label}
+                                            {
+                                                f.requiredAtCreation ? 
+                                                <i className={"margined-left8 has-text-link fa-" + props.fastyle + " fa-circle-exclamation"} />
+                                                :
+                                                ""
+                                            }
                                         </a>
                                     )
                                 })
@@ -306,7 +317,7 @@ const Structure = props => {
                                 </div>
                                 <div className="column is-narrow flex">
                                     <label className="checkbox flex align">
-                                        <input className="checkbox" type="checkbox" onChange={handleFieldChange} name="requieredAtCreation"/>
+                                        <input className="checkbox" type="checkbox" onChange={handleFieldChange} name="requiredAtCreation" id="fieldCreationRequired"/>
                                         Requis à la création
                                     </label>
                                 </div>
