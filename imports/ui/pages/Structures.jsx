@@ -72,7 +72,6 @@ const selectIcon = icon => {
         loadStructures();
         closeModalAdd()
         props.toastQRM(data.data.addStructure)
-        props.loadStructures();
     })
   }
   const deleteStructure = () => {
@@ -85,7 +84,6 @@ const selectIcon = icon => {
         loadStructures();
         closeModalDelete()
         props.toastQRM(data.data.deleteStructure)
-        props.loadStructures();
     })
   }
   const structures = () => {

@@ -1,16 +1,36 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import HumanRow from '../molecules/HumanRow';
-import ModalBodyContentDatePicker from '../atoms/ModalDatePicker';
-import Button from "../elements/Button";
+import { UserContext } from '../../contexts/UserContext';
+import CrudEntityRow from '../molecules/CrudEntityRow';
+import ModalGenericDatePicker from '../atoms/ModalDatePicker';
+import { gql } from 'graphql-tag';
 
-export const Humans = props => {
+export const Crud = props => {
     
-    const [humansRaw,setHumansRaw] = useState([]);
+    const [crudEntitiesRaw,setCrudEntitiesRaw] = useState([]);
+    const [structureRaw,setStructureRaw] = useState([]);
+    const [layoutOptions,setLayoutOptions] = useState(JSON.parse(props.layoutOptions));
+    const [loading,setLoading] = useState(true);
     const [openModalDate,setOpenModalDate] = useState(false);
     const [openModalAdd,setOpenModalAdd] = useState(false);
 
+    const structureQuery = gql` query structure($uid: Int!) {
+        structure(uid:$uid) {
+            _id
+            entityUID
+            icon
+            fields{
+                _id
+                label
+                name
+                type
+                requiredAtCreation
+            }
+            label
+            name
+        }
+    }`;
+
     const onValidateDatePicker = (target,value) => {
-        console.log(value.getDate().toString().padStart(2, '0')+"/"+parseInt(value.getMonth()+1).toString().padStart(2, '0')+"/"+value.getFullYear().toString().padStart(4, '0'))
         closeModal();
     }
     const closeModalDate = () => {
@@ -19,13 +39,27 @@ export const Humans = props => {
     const closeModalAdd = () => {
         setOpenModalAdd(false)
     }
+    const loadStructure = () => {
+        props.client.query({
+            query:structureQuery,
+            fetchPolicy:"network-only",
+            variables:{
+                uid:parseInt(layoutOptions.structureEntityUID),
+            }
+        }).then(({data})=>{
+            console.log(data.structure)
+            setStructureRaw(data.structure);
+            setLoading(false)
+        })
+    }
 
     useEffect(()=>{
+        loadStructure()
     },[])
 
     return (
         <Fragment>
-            <div className='basic-crud-search-layout'>
+            <div className='box basic-crud-search-layout'>
                 <div>
                     <input className='input' type="text"/>
                 </div>
@@ -35,8 +69,8 @@ export const Humans = props => {
                     </button>
                 </div>
                 <div className='entries-container'>
-                    {humansRaw.map(h=>
-                        <HumanRow human={h} />
+                    {crudEntitiesRaw.map(ce=>
+                        <CrudEntityRow crudEntity={ce} />
                     )}
                 </div>
             </div>
@@ -56,16 +90,21 @@ export const Humans = props => {
                         <button className="delete" aria-label="close" onClick={props.close}/>
                     </header>
                     <section className="modal-card-body">
-                        <input type="text" className='input' />
-                        <input type="text" className='input' />
-                        <input type="text" className='input' />
+                        {!loading && structureRaw.fields.map(f=>{
+                            return(
+                                <div className='field'>
+                                    <label className='label'>{}</label>
+                                    <input placeholder={f.label} type="text" className='input' />
+                                </div>
+                            )
+                        })}
                     </section>
                     <footer className="modal-card-foot">
                         <button className='button' onClick={closeModalAdd}>
                             <i className='fa-light fa-arrow-left'/>
                             Annuler
                         </button>
-                        <button className="button is-primary" onClick={console.log("Create")}>
+                        <button className="button is-primary" onClick={()=>console.log("CREATE STRUCTURE INSTANCE")}>
                             <i className='fa-light fa-check'/>
                             Créer
                         </button>
@@ -76,4 +115,10 @@ export const Humans = props => {
     )
 }
 
-export default Humans;
+const withUserContext = WrappedComponent => props => (
+    <UserContext.Consumer>
+        {ctx => <WrappedComponent {...ctx} {...props}/>}
+    </UserContext.Consumer>
+)
+  
+export default wrappedInUserContext = withUserContext(Crud);

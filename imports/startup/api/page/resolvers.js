@@ -131,7 +131,7 @@ export default {
             }
             throw new Error('Unauthorized')
         },
-        async setLayout(obj,{_id,layout},{user}){
+        async setLayout(obj,{_id,layout,layoutOptions},{user}){
             if(user._id){
                 const admin = Meteor.users.findOne({_id:user._id});
                 if(admin.settings.isAdmin){
@@ -141,6 +141,7 @@ export default {
                     }, {
                         $set: {
                             "layout": layout,
+                            "layoutOptions": [...layoutOptions]
                         }
                     });
                     return [{status:"success",message:"Layout set"}];

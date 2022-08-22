@@ -7,6 +7,7 @@ export const UserContext = React.createContext();
 
 export const UserProvider = props => {
     const [user, setUser] = useState("loading");
+    const [location, setLocation] = useState("");
     const [isActivated, setIsActivated] = useState("loading");
     const [isAdmin, setIsAdmin] = useState("loading");
     const [isOwner, setIsOwner] = useState("loading");
@@ -68,9 +69,13 @@ export const UserProvider = props => {
             }
         }
     }`;
+
+    const warnContext = url => {
+        setLocation(url)
+        console.log(location)
+    }
     
     const toast = ({message,type}) => {
-        console.log(message,type)
         if(type == 'error'){
             TOASTER(message,{type:TOASTER.TYPE.ERROR});
         }
@@ -135,6 +140,7 @@ export const UserProvider = props => {
             isAdmin: isAdmin,
             isActivated: isActivated,
             avatar: avatar,
+            warnContext: warnContext,
             loadUser: loadUser,
             loadPages: loadPages,
             toast: toast,

@@ -47,7 +47,7 @@ export const Navbar = props => {
             </a>
           </li>
           <hr/>
-          <NavbarItemList fastyle={props.fastyle} menuItems={getMenuItemsList()}/>
+          <NavbarItemList warnContext={props.warnContext} fastyle={props.fastyle} menuItems={getMenuItemsList()}/>
           <hr/>
           <li className="nav-item">
             <a className="nav-link" onClick={()=>{navigate("/admin/pages")}} style={{textDecoration: 'none'}}>

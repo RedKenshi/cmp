@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
 import LayoutPicker from "../molecules/LayoutPicker";
+import Crud from "./Crud";
 import _ from 'lodash';
 
 const CustomPage = props => {
@@ -24,10 +25,8 @@ const CustomPage = props => {
       fullpath
       icon
       active
-      layout{
-        _id
-        name
-      }
+      layout
+      layoutOptions
       sub{
         _id
         entityUID
@@ -51,13 +50,13 @@ const CustomPage = props => {
       fullpath
     }
   }`;
+  const setLayoutQuery = gql` mutation setLayout($_id: String!,$layout: String!,$layoutOptions:[String]) {
+    setLayout(_id: $_id, layout: $layout, layoutOptions: $layoutOptions) {
+      status
+      message
+    }
+  }`;
 
-  const handleFormChange = e => {
-    setFormValues({
-        ...formValues,
-        [e.target.name] : e.target.value
-    })
-  }
   const loadPageAndSubs = () => {
     props.client.query({
       query:pageAndSubsQuery,
@@ -82,13 +81,30 @@ const CustomPage = props => {
       setLoadingBreadcrumbs(false)
     })
   }
-  const setLayout = layout => {
-    console.log(layout)
-    return layout;
+  const setLayout = (layout,layoutOptions) => {
+    let input = layoutOptions.map(lo=>JSON.stringify(lo))
+    console.log(input)
+    props.client.mutate({
+      mutation:setLayoutQuery,
+      variables:{
+        _id:pageRaw._id,
+        layout:layout,
+        layoutOptions:input
+      }
+    }).then((data)=>{
+      props.toastQRM(data.data.setLayout)
+      loadPageAndSubs();
+    })
   }
   const getContent = () => {
     if(pageRaw.layout == null){
-      return <LayoutPicker setLayout={setLayout}/>
+      return (
+        <LayoutPicker setLayout={setLayout}/>
+      )
+    }else{
+      if(pageRaw.layout == "crud"){
+        return <Crud layoutOptions={pageRaw.layoutOptions} />
+      }
     }
     return "THIS IS PICKED LAYOUT";
   }
@@ -97,7 +113,7 @@ const CustomPage = props => {
       return <p>Loading breadcrumbs</p>
     }else{
       return (
-        <nav className="breadcrumb padded-top16 padded-left16" aria-label="breadcrumbs">
+        <nav className="breadcrumb padded-top16 padded-bottom16 padded-left16" aria-label="breadcrumbs">
           <ul>
             <li onClick={()=>navigate("/")} style={{cursor:"pointer"}}><a>Home</a></li>
             {breadcrumbs.map(p=>{
@@ -141,21 +157,7 @@ const CustomPage = props => {
                 </div>
             </div>
             <div className="column">
-              <ul className="is-fullwidth">
-                <div className="box">
-                  <article class="message is-link">
-                    <div class="message-header">
-                      <p>Aucun type de page affecté</p>
-                    </div>
-                    <div class="message-body">
-                      Aucun type n'est affecté à cette page.
-                      Le type d'une page sert à détérminer la fonction de la page ainsi que l'interface qui sera utilisé dessus. 
-                      Sélectionnez un type de page pour commencer à utiliser cette page.
-                    </div>
-                  </article>
-                  {getContent()}
-                </div>                
-              </ul>
+              {getContent()}
             </div>
           </div>
         </div>

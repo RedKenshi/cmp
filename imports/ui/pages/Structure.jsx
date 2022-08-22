@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Fragment } from "react"
 import { useParams, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
-import StructureRow from "../molecules/StructureRow";
 import AdministrationMenu from "../molecules/AdministrationMenu";
 import _ from 'lodash';
-import { Fragment } from "react/cjs/react.production.min";
 
 const Structure = props => {
 
