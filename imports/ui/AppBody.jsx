@@ -26,7 +26,7 @@ export const AppBody = props => {
     const extractSubRoutes = p => {
         let routes = [];
         if(p.active){
-            routes.push(<Route exact path={p.fullpath} key={p.fullpath} element={withNavbar(CustomPage)({...props})}/>)
+            routes.push(<Route exact path={p.fullpath} key={p.fullpath} element={withNavbar(()=><CustomPage location={p.fullpath} />)({...props})}/>)
             if(p.sub){
                 p.sub.map(s=>{routes.push(...extractSubRoutes(s));})
             }

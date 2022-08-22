@@ -69,10 +69,6 @@ export const UserProvider = props => {
             }
         }
     }`;
-
-    const warnContext = url => {
-        setLocation(url)
-    }
     
     const toast = ({message,type}) => {
         if(type == 'error'){
@@ -139,7 +135,6 @@ export const UserProvider = props => {
             isAdmin: isAdmin,
             isActivated: isActivated,
             avatar: avatar,
-            warnContext: warnContext,
             loadUser: loadUser,
             loadPages: loadPages,
             toast: toast,

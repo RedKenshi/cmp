@@ -62,7 +62,7 @@ const CustomPage = props => {
       query:pageAndSubsQuery,
       fetchPolicy:"network-only",
       variables:{
-        url:location.pathname
+        url:props.location
       }
     }).then(({data})=>{
       setPageRaw(data.pageAndSubs);
