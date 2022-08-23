@@ -67,16 +67,14 @@ const AppBody = props => {
     if(action == "login"){
         return (
             <div className="landing-container">
-                <div className="form-container">
-                    <div className="form">
-                        <h1>Welcome please login or register</h1>
-                        <input className="input" name="mail" placeholder="mail" onChange={handleChange}/>
-                        <input className="input" name="pass" placeholder="pass" onChange={handleChange} type="password"/>
-                        <Button onClick={login} light icon="fas fa-arrow-right" color="success" text="Login"/>
-                        <Button onClick={()=>setAction({action:"register"})} light color="info" text="Register"/>
-                    </div>
+                <div className="form flex flex-column align center children-spaced">
+                    <img className='margined-bottom64 image is-256x256' src="/img/object.svg"/>
+                    <h1>Welcome please login or register</h1>
+                    <input className="input is-primary" name="mail" placeholder="mail" onChange={handleChange}/>
+                    <input className="input is-primary" name="pass" placeholder="pass" onChange={handleChange} type="password"/>
+                    <button className='margined-bottom16 button is-success' onClick={login} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Se connecter</button>
+                    <a className='text-center is-link center' onClick={()=>setAction({action:"register"})}>Créer un compte</a>
                 </div>
-                <img src="/img/stone.svg"/>
             </div>
         );
     }else{
@@ -98,17 +96,14 @@ const AppBody = props => {
         }
         return (
             <div className="landing-container">
-                <div className="form-container">
-                    <div className="form">
-                        <h1>Welcome please login or register</h1>
-                        <input className="input" name="newmail" placeholder="mail" onChange={handleChange}/>
-                        <input className="input" name="firstname" placeholder="firstname" onChange={handleChange}/>
-                        <input className="input" name="lastname" placeholder="lastname" onChange={handleChange}/>
-                        <input className="input" name="newpass" placeholder="pass" onChange={handleChange} type="password"/>
-                        <input className="input" name="newpassconfirm" placeholder="confirm pass" onChange={handleChange} type="password"/>
-                        <Button onClick={(error ? ()=>{} : register)} disabled={error} light icon="fas fa-arrow-right" color="success" text="Register"/>
-                        <Button onClick={()=>setAction("login")} light color="info" text="Login"/>
-                    </div>
+                <div className="form flex flex-column align center children-spaced">
+                    <img className='margined-bottom32 image is-128x128' src="/img/object.svg"/>
+                    <h1>Welcome please login or register</h1>
+                    <input className="input is-link" name="newmail" placeholder="mail" onChange={handleChange}/>
+                    <input className="input is-link" name="firstname" placeholder="firstname" onChange={handleChange}/>
+                    <input className="input is-link" name="lastname" placeholder="lastname" onChange={handleChange}/>
+                    <input className="input is-link" name="newpass" placeholder="pass" onChange={handleChange} type="password"/>
+                    <input className="input is-link" name="newpassconfirm" placeholder="confirm pass" onChange={handleChange} type="password"/>
                     <div className={"message " + errorColor + " is-small margined-auto"+ (error ? "" : " hidden")}>
                         <div className="message-header">
                             <p>{errorTitle}</p>
@@ -117,8 +112,9 @@ const AppBody = props => {
                             {errorContent}
                         </div>
                     </div>
+                    <button disabled={error} className='margined-bottom16 button is-success' onClick={(error ? ()=>{} : register)} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Créer le compte</button>
+                    <a className='text-center is-link center' onClick={()=>setAction("login")}>J'ai déjà un compte</a>
                 </div>
-                <img src="/img/stone.svg"/>
             </div>
         );
     }
