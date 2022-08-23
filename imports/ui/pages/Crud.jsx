@@ -124,16 +124,29 @@ export const Crud = props => {
                             </div>
                             <div className="column">
                                 {!loading && Array.from(structureRaw.fields).filter(f => f.requiredAtCreation == (modalActiveFieldType == "required")).map(f=>{
-                                    return(
-                                        <div key={f._id} className='field'>
-                                            <p className="control has-icons-right">
-                                                <input className={"input " + (f.requiredAtCreation ? " is-primary" : "")} placeholder={f.label} />
-                                                <span className="icon is-small is-right is-primary">
-                                                    <i className="fa-solid fa-circle-exclamation"></i>
-                                                </span>
-                                            </p>
-                                        </div>
-                                    )
+                                    if(f.requiredAtCreation){
+                                        return(
+                                            <div key={f._id} className='field'>
+                                                <p className="control has-icons-right">
+                                                    <input className="input is-primary" placeholder={f.label} />
+                                                    <span className="icon is-small is-right is-primary">
+                                                        <i className="fa-solid fa-circle-exclamation"></i>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        )
+                                    }else{
+                                        return(
+                                            <div key={f._id} className='field'>
+                                                <p className="control has-icons-right">
+                                                    <input className="input is-link" placeholder={f.label} />
+                                                    <span className="icon is-small is-right is-primary">
+                                                        <i className="fa-solid fa-brackets-curly"></i>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        )
+                                    }
                                 })}
                             </div>
                         </div>
