@@ -37,6 +37,7 @@ const Structure = props => {
                 {name:"time",label:"Heure"},
                 {name:"timestamp",label:"Instant"},
                 {name:"duration",label:"Durée"},
+                {name:"age",label:"Age"},
                 {name:"range",label:"Tranche horaire"}
             ]
         },
