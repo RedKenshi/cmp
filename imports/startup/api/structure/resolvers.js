@@ -5,7 +5,6 @@ import { Mongo } from 'meteor/mongo';
 const loadFields = structure => {
     let fields = StructureFields.find({structure:structure._id._str}).fetch() || {};
     structure.fields = fields;
-    console.log(structure)
     return structure;
 }
 

@@ -6,7 +6,6 @@ const getFullPath = (parentUID,url) => {
         return url;
     }else{
         let parent = Pages.findOne({entityUID:parentUID});
-        console.log(parent)
         let fullpath = parent.url + url;
         return getFullPath(parent.parentUID,fullpath)
     }

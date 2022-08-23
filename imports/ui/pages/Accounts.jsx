@@ -23,7 +23,6 @@ const Accounts = props => {
     return accountsRaw.filter(a=> a.firstname.toLowerCase().includes(userFilter.toLowerCase()) || a.lastname.toLowerCase().includes(userFilter.toLowerCase()) || a.mail.toLowerCase().includes(userFilter.toLowerCase()))
   }
   const handleFilter = value => {
-    console.log(value)
     setUserFilter(value);
   }
   const loadAccounts = () => {

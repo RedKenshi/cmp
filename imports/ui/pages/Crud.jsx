@@ -62,7 +62,6 @@ export const Crud = props => {
                 uid:parseInt(layoutOptions.structureEntityUID),
             }
         }).then(({data})=>{
-            console.log(data.structure)
             setStructureRaw(data.structure);
             setLoading(false)
         })
