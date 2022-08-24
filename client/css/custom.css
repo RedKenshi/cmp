@@ -491,6 +491,18 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
+/*$primary: #deb75f;
+$theme-bg: #325a5d;
+$theme-panel: #2e5557;
+$theme-text: #ecf0f1;
+$theme-full: #fff;
+$theme-opposite: #34495e;
+$theme-full-opposite: #000;*/
+/*
+    primary (golg): #deb75f
+    back: #2e5557
+    back-light : #325a5d
+*/
 .landing-container {
   width: 100vw;
   height: 100vh;
@@ -775,6 +787,18 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
+/*$primary: #deb75f;
+$theme-bg: #325a5d;
+$theme-panel: #2e5557;
+$theme-text: #ecf0f1;
+$theme-full: #fff;
+$theme-opposite: #34495e;
+$theme-full-opposite: #000;*/
+/*
+    primary (golg): #deb75f
+    back: #2e5557
+    back-light : #325a5d
+*/
 .react-calendar {
   width: 350px;
   max-width: 100%;
@@ -941,7 +965,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-image: linear-gradient(315deg, #e9eaf7 0%, #f6f0ea 74%);
+  background-color: hsl(42deg, 60%, 94%);
   background-attachment: fixed;
   min-height: 100vh;
   min-width: 100vw;
@@ -1358,14 +1382,25 @@ input.checkbox {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
+/*$primary: #deb75f;
+$theme-bg: #325a5d;
+$theme-panel: #2e5557;
+$theme-text: #ecf0f1;
+$theme-full: #fff;
+$theme-opposite: #34495e;
+$theme-full-opposite: #000;*/
+/*
+    primary (golg): #deb75f
+    back: #2e5557
+    back-light : #325a5d
+*/
 .navbar {
   width: 100%;
   display: flex;
   flex-direction: column;
   z-index: 1000;
   position: fixed;
-  background-color: transparent;
-  backdrop-filter: blur(10px);
+  background-color: hsl(42deg, 60%, 94%);
 }
 .navbar hr {
   text-align: center;
@@ -1412,7 +1447,6 @@ input.checkbox {
   text-decoration: none;
   text-transform: uppercase;
   align-items: center;
-  height: 3.6rem;
 }
 .navbar .navbar-nav .logo .nav-link .link-text {
   text-align: center;
@@ -1428,12 +1462,10 @@ input.checkbox {
   cursor: pointer;
 }
 .navbar .navbar-nav .nav-item .nav-link {
-  filter: opacity(0.8);
   text-decoration: none;
-  display: grid;
-  grid-template-columns: 5rem;
+  display: flex;
   align-items: center;
-  height: 3.6rem;
+  height: 100%;
 }
 .navbar .navbar-nav .nav-item .nav-link .link-text {
   white-space: nowrap;
@@ -1450,10 +1482,9 @@ input.checkbox {
   font-size: 1.8em;
 }
 .navbar .navbar-nav .nav-item .nav-link:hover {
-  filter: brightness(1.2) opacity(1);
   transition: filter 200ms ease;
   transition: background-color 200ms ease;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #fff;
 }
 .navbar .navbar-nav .nav-item .nav-link:not(:hover) .fa {
   color: #34495e;
@@ -1467,7 +1498,6 @@ input.checkbox {
 }
 .navbar.expanded .navbar-nav.hide {
   padding-top: 1rem;
-  backdrop-filter: blur(10px) brightness(90%);
 }
 .navbar.expanded .navbar-nav .nav-item {
   height: 4rem;
@@ -1597,7 +1627,6 @@ input.checkbox {
   .navbar:hover {
     width: 16rem;
     transition: backdrop-filter 500ms ease;
-    backdrop-filter: blur(10px) brightness(90%);
   }
   .navbar:hover .logo i {
     animation: rotation 0.5s ease-in-out forwards;
@@ -1619,7 +1648,6 @@ input.checkbox {
     text-decoration: none;
     text-transform: uppercase;
     align-items: center;
-    height: 3.6rem;
     display: flex;
     justify-content: start;
     flex-direction: row-reverse;
@@ -1653,3 +1681,15 @@ input.checkbox {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
+/*$primary: #deb75f;
+$theme-bg: #325a5d;
+$theme-panel: #2e5557;
+$theme-text: #ecf0f1;
+$theme-full: #fff;
+$theme-opposite: #34495e;
+$theme-full-opposite: #000;*/
+/*
+    primary (golg): #deb75f
+    back: #2e5557
+    back-light : #325a5d
+*/

@@ -6,8 +6,7 @@
   flex-direction: column;
   z-index: 1000;
   position: fixed;
-  background-color: transparent;
-  backdrop-filter: blur(10px);
+  background-color: $bg-color;
   & hr{
     text-align: center;
     width: 70%;
@@ -51,7 +50,6 @@
         text-decoration: none;
         text-transform: uppercase;
         align-items: center;
-        height: 3.6rem;
         & .link-text{
           text-align: center;
           display: none;
@@ -67,12 +65,10 @@
       list-style: none;
       cursor: pointer;
       & .nav-link{
-        filter: opacity(.8);
         text-decoration: none;
-        display: grid;
-        grid-template-columns: 5rem;
+        display: flex;
         align-items: center;
-        height: 3.6rem;
+        height: 100%;
         & .link-text{
           white-space: nowrap;
           display: none;
@@ -89,10 +85,9 @@
           font-size: 1.8em;
         }
         &:hover{
-          filter: brightness(1.2) opacity(1);
           transition: filter 200ms ease;
           transition: background-color 200ms ease;
-          background-color: rgba(#fff,.2);
+          background-color: #fff;
         }
         &:not(:hover) .fa{
           color: $text;
@@ -107,7 +102,6 @@
       display: flex;
       &.hide{
         padding-top: 1rem;
-        backdrop-filter: blur(10px) brightness(90%);
       }
       & .nav-item{
         height: 4rem;
@@ -198,7 +192,6 @@
       }
       width: 16rem;
       transition: backdrop-filter 500ms ease;
-      backdrop-filter: blur(10px) brightness(90%);
       & .link-text{
         display: block !important;
       }
@@ -215,7 +208,6 @@
           text-decoration: none;
           text-transform: uppercase;
           align-items: center;
-          height: 3.6rem;
           display: flex;
           justify-content: start;
           flex-direction: row-reverse;

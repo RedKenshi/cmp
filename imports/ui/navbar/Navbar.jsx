@@ -15,6 +15,10 @@ export const Navbar = props => {
     props.logout();
     navigate("/")
   }
+  const navigateTo = url => {
+    navigate(url)
+    setExpanded(false)
+  }
   const getMenuItemsList = () =>{
     return (
       props.pagesTree.map(page=>{
@@ -56,7 +60,7 @@ export const Navbar = props => {
         </ul>
         <ul className="navbar-nav navbar-home hide">
           <li className="nav-item">
-            <a className="nav-link" onClick={()=>{navigate("/")}} style={{textDecoration: 'none'}}>
+            <a className="nav-link" onClick={()=>{navigateTo("/")}} style={{textDecoration: 'none'}}>
               <i style={props.style} className={"fa fa-"+props.fastyle+" fa-home dark"}></i>
               <span className="link-text">Home</span>
             </a>
@@ -64,18 +68,18 @@ export const Navbar = props => {
         </ul>
         <hr/>
         <ul className="navbar-nav navbar-pages hide">
-          <NavbarItemList fastyle={props.fastyle} menuItems={getMenuItemsList()}/>
+          <NavbarItemList navigate={navigateTo} fastyle={props.fastyle} menuItems={getMenuItemsList()}/>
         </ul>
         <hr/>
         <ul className="navbar-nav navbar-admin hide">
           <li className="nav-item">
-            <a className="nav-link" onClick={()=>{navigate("/admin/pages")}} style={{textDecoration: 'none'}}>
+            <a className="nav-link" onClick={()=>{navigateTo("/admin/pages")}} style={{textDecoration: 'none'}}>
               <i style={props.style} className={"fa fa-"+props.fastyle+" fa-cogs dark"}></i>
               <span className="link-text">Settings</span>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" onClick={()=>{navigate("/admin/accounts")}} style={{textDecoration: 'none'}}>
+            <a className="nav-link" onClick={()=>{navigateTo("/admin/accounts")}} style={{textDecoration: 'none'}}>
               <i style={props.style} className={"fa fa-"+props.fastyle+" fa-shield-alt dark"}></i>
               <span className="link-text">Administrattion</span>
             </a>
