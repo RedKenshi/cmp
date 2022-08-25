@@ -9,12 +9,12 @@
   background-color: $bg-color;
   & hr{
     text-align: center;
-    width: 70%;
-    margin: auto;
+    background-color: $flat-dark-dark;
+    border: 1px solid $flat-dark-dark;
+    width: 30%;
     align-self: center;
   }
   & .navbar-nav {
-    min-height: 4rem;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -23,21 +23,21 @@
     &.navbar-logo{
       box-shadow: 0 0 .5rem .25rem #0002;
       display: flex;
+      min-height: 4rem;
       width: 100vw;
       justify-content: space-between;
       flex-shrink: 1;
       flex-direction: row;
     }
-    &.navbar-home{
+    &.navbar-home.hide{
+      padding: 1rem 0;
+      overflow-y: auto;
       flex-shrink: 1;
-    }
-    &.navbar-pages{
-      flex-shrink: 1;
-    }
-    &.navbar-admin{
       flex-grow: 1;
     }
     &.navbar-logout{
+      margin-top: auto;
+      box-shadow: 0 0 .5rem .25rem #0002;
       flex-shrink: 1;
     }
     &.navbar-expanded{
@@ -96,19 +96,18 @@
     }
   }
   &.expanded{
-    height: 100vh;
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
     width: 100vw;
+    height: 100vh;
     & .navbar-nav {
-      display: flex;
-      &.hide{
-        padding-top: 1rem;
-      }
-      & .nav-item{
-        height: 4rem;
-      }
+      display: flex;      
     }
     & hr{
-      display: unset;
+      margin: 1rem 0;
     }
     & .link-text{
       display: block !important;
@@ -160,22 +159,21 @@
 
 @media screen and (min-width : 56rem) {
   .navbar{
-    padding-bottom: .5rem;
     height: 100%;
     width: 5rem;
     transition: width 500ms ease;
     box-shadow: 0 0 .5rem .25rem #0002;
-    .navbar-nav.navbar-logo{
+    & .navbar-nav.navbar-logo{
       display: flex;
       margin-bottom: .5rem;
       & i{
         display: none;
       }
     }
-    .navbar-nav.navbar-home{display: flex;}
-    .navbar-nav.navbar-pages{display: flex;}
-    .navbar-nav.navbar-admin{display: flex;}
-    .navbar-nav.navbar-logout{display: flex;}
+    & .navbar-nav.navbar-home{display: flex;}
+    & .navbar-nav.navbar-pages{display: flex;}
+    & .navbar-nav.navbar-admin{display: flex;}
+    & .navbar-nav.navbar-logout{display: flex;}
     & .nav-expand{
       display: none !important;
     }
@@ -184,7 +182,7 @@
     }
     & hr {
       display: block !important;
-      margin: .5rem 0;
+      margin: 1.5rem 0;
     }
     &:hover{
       & .logo i{

@@ -165,7 +165,7 @@ const Status = props => {
                         </div>
                         <nav className="panel is-link">
                             <p className="panel-heading has-background-link-light has-text-link">
-                                Propriétés
+                                Valeurs
                             </p>
                             <div className="panel-block">
                                 <p className="control has-icons-left">

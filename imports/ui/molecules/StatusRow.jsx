@@ -22,16 +22,16 @@ export const StatusRow = props => {
                         </div>
                     </div>
                     <div className="details-and-actions columns">
-                        <div className="details column is-half">
+                        <div className="details column is-half is-justify-content-space-between">
                             <i className="tag is-small is-link is-light">0 values</i>
-                        </div>
-                        <div className="actions column is-half">
-                            <button className="button is-small is-danger is-light" onClick={()=>props.showModalDelete(props.status._id)}>
-                                <i className={"fa-" + props.fastyle + " fa-trash"}></i>
-                            </button>
-                            <button className="button is-small is-link is-light" onClick={()=>navigate(props.status.entityUID.toString())} >
-                                <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
-                            </button>
+                            <div className="actions column is-half">
+                                <button className="button is-small is-danger is-light" onClick={()=>props.showModalDelete(props.status._id)}>
+                                    <i className={"fa-" + props.fastyle + " fa-trash"}></i>
+                                </button>
+                                <button className="button is-small is-link is-light" onClick={()=>navigate(props.status.entityUID.toString())} >
+                                    <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
