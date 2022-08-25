@@ -17,15 +17,15 @@ export const StructureRow = props => {
             <li>
                 <div className="structure-row-wrapper box">
                     <div className="columns">
-                        <div className="is-narrow column flex align">
-                            <i className={"fa fa-"+props.fastyle+" fa-"+props.structure.icon}/>
-                        </div>
                         <div className="column flex align">
                             <h3>{props.structure.label}</h3>
                         </div>
+                        <div className="is-narrow column flex align">
+                            <i className={"fa fa-"+props.fastyle+" fa-"+props.structure.icon}/>
+                        </div>
                     </div>
                     <div className="details-and-actions columns">
-                        <div className="details column is-half is-justify-content-space-between">
+                        <div className="details column is-justify-content-space-between">
                             <i className="tag is-small is-link is-light">0 instances</i>
                             <div className="actions column is-half">
                                 <button className="button is-small is-danger is-light" onClick={()=>props.showModalDelete(props.structure._id)}>

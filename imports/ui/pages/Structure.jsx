@@ -7,83 +7,6 @@ import _ from 'lodash';
 
 const Structure = props => {
 
-    const fieldTypes = [
-        {
-            typeName:"basic", icon:"brackets-curly", label:"Basic",
-            types:[
-                {name:"string",label:"Texte"},
-                {name:"int",label:"Nombre entier"},
-                {name:"float",label:"Nombre décimal"},
-                {name:"percent",label:"Pourcentage"},
-            ]
-        },
-        {
-            typeName:"physic", icon:"ruler-triangle", label:"Mesures physique",
-            types:[
-                {name:"weight",label:"Poid"},
-                {name:"volume",label:"Volume"},
-                {name:"gps",label:"Coordonées GPS"},
-                {name:"distance",label:"Distance"},
-                {name:"angle",label:"Angle"},
-                {name:"length",label:"Longeur"},
-                {name:"height",label:"Hauteur"},
-                {name:"width",label:"Largeur"}
-            ]
-        },
-        {
-            typeName:"time", icon:"calendar-clock", label:"Temporel",
-            types:[
-                {name:"date",label:"Date"},
-                {name:"time",label:"Heure"},
-                {name:"timestamp",label:"Instant"},
-                {name:"duration",label:"Durée"},
-                {name:"age",label:"Age"},
-                {name:"range",label:"Tranche horaire"}
-            ]
-        },
-        {
-            typeName:"coord", icon:"at", label:"Coordonées",
-            types:[
-                {name:"phone",label:"Téléphone"},
-                {name:"link",label:"Lien"},
-                {name:"mail",label:"Adresse e-mail"},
-                {name:"address",label:"Adresse"},
-                {name:"instagram",label:"Instagram"},
-                {name:"twitter",label:"Twitter"},
-                {name:"discord",label:"Discord"}
-            ]
-        },
-        {
-            typeName:"money", icon:"coin", label:"Monétaire",
-            types:[
-                {name:"amount",label:"Montant"},
-                {name:"currency",label:"Monnaie"}
-            ]
-        },
-        {
-            typeName:"complex",icon:"file-alt", label:"Complexe",
-            types:[
-                {name:"rating",label:"Notation"},
-                {name:"user",label:"Utilisateur"},
-                {name:"step",label:"Processus"}
-            ]
-        },
-        {
-            typeName:"doc",icon:"square-list", label:"Documents",
-            types:[
-                {name:"pdf",label:"Fichier PDF"},
-                {name:"file",label:"Fichier tout format"}
-            ]
-        },
-        {
-            typeName:"custom",icon:"atom", label:"Custom",
-            types:[
-                {name:"relation",label:"Relation"},
-                {name:"status",label:"Status"}
-            ]
-        },
-    ]
-
     const { uid } = useParams();
     const [loading, setLoading] = useState(true)
     const [modalActiveFieldType, setModalActiveFieldType] = useState("basic")
@@ -237,7 +160,7 @@ const Structure = props => {
     const getFieldTypeMenu = () => {
         return (
             <ul >
-                {fieldTypes.map(ft=>{
+                {props.fieldTypes.map(ft=>{
                     return (
                         <li className={(modalActiveFieldType == ft.typeName ? "is-active" : "")}>
                             <a onClick={()=>setModalActiveFieldType(ft.typeName)}>
@@ -255,7 +178,7 @@ const Structure = props => {
     const getSelectedFieldTypeSubtype = () => {
         return (
             <tbody>
-                {fieldTypes.filter(ft=>ft.typeName == modalActiveFieldType)[0].types.map(type=>{
+                {props.fieldTypes.filter(ft=>ft.typeName == modalActiveFieldType)[0].types.map(type=>{
                     return(
                         <tr>
                             <td>{type.label}</td>
@@ -307,20 +230,21 @@ const Structure = props => {
                             </div>
                             {Array.from(structureRaw.fields).sort((a,b) => (a.requiredAtCreation === b.requiredAtCreation)? 0 : a.requiredAtCreation? -1 : 1).map(f=>{
                                 return(
-                                    <a className="panel-block flex flex-between">
+                                    <a className={"panel-block flex flex-between"}>
                                         <div className="flex align center">
                                             <span className="panel-icon">
-                                                <i className={"fa-"+props.fastyle+" fa-brackets-curly has-text-link"} aria-hidden="true"></i>
+                                                <i className={"fa-"+props.fastyle+" fa-brackets-curly" + (f.requiredAtCreation ? " has-text-primary" : " has-text-link")} aria-hidden="true"></i>
                                             </span>
                                             {f.label}
                                             {
                                                 f.requiredAtCreation ? 
-                                                <i className={"margined-left8 has-text-primary fa-" + props.fastyle + " fa-circle-exclamation"} />
+                                                <i className={"margined-left8" + (f.requiredAtCreation ? " has-text-primary" : " has-text-link") + " fa-" + props.fastyle + " fa-circle-exclamation"} />
                                                 :
                                                 ""
                                             }
                                         </div>
-                                        <div>
+                                        <div className="flex align">
+                                            <span className={"tag" + (f.requiredAtCreation ? " has-text-primary" : " has-text-link") + " is-light"}>{props.getFieldTypeLabel(f.type)}</span>
                                             <button onClick={()=>showModalDeleteField(f._id)} className="button is-small is-danger is-light">
                                                 <i className={"fa-" + props.fastyle + " fa-trash"}/>
                                             </button>

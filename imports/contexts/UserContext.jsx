@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { gql } from 'graphql-tag';
 import { toast as TOASTER } from 'react-toastify';
+import _ from 'lodash';
 TOASTER.configure();
 
 export const UserContext = React.createContext();
@@ -24,17 +25,7 @@ export const UserProvider = props => {
         activated
     }}`
     const pagesTreeQuery = gql` query pagesTree {
-    pagesTree {
-        _id
-        entityUID
-        parentUID
-        title
-        name
-        url
-        fullpath
-        icon
-        active
-        sub{
+        pagesTree {
             _id
             entityUID
             parentUID
@@ -64,12 +55,101 @@ export const UserProvider = props => {
                     fullpath
                     icon
                     active
+                    sub{
+                        _id
+                        entityUID
+                        parentUID
+                        title
+                        name
+                        url
+                        fullpath
+                        icon
+                        active
                     }
                 }
             }
         }
     }`;
-    
+
+    const fieldTypes = [
+        {
+            typeName:"basic", icon:"brackets-curly", label:"Basic",
+            types:[
+                {name:"string",label:"Texte"},
+                {name:"int",label:"Nombre entier"},
+                {name:"float",label:"Nombre décimal"},
+                {name:"percent",label:"Pourcentage"},
+            ]
+        },
+        {
+            typeName:"physic", icon:"ruler-triangle", label:"Mesures physique",
+            types:[
+                {name:"weight",label:"Poid"},
+                {name:"volume",label:"Volume"},
+                {name:"gps",label:"Coordonées GPS"},
+                {name:"distance",label:"Distance"},
+                {name:"angle",label:"Angle"},
+                {name:"length",label:"Longeur"},
+                {name:"height",label:"Hauteur"},
+                {name:"width",label:"Largeur"}
+            ]
+        },
+        {
+            typeName:"time", icon:"calendar-clock", label:"Temporel",
+            types:[
+                {name:"date",label:"Date"},
+                {name:"time",label:"Heure"},
+                {name:"timestamp",label:"Instant"},
+                {name:"duration",label:"Durée"},
+                {name:"age",label:"Age"},
+                {name:"range",label:"Tranche horaire"}
+            ]
+        },
+        {
+            typeName:"coord", icon:"at", label:"Coordonées",
+            types:[
+                {name:"phone",label:"Téléphone"},
+                {name:"link",label:"Lien"},
+                {name:"mail",label:"Adresse e-mail"},
+                {name:"address",label:"Adresse"},
+                {name:"instagram",label:"Instagram"},
+                {name:"twitter",label:"Twitter"},
+                {name:"discord",label:"Discord"}
+            ]
+        },
+        {
+            typeName:"money", icon:"coin", label:"Monétaire",
+            types:[
+                {name:"amount",label:"Montant"},
+                {name:"currency",label:"Monnaie"}
+            ]
+        },
+        {
+            typeName:"complex",icon:"file-alt", label:"Complexe",
+            types:[
+                {name:"rating",label:"Notation"},
+                {name:"user",label:"Utilisateur"},
+                {name:"step",label:"Processus"}
+            ]
+        },
+        {
+            typeName:"doc",icon:"square-list", label:"Documents",
+            types:[
+                {name:"pdf",label:"Fichier PDF"},
+                {name:"file",label:"Fichier tout format"}
+            ]
+        },
+        {
+            typeName:"custom",icon:"atom", label:"Custom",
+            types:[
+                {name:"relation",label:"Relation"},
+                {name:"status",label:"Status"}
+            ]
+        },
+    ];
+    const getFieldTypeLabel = type => {
+        return _.flattenDeep(fieldTypes.map(t=>t.types)).filter(t=>t.name == type)[0].label;
+    }
     const toast = ({message,type}) => {
         if(type == 'error'){
             TOASTER(message,{type:TOASTER.TYPE.ERROR});
@@ -135,6 +215,8 @@ export const UserProvider = props => {
             isAdmin: isAdmin,
             isActivated: isActivated,
             avatar: avatar,
+            fieldTypes: fieldTypes,
+            getFieldTypeLabel: getFieldTypeLabel,
             loadUser: loadUser,
             loadPages: loadPages,
             toast: toast,

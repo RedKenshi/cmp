@@ -165,6 +165,23 @@ const Status = props => {
                         </div>
                         <nav className="panel is-link">
                             <p className="panel-heading has-background-link-light has-text-link">
+                                Paramètres
+                            </p>
+                            <a className="panel-block flex flex-between">
+                                <div className="flex align center">
+                                    Apparence
+                                </div>
+                                <div className="select is-link">
+                                    <select onChange={props.onChange}>
+                                        <option value="" selected disabled hidden>Choisir une apparence ...</option>
+                                        <option value="multiple">Choix multiple</option>
+                                        <option value="states">Etat</option>
+                                    </select>
+                                </div>
+                            </a>
+                        </nav>
+                        <nav className="panel is-link">
+                            <p className="panel-heading has-background-link-light has-text-link">
                                 Valeurs
                             </p>
                             <div className="panel-block">

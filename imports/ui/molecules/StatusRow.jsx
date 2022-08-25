@@ -22,7 +22,7 @@ export const StatusRow = props => {
                         </div>
                     </div>
                     <div className="details-and-actions columns">
-                        <div className="details column is-half is-justify-content-space-between">
+                        <div className="details column is-justify-content-space-between">
                             <i className="tag is-small is-link is-light">0 values</i>
                             <div className="actions column is-half">
                                 <button className="button is-small is-danger is-light" onClick={()=>props.showModalDelete(props.status._id)}>

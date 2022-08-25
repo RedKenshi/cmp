@@ -96,7 +96,7 @@ const AppBody = props => {
         }
         return (
             <div className="landing-container">
-                <div className="form flex flex-column align center children-spaced">
+                <form className="form flex flex-column align center children-spaced">
                     <img className='margined-bottom32 image is-128x128' src="/img/object.svg"/>
                     <h1>Welcome please login or register</h1>
                     <input className="input is-link" name="newmail" placeholder="mail" onChange={handleChange}/>
@@ -114,7 +114,7 @@ const AppBody = props => {
                     </div>
                     <button disabled={error} className='margined-bottom16 button is-success' onClick={(error ? ()=>{} : register)} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Créer le compte</button>
                     <a className='text-center is-link center' onClick={()=>setAction("login")}>J'ai déjà un compte</a>
-                </div>
+                </form>
             </div>
         );
     }
