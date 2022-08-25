@@ -1,0 +1,24 @@
+type Status{
+    _id: String
+    entityUID: Int
+    values: [StatusValue]
+    label: String
+    name: String
+    icon: String
+}
+type StatusValue{
+    _id: String
+    label: String
+}
+
+type Query{
+    status(uid:Int): Status
+    statuses : [Status]
+}
+
+type Mutation{
+    addStatus(label: String, name: String): [QueryResultMessage]
+    addValueToStatus(_id: String!,label: String): [QueryResultMessage]
+    deleteValueFromStatus(_id: String!): [QueryResultMessage]
+    deleteStatus(_id: String!): [QueryResultMessage]
+}

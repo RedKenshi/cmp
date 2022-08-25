@@ -19,19 +19,24 @@ import StructureResolvers from '../api/structure/resolvers.js';
 import LayoutSchema from '../api/layout/Layout.graphql';
 import LayoutResolvers from '../api/layout/resolvers.js';
 
-// #0626
+import StatusSchema from '../api/status/Status.graphql';
+import StatusResolvers from '../api/status/resolvers.js';
+
+// #0628
 
 const typeDefs = [
     UserSchema,
     PageSchema,
     StructureSchema,
-    LayoutSchema
+    LayoutSchema,
+    StatusSchema
 ];
 const resolvers = merge(
     UserResolvers,
     PageResolvers,
     StructureResolvers,
-    LayoutResolvers
+    LayoutResolvers,
+    StatusResolvers
 );  
 
 const app = express();

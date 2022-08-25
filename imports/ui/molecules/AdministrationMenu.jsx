@@ -10,22 +10,19 @@ const AdministrationMenu = props => {
             <p className="menu-label">Settings</p>
             <ul className="menu-list">
                 <li onClick={()=>navigate("/admin/pages")}>
-                    <a className={props.active == "pages" ? "is-active" : ""}>
-                    Pages
-                    </a>
+                    <a className={props.active == "pages" ? "is-active" : ""}>Pages</a>
                 </li>
                 <li onClick={()=>navigate("/admin/structures")}>
-                    <a className={props.active == "structures" ? "is-active" : ""}>
-                    Structures
-                    </a>
+                    <a className={props.active == "structures" ? "is-active" : ""}>Structures</a>
+                </li>
+                <li onClick={()=>navigate("/admin/status")}>
+                    <a className={props.active == "statuses" ? "is-active" : ""}>Status</a>
                 </li>
             </ul>
             <p className="menu-label">Administration</p>
-                <ul className="menu-list">
+            <ul className="menu-list">
                 <li onClick={()=>navigate("/admin/accounts")}>
-                    <a className={props.active == "accounts" ? "is-active" : ""}>
-                    User Accounts
-                    </a>
+                    <a className={props.active == "accounts" ? "is-active" : ""}>User Accounts</a>
                 </li>
             </ul>
         </div>

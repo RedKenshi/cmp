@@ -78,9 +78,8 @@ const Structure = props => {
         {
             typeName:"custom",icon:"atom", label:"Custom",
             types:[
-                {name:"custom1",label:"Custom 1"},
-                {name:"custom2",label:"Custom 2"},
-                {name:"custom3",label:"Custom 3"}
+                {name:"relation",label:"Relation"},
+                {name:"status",label:"Status"}
             ]
         },
     ]

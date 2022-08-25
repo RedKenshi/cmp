@@ -7,10 +7,12 @@ import Home from './pages/Home.jsx';
 import Navbar from './navbar/Navbar';
 import Login from './pages/Login.jsx';
 import NeedActivation from './pages/NeedActivation.jsx';
-import CustomPage from './pages/CustomPage.jsx'
-import Pages from './pages/Pages.jsx'
-import Structures from './pages/Structures.jsx'
-import Structure from './pages/Structure.jsx'
+import CustomPage from './pages/CustomPage.jsx';
+import Pages from './pages/Pages.jsx';
+import Structures from './pages/Structures.jsx';
+import Structure from './pages/Structure.jsx';
+import Statuses from './pages/Statuses.jsx';
+import Status from './pages/Status.jsx';
 import Accounts from './pages/Accounts.jsx';
 
 export const AppBody = props => {
@@ -48,6 +50,8 @@ export const AppBody = props => {
                     {(props.isAdmin ? <Route exact path="/admin/pages" element={withNavbar(Pages)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/structures" element={withNavbar(Structures)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/structures/:uid" element={withNavbar(Structure)({...props})}/> : "")}
+                    {(props.isAdmin ? <Route exact path="/admin/status" element={withNavbar(Statuses)({...props})}/> : "")}
+                    {(props.isAdmin ? <Route exact path="/admin/status/:uid" element={withNavbar(Status)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/accounts" element={withNavbar(Accounts)({...props})}/> : "")}
                 </Routes>
             )

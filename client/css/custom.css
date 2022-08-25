@@ -673,11 +673,10 @@ $theme-full-opposite: #000;*/
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto auto;
-  gap: 1rem;
   align-content: center;
 }
 .structure-row-wrapper .fa {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 .structure-row-wrapper .dropdown {
   align-items: center;
