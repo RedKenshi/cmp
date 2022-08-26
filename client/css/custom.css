@@ -491,18 +491,6 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
-/*$primary: #deb75f;
-$theme-bg: #325a5d;
-$theme-panel: #2e5557;
-$theme-text: #ecf0f1;
-$theme-full: #fff;
-$theme-opposite: #34495e;
-$theme-full-opposite: #000;*/
-/*
-    primary (golg): #deb75f
-    back: #2e5557
-    back-light : #325a5d
-*/
 .landing-container {
   width: 100vw;
   height: 100vh;
@@ -787,18 +775,6 @@ $theme-full-opposite: #000;*/
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
-/*$primary: #deb75f;
-$theme-bg: #325a5d;
-$theme-panel: #2e5557;
-$theme-text: #ecf0f1;
-$theme-full: #fff;
-$theme-opposite: #34495e;
-$theme-full-opposite: #000;*/
-/*
-    primary (golg): #deb75f
-    back: #2e5557
-    back-light : #325a5d
-*/
 .react-calendar {
   width: 350px;
   max-width: 100%;
@@ -979,7 +955,7 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-color: hsl(42deg, 60%, 94%);
+  background-color: hsl(42deg, 45%, 96%);
   background-attachment: fixed;
   min-height: 100vh;
   min-width: 100vw;
@@ -1396,25 +1372,13 @@ input.checkbox {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
-/*$primary: #deb75f;
-$theme-bg: #325a5d;
-$theme-panel: #2e5557;
-$theme-text: #ecf0f1;
-$theme-full: #fff;
-$theme-opposite: #34495e;
-$theme-full-opposite: #000;*/
-/*
-    primary (golg): #deb75f
-    back: #2e5557
-    back-light : #325a5d
-*/
 .navbar {
   width: 100%;
   display: flex;
   flex-direction: column;
   z-index: 1000;
   position: fixed;
-  background-color: hsl(42deg, 60%, 94%);
+  background-color: hsl(42deg, 45%, 96%);
 }
 .navbar hr {
   text-align: center;
@@ -1693,15 +1657,3 @@ $theme-full-opposite: #000;*/
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
-/*$primary: #deb75f;
-$theme-bg: #325a5d;
-$theme-panel: #2e5557;
-$theme-text: #ecf0f1;
-$theme-full: #fff;
-$theme-opposite: #34495e;
-$theme-full-opposite: #000;*/
-/*
-    primary (golg): #deb75f
-    back: #2e5557
-    back-light : #325a5d
-*/

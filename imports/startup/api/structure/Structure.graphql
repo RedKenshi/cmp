@@ -7,16 +7,28 @@ type Structure{
     icon: String
 }
 type StructureField{
-    _id: String
+    _id: String!
     label: String
     name: String
     type: String
     requiredAtCreation: Boolean
 }
 
+type Column {
+    fieldId:String!
+    value:String
+}
+
+type StructureInstance{
+    _id: String!
+    columns : [Column]
+}
+
 type Query{
     structure(uid:Int): Structure
     structures : [Structure]
+    structureInstances(_id:String): [StructureInstance]
+    structureInstance(_id:String): StructureInstance
 }
 
 type Mutation{
@@ -24,4 +36,5 @@ type Mutation{
     addFieldToStructure(_id: String!,label: String, name: String, type: String!, requiredAtCreation: Boolean!): [QueryResultMessage]
     deleteFieldFromStructure(_id: String!): [QueryResultMessage]
     deleteStructure(_id: String!): [QueryResultMessage]
+    addStructureInstance(structureId:String,columns:[String]): [QueryResultMessage]
 }

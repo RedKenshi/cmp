@@ -22,7 +22,7 @@ import LayoutResolvers from '../api/layout/resolvers.js';
 import StatusSchema from '../api/status/Status.graphql';
 import StatusResolvers from '../api/status/resolvers.js';
 
-// #0628
+// #0636
 
 const typeDefs = [
     UserSchema,

@@ -24,5 +24,5 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass:watch', function () {
-   gulp.watch(['./client/css/scss/*.scss','./client/css/scss/elements/*.scss'], gulp.series('sass'));
+   gulp.watch(['./client/css/scss/*.scss','./client/css/scss/elements/*.scss','./client/css/bulma.scss'], gulp.series('sass'));
  });

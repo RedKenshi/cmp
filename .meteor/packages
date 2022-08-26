@@ -24,3 +24,4 @@ react-meteor-data             # React higher-order component for reactively trac
 
 apollo
 accounts-password@2.2.0
+dburles:mongo-collection-instances

@@ -2,6 +2,28 @@ import Structures from './structures.js';
 import StructureFields from './structureFields';
 import { Mongo } from 'meteor/mongo';
 
+const getCol = name => {
+    let col;
+    try {
+        col = new Mongo.Collection(name);
+    } catch (error) {
+        col = Mongo.Collection.get(name);
+    }
+    return col
+}
+const toColumns = i => {
+    const cols = []
+    for (const [key, value] of Object.entries(i)) {
+        if(key != "_id"){
+            cols.push({
+                fieldId:key,
+                value:value
+            })
+        }
+    }
+    return cols;
+}
+
 const loadFields = structure => {
     let fields = StructureFields.find({structure:structure._id._str}).fetch() || {};
     structure.fields = fields;
@@ -17,6 +39,20 @@ export default {
         async structures(obj, args){
             return Structures.find({}).fetch() || {};
         },
+        async structureInstances(obj,{_id},{user}){
+            let col = getCol(_id);
+            let instances = col.find({}).fetch();
+            let is = instances.map(i => {
+                return ({
+                    _id:i._id,
+                    columns: toColumns(i)
+                })
+            })
+            return is;   
+        },
+        async structureInstance(obj,{instance},{user}){
+            return {};
+        }
     },
     Mutation:{
         async addStructure(obj,{label,name,icon},{user}){
@@ -66,5 +102,10 @@ export default {
             }
             throw new Error('Unauthorized');
         },
+        async addStructureInstance(obj,{structureId,columns},{user}){
+            const InstancesCollection = getCol(structureId);
+            InstancesCollection.insert({"_id":new Mongo.ObjectID(),...JSON.parse(columns)})
+            return [{status:"success",message:'Création réussie'}];
+        }
     }
 }

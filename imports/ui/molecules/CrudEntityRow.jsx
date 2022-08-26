@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 export const CrudEntityRow = props => {
 
@@ -8,11 +9,22 @@ export const CrudEntityRow = props => {
 
     return (
         <tr>
-           <td></td>
-           <td></td>
-           <td></td>
+            {props.crudEntity.columns.map(c=>
+                <td key={c.fieldId}>{c.value}</td>
+            )}
+            <td>
+                <button className="button is-small is-danger is-light">
+                    <i className={"fa-" + props.fastyle + " fa-trash"}></i>
+                </button>
+            </td>
         </tr>
     )
 }
 
-export default CrudEntityRow;
+const withUserContext = WrappedComponent => props => (
+    <UserContext.Consumer>
+        {ctx => <WrappedComponent {...ctx} {...props}/>}
+    </UserContext.Consumer>
+)
+  
+export default wrappedInUserContext = withUserContext(CrudEntityRow);
