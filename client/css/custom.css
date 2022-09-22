@@ -1056,6 +1056,9 @@ ul, li {
 .flex.flex-column {
   flex-direction: column;
 }
+.flex.nowrap {
+  flex-wrap: nowrap;
+}
 
 .centered {
   justify-content: center;

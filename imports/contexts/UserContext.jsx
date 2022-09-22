@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { gql } from 'graphql-tag';
 import { toast as TOASTER } from 'react-toastify';
 import _ from 'lodash';
+
+import InputString from '../ui/atoms/inputs/InputString';
+import InputInt from '../ui/atoms/inputs/InputInt';
+import InputFloat from '../ui/atoms/inputs/InputFloat';
+import InputPercent from '../ui/atoms/inputs/InputPercent';
+
 TOASTER.configure();
 
 export const UserContext = React.createContext();
@@ -75,10 +81,10 @@ export const UserProvider = props => {
         {
             typeName:"basic", icon:"brackets-curly", label:"Basic",
             types:[
-                {name:"string",label:"Texte"},
-                {name:"int",label:"Nombre entier"},
-                {name:"float",label:"Nombre décimal"},
-                {name:"percent",label:"Pourcentage"},
+                {name:"string",label:"Texte",input:InputString},
+                {name:"int",label:"Nombre entier",input:InputInt},
+                {name:"float",label:"Nombre décimal",input:InputFloat},
+                {name:"percent",label:"Pourcentage",input:InputPercent},
             ]
         },
         {
@@ -150,6 +156,9 @@ export const UserProvider = props => {
     const getFieldTypeLabel = type => {
         return _.flattenDeep(fieldTypes.map(t=>t.types)).filter(t=>t.name == type)[0].label;
     }
+    const getFieldTypeInput = type => {
+        return _.flattenDeep(fieldTypes.map(t=>t.types)).filter(t=>t.name == type)[0].input;
+    }
     const toast = ({message,type}) => {
         if(type == 'error'){
             TOASTER(message,{type:TOASTER.TYPE.ERROR});
@@ -217,6 +226,7 @@ export const UserProvider = props => {
             avatar: avatar,
             fieldTypes: fieldTypes,
             getFieldTypeLabel: getFieldTypeLabel,
+            getFieldTypeInput: getFieldTypeInput,
             loadUser: loadUser,
             loadPages: loadPages,
             toast: toast,

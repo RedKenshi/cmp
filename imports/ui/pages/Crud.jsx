@@ -100,7 +100,6 @@ export const Crud = props => {
                 _id:_id
             }
         }).then(({data})=>{
-            console.log(data.structureInstances)
             setStructureInstancesRaw(data.structureInstances);
             setLoadingInstances(false)
         })
@@ -136,6 +135,14 @@ export const Crud = props => {
             closeModalAdd()
         })
     }
+    const getInput = field => {
+        let Input = props.getFieldTypeInput(field.type);
+        if(Input){
+            return <Input field={field} onChange={handleFieldInputChange} />
+        }else{
+            <InputString field={field} onChange={handleFieldInputChange} />
+        }
+    }
 
     useEffect(()=>{
         loadStructure()
@@ -161,7 +168,7 @@ export const Crud = props => {
                                         <td>{f.label}</td>
                                     )
                                 })}
-                                <td className='is-narrow'>...</td>
+                                <td className='is-narrow'></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -191,29 +198,7 @@ export const Crud = props => {
                             </div>
                             <div className="column">
                                 {!loadingStructure && Array.from(structureRaw.fields).filter(f => f.requiredAtCreation == (modalActiveFieldType == "required")).map(f=>{
-                                    if(f.requiredAtCreation){
-                                        return(
-                                            <div key={f._id} className='field'>
-                                                <p className="control has-icons-right">
-                                                    <input className="input is-primary" placeholder={f.label} name={f._id} onChange={handleFieldInputChange} />
-                                                    <span className="icon is-small is-right is-primary">
-                                                        <i className="fa-solid fa-circle-exclamation"></i>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        )
-                                    }else{
-                                        return(
-                                            <div key={f._id} className='field'>
-                                                <p className="control has-icons-right">
-                                                    <input className="input is-link" placeholder={f.label} name={f._id} onChange={handleFieldInputChange} />
-                                                    <span className="icon is-small is-right is-primary">
-                                                        <i className="fa-solid fa-brackets-curly"></i>
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        )
-                                    }
+                                    return(getInput(f))
                                 })}
                             </div>
                         </div>
