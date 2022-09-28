@@ -22,13 +22,18 @@ export const Crud = props => {
     ]
     const [modalActiveFieldType, setModalActiveFieldType] = useState("required")
     const [structureInstancesRaw,setStructureInstancesRaw] = useState([]);
+    const [structureInstancesColumns,setStructureInstancesColumns] = useState([]);
     const [structureInstanceFieldValues,setStructureInstanceFieldValues] = useState([]);
     const [structureRaw,setStructureRaw] = useState([]);
+    const [structureId,setStructureId] = useState([]);
     const [layoutOptions,setLayoutOptions] = useState(JSON.parse(props.layoutOptions));
     const [loadingStructure,setLoadingStructure] = useState(true);
     const [loadingInstances,setLoadingInstances] = useState(true);
     const [openModalDate,setOpenModalDate] = useState(false);
     const [openModalAdd,setOpenModalAdd] = useState(false);
+    const [openModalDelete,setOpenModalDelete] = useState(false);
+    const [deleteTarget,setDeleteTarget] = useState("");
+    const [deleteTargetId,setDeleteTargetId] = useState("");
     const [fieldsOrder,setFieldsOrder] = useState([])
 
     const structureQuery = gql` query structure($uid: Int!) {
@@ -63,6 +68,12 @@ export const Crud = props => {
             message
         }
     }`;
+    const deleteStructureInstanceQuery = gql` mutation deleteStructureInstance($structureId:String!,$instanceId:String!) {
+        deleteStructureInstance(structureId:$structureId,instanceId:$instanceId) {
+            status
+            message
+        }
+    }`;
 
     const handleFieldInputChange = e => {
         setStructureInstanceFieldValues({
@@ -80,6 +91,14 @@ export const Crud = props => {
     const closeModalAdd = () => {
         setOpenModalAdd(false)
     }
+    const closeModalDelete = () => {
+        setOpenModalDelete(false)
+    }
+    const showModalDelete = target => {
+        setOpenModalDelete(true)
+        setDeleteTargetId(target)
+        setDeleteTarget(structureInstancesRaw.filter(si=>si._id == target)[0])
+    }
     const loadStructure = () => {
         props.client.query({
             query:structureQuery,
@@ -92,6 +111,7 @@ export const Crud = props => {
                 return({_id:f._id,label:f.label})
             }));
             setStructureRaw(data.structure);
+            setStructureId(data.structure._id);
             loadStructureInstances(data.structure._id);
             setLoadingStructure(false)
         })
@@ -104,15 +124,7 @@ export const Crud = props => {
                 _id:_id
             }
         }).then(({data})=>{
-            setStructureInstancesRaw(
-                data.structureInstances.map(si=>{
-                    let val = {};
-                    si.columns.map(col=>{
-                        val[col.fieldId] = col.value;
-                    })
-                    return val;
-                })
-            );
+            setStructureInstancesRaw(data.structureInstances);
             setLoadingInstances(false)
         })
     }
@@ -143,8 +155,22 @@ export const Crud = props => {
             }
         }).then((data)=>{
             props.toastQRM(data.data.addStructureInstance)
-            loadStructureInstances()
+            loadStructureInstances(structureId)
             closeModalAdd()
+        })
+    }
+    const deleteStructureInstance = () => {
+        props.client.mutate({
+            mutation:deleteStructureInstanceQuery,
+            variables:{
+                structureId:structureRaw._id,
+                instanceId:deleteTargetId,
+            }
+        }).then((data)=>{
+            props.toastQRM(data.data.deleteStructureInstance)
+            setDeleteTargetId("");
+            loadStructureInstances(structureId)
+            closeModalDelete()
         })
     }
     const getInput = field => {
@@ -155,7 +181,6 @@ export const Crud = props => {
             return <InputString field={field} onChange={handleFieldInputChange} />
         }
     }
-
     useEffect(()=>{
         loadStructure()
     },[])
@@ -186,7 +211,7 @@ export const Crud = props => {
                         <tbody>
                             {(!loadingInstances && structureInstancesRaw.map(ce=>{
                                 return(
-                                    <CrudEntityRow key={ce._id} fields={fieldsOrder} crudEntity={ce}/>
+                                    <CrudEntityRow key={ce._id} showModalDelete={showModalDelete} fields={fieldsOrder} crudEntity={ce}/>
                                 )
                             }))}
                         </tbody>
@@ -223,6 +248,43 @@ export const Crud = props => {
                         <button className="button is-primary" onClick={addStructureInstance}>
                             <i className='fa-light fa-check'/>
                             Créer
+                        </button>
+                    </footer>
+                </div>
+            </div>
+            <div className={"modal" + (openModalDelete != false ? " is-active" : "")}>
+                <div className="modal-background"></div>
+                <div className="modal-card">
+                    <header className="modal-card-head">
+                        <p className="modal-card-title">Supprimer une instance : {structureRaw.label}</p>
+                        <button className="delete" aria-label="close" onClick={closeModalDelete}/>
+                    </header>
+                    <div className='modal-card-body'>
+                        {!loadingStructure && deleteTarget && structureRaw.fields.map(f=>{
+                            if(f.requiredAtCreation){
+                                return(
+                                    <div className='columns info-display'>
+                                        <div className='column is-half text-end'>
+                                            <p>{f.label} : </p>
+                                        </div>
+                                        <div className='column is-half'>
+                                            <span class="tag is-light is-medium">
+                                                {deleteTarget.columns.filter(c=>c.fieldId == f._id)[0].value}
+                                            </span>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        })}
+                    </div>
+                    <footer className="modal-card-foot">
+                        <button className='button' onClick={closeModalDelete}>
+                            <i className='fa-light fa-arrow-left'/>
+                            Annuler
+                        </button>
+                        <button className="button is-danger" onClick={deleteStructureInstance}>
+                            <i className='fa-light fa-check'/>
+                            Supprimer
                         </button>
                     </footer>
                 </div>

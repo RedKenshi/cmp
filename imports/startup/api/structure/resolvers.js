@@ -106,6 +106,13 @@ export default {
             const InstancesCollection = getCol(structureId);
             InstancesCollection.insert({"_id":new Mongo.ObjectID(),...JSON.parse(columns)})
             return [{status:"success",message:'Création réussie'}];
+        },
+        async deleteStructureInstance(obj,{structureId,instanceId},{user}){
+            const InstancesCollection = getCol(structureId);
+            InstancesCollection.remove({
+                _id:new Mongo.ObjectID(instanceId),
+            });
+            return [{status:"success",message:'Création réussie'}];
         }
     }
 }

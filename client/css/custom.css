@@ -763,6 +763,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   font-size: 3rem;
 }
 
+.info-display .column {
+  align-self: center;
+}
+
 .basic-crud-search-layout {
   height: 100%;
   display: grid;
@@ -1035,6 +1039,14 @@ ul, li {
 
 .text-center {
   text-align: center;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
 }
 
 .children-spaced > * {

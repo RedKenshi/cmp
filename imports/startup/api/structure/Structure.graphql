@@ -37,4 +37,5 @@ type Mutation{
     deleteFieldFromStructure(_id: String!): [QueryResultMessage]
     deleteStructure(_id: String!): [QueryResultMessage]
     addStructureInstance(structureId:String,columns:[String]): [QueryResultMessage]
+    deleteStructureInstance(structureId:String!,instanceId:String!): [QueryResultMessage]
 }
