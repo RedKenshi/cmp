@@ -29,6 +29,7 @@ export const Crud = props => {
     const [loadingInstances,setLoadingInstances] = useState(true);
     const [openModalDate,setOpenModalDate] = useState(false);
     const [openModalAdd,setOpenModalAdd] = useState(false);
+    const [fieldsOrder,setFieldsOrder] = useState([])
 
     const structureQuery = gql` query structure($uid: Int!) {
         structure(uid:$uid) {
@@ -87,6 +88,9 @@ export const Crud = props => {
                 uid:parseInt(layoutOptions.structureEntityUID),
             }
         }).then(({data})=>{
+            setFieldsOrder(data.structure.fields.map(f=>{
+                return({_id:f._id,label:f.label})
+            }));
             setStructureRaw(data.structure);
             loadStructureInstances(data.structure._id);
             setLoadingStructure(false)
@@ -100,7 +104,15 @@ export const Crud = props => {
                 _id:_id
             }
         }).then(({data})=>{
-            setStructureInstancesRaw(data.structureInstances);
+            setStructureInstancesRaw(
+                data.structureInstances.map(si=>{
+                    let val = {};
+                    si.columns.map(col=>{
+                        val[col.fieldId] = col.value;
+                    })
+                    return val;
+                })
+            );
             setLoadingInstances(false)
         })
     }
@@ -140,7 +152,7 @@ export const Crud = props => {
         if(Input){
             return <Input field={field} onChange={handleFieldInputChange} />
         }else{
-            <InputString field={field} onChange={handleFieldInputChange} />
+            return <InputString field={field} onChange={handleFieldInputChange} />
         }
     }
 
@@ -174,7 +186,7 @@ export const Crud = props => {
                         <tbody>
                             {(!loadingInstances && structureInstancesRaw.map(ce=>{
                                 return(
-                                    <CrudEntityRow crudEntity={ce}/>
+                                    <CrudEntityRow key={ce._id} fields={fieldsOrder} crudEntity={ce}/>
                                 )
                             }))}
                         </tbody>

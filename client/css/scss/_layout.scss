@@ -45,6 +45,10 @@
     place-self: stretch;
 }
 .home-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20vh 1fr 20vh;
+    place-items: center;
     & .home-card{
         padding-right: 2rem;
         grid-template-columns: auto 1fr;
@@ -67,6 +71,7 @@
     & .cmp-title-container{
         margin:auto;
         text-align: center;
+        padding-bottom: 4rem;
         & .cmp-title{
             font-family: "Montserrat", sans-serif;
             font-weight: 900;

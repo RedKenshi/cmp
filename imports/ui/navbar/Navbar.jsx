@@ -6,7 +6,6 @@ import { UserContext } from '../../contexts/UserContext';
 /*ELEMENTS*/
 import { DuoIcon } from '../elements/DuoIcon';
 /*COMPONENTS*/
-import { NavbarItemList } from './NavbarItemList';
 
 export const Navbar = props => {
   const [expanded,setExpanded] = useState(false)
@@ -66,7 +65,18 @@ export const Navbar = props => {
             </a>
           </li>
           <hr/>
-          <NavbarItemList navigate={navigateTo} fastyle={props.fastyle} menuItems={getMenuItemsList()}/>
+          {getMenuItemsList().map(item => {
+            if(item.display){
+              return(
+                <li className="nav-item" name={item.name} key={item.name}>
+                  <a className="nav-link" key={item.name} onClick={()=>{navigate(item.url)}} style={{textDecoration: 'none'}}>
+                    <i style={props.style} className={"fa fa-"+props.fastyle+" fa-"+ item.icon + " " + item.color}></i>
+                    <span className="link-text">{item.label}</span>
+                  </a>
+                </li>
+              )
+            }
+          })}
           <hr/>
           <li className="nav-item">
             <a className="nav-link" onClick={()=>{navigateTo("/admin/pages")}} style={{textDecoration: 'none'}}>
