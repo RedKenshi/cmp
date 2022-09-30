@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
+import Carl from '../atoms/Carl';
 import Button from '../elements/Button';
 
 const AppBody = props => {
@@ -21,7 +22,6 @@ const AppBody = props => {
             [e.target.name] : e.target.value
         })
     }
-
     const login = () => {
         Meteor.loginWithPassword(formValues.mail, formValues.pass,
             error=>{
@@ -63,17 +63,20 @@ const AppBody = props => {
             }
         })
     }
-
     if(action == "login"){
         return (
-            <div className="landing-container">
-                <div className="form flex flex-column align center children-spaced">
-                    <img className='margined-bottom64 image is-256x256' src="/img/object.svg"/>
-                    <h1>Welcome please login or register</h1>
-                    <input className="input is-primary" name="mail" placeholder="mail" onChange={handleChange}/>
-                    <input className="input is-primary" name="pass" placeholder="pass" onChange={handleChange} type="password"/>
-                    <button className='margined-bottom16 button is-success' onClick={login} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Se connecter</button>
-                    <a className='text-center is-link center' onClick={()=>setAction({action:"register"})}>Créer un compte</a>
+            <div className="landing-container columns">
+                <div className='column is-half'>
+                    <Carl />
+                </div>
+                <div className='column is-half'>
+                    <form className="form children-spaced">
+                        <h1>Welcome please login or register</h1>
+                        <input className="input is-primary" name="mail" placeholder="mail" onChange={handleChange}/>
+                        <input className="input is-primary" name="pass" placeholder="pass" onChange={handleChange} type="password"/>
+                        <button className='margined-bottom16 button is-primary' onClick={login} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Se connecter</button>
+                        <button className='button is-primary is-outlined text-center center' onClick={()=>setAction({action:"register"})}>Créer un compte</button>
+                    </form>
                 </div>
             </div>
         );
@@ -95,26 +98,28 @@ const AppBody = props => {
             errorContent = "Tous les champs doivent être renseignés";
         }
         return (
-            <div className="landing-container">
-                <form className="form flex flex-column align center children-spaced">
-                    <img className='margined-bottom32 image is-128x128' src="/img/object.svg"/>
-                    <h1>Welcome please login or register</h1>
-                    <input className="input is-link" name="newmail" placeholder="mail" onChange={handleChange}/>
-                    <input className="input is-link" name="firstname" placeholder="firstname" onChange={handleChange}/>
-                    <input className="input is-link" name="lastname" placeholder="lastname" onChange={handleChange}/>
-                    <input className="input is-link" name="newpass" placeholder="pass" onChange={handleChange} type="password"/>
-                    <input className="input is-link" name="newpassconfirm" placeholder="confirm pass" onChange={handleChange} type="password"/>
-                    <div className={"message " + errorColor + " is-small margined-auto"+ (error ? "" : " hidden")}>
-                        <div className="message-header">
-                            <p>{errorTitle}</p>
+            <div className="landing-container columns">
+                <div className='column is-half'>
+                    <Carl />
+                </div>
+                <div className='column is-half'>
+                    <form className="form box children-spaced">
+                        <h1>Welcome please login or register</h1>
+                        <input className="input is-primary" name="newmail" placeholder="mail" onChange={handleChange}/>
+                        <input className="input is-primary" name="firstname" placeholder="firstname" onChange={handleChange}/>
+                        <input className="input is-primary" name="lastname" placeholder="lastname" onChange={handleChange}/>
+                        <input className="input is-primary" name="newpass" placeholder="pass" onChange={handleChange} type="password"/>
+                        <input className="input is-primary" name="newpassconfirm" placeholder="confirm pass" onChange={handleChange} type="password"/>
+                        <div className={"message " + errorColor + " is-small margined-auto"+ (error ? "" : " hidden")}>
+                            <div className="message-body">
+                                <p><strong>{errorTitle}</strong></p>
+                                <p>{errorContent}</p>
+                            </div>
                         </div>
-                        <div className="message-body">
-                            {errorContent}
-                        </div>
-                    </div>
-                    <button disabled={error} className='margined-bottom16 button is-success' onClick={(error ? ()=>{} : register)} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Créer le compte</button>
-                    <a className='text-center is-link center' onClick={()=>setAction("login")}>J'ai déjà un compte</a>
-                </form>
+                        <button disabled={error} className='margined-bottom16 button is-primary' onClick={(error ? ()=>{} : register)} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Créer le compte</button>
+                        <button className='button is-primary is-outlined text-center center' onClick={()=>setAction("login")}>J'ai déjà un compte</button>
+                    </form>
+                </div>
             </div>
         );
     }

@@ -13,6 +13,7 @@ TOASTER.configure();
 export const UserContext = React.createContext();
 
 export const UserProvider = props => {
+    const [platformSettings, setPlatformSettings] = useState({});
     const [user, setUser] = useState("loading");
     const [location, setLocation] = useState("");
     const [isActivated, setIsActivated] = useState("loading");
@@ -74,6 +75,11 @@ export const UserProvider = props => {
                     }
                 }
             }
+        }
+    }`;
+    const platformSettingsQuery = gql` query platform {
+        platform {
+            initialized
         }
     }`;
 
@@ -209,10 +215,19 @@ export const UserProvider = props => {
             setPagesTree(data.pagesTree);
         })
     }
+    const loadPlatformSettings = () => {
+        props.client.query({
+            query:platformSettingsQuery,
+            fetchPolicy:"network-only",
+        }).then(({data})=>{
+            setPlatformSettings(data.platform);
+        })
+    }
 
     useEffect (()=>{
         loadUser();
         loadPages();
+        loadPlatformSettings();
     });
 
     return (

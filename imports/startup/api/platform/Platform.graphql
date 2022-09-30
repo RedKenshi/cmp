@@ -1,0 +1,7 @@
+type Platform{
+    initialized : Boolean
+}
+
+type Query{
+    platform: Platform
+}

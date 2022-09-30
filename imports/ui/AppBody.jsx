@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from "react-router-dom";
 
 import { UserContext } from '../contexts/UserContext';
@@ -63,6 +63,7 @@ export const AppBody = props => {
             )
         }
     }else{
+
         return(
             <Routes>
                 <Route path="*" element={<Login />} />

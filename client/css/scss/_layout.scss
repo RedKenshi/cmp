@@ -5,11 +5,14 @@
 .landing-container{
     width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    & > .column{
+        padding: 4rem !important;
+        & > input {
+            margin: auto;
+        }
+    }
 }
 .main-container-navbar{
     display: block;
