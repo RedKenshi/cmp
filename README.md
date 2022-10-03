@@ -1,1 +1,1 @@
-# meteor251-stack
+# cmp-stack

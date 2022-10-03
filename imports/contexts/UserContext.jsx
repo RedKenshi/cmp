@@ -14,6 +14,7 @@ export const UserContext = React.createContext();
 
 export const UserProvider = props => {
     const [platformSettings, setPlatformSettings] = useState({});
+    const [initialized, setInitialized] = useState(null);
     const [user, setUser] = useState("loading");
     const [location, setLocation] = useState("");
     const [isActivated, setIsActivated] = useState("loading");
@@ -82,7 +83,6 @@ export const UserProvider = props => {
             initialized
         }
     }`;
-
     const fieldTypes = [
         {
             typeName:"basic", icon:"brackets-curly", label:"Basic",
@@ -221,6 +221,7 @@ export const UserProvider = props => {
             fetchPolicy:"network-only",
         }).then(({data})=>{
             setPlatformSettings(data.platform);
+            setInitialized(data.platform.initialized)
         })
     }
 
@@ -238,6 +239,7 @@ export const UserProvider = props => {
             isOwner: isOwner,
             isAdmin: isAdmin,
             isActivated: isActivated,
+            initialized:initialized,
             avatar: avatar,
             fieldTypes: fieldTypes,
             getFieldTypeLabel: getFieldTypeLabel,

@@ -533,14 +533,42 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 /*SELECTED COLORS*/
 .landing-container {
   width: 100vw;
+  max-width: 64rem;
+  padding: 1rem;
+  margin: auto;
   height: 100vh;
   justify-content: center;
   align-items: center;
 }
-.landing-container > .column {
-  padding: 4rem !important;
+.landing-container > h1 {
+  text-align: center;
 }
-.landing-container > .column > input {
+.landing-container > .column {
+  min-width: 16rem;
+  max-width: 36rem;
+  padding: 2rem;
+  margin: auto;
+  padding: 2rem 0 !important;
+}
+.landing-container > .column > * {
+  margin: auto;
+}
+.landing-container > .column .inputs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.landing-container > .column .inputs .steps {
+  display: flex;
+  gap: 1rem;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.landing-container > .column .inputs .steps .tag {
+  flex-grow: 1;
+}
+.landing-container > .column .inputs > button {
+  flex: 1 1 50%;
   margin: auto;
 }
 
@@ -797,6 +825,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 
 .box, .panel {
+  box-shadow: 0 0.5rem 1rem -0.125rem rgba(0, 0, 0, 0.0666666667), 0 0px 0.5rem 0.125rem rgba(0, 0, 0, 0.0666666667);
   margin: 0 0.5rem 0.5rem 0.5rem;
 }
 .box:not(:last-child), .panel:not(:last-child) {
@@ -1054,8 +1083,8 @@ ul, li {
   text-align: end;
 }
 
-.children-spaced > * {
-  margin-bottom: 1rem;
+.children-spaced > *:not(:last-child) {
+  margin-bottom: 1rem !important;
 }
 
 .text-light p,

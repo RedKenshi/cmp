@@ -4,13 +4,41 @@
 
 .landing-container{
     width: 100vw;
+    max-width: 64rem;
+    padding: 1rem;
+    margin: auto;
     height: 100vh;
     justify-content: center;
     align-items: center;
+    & > h1 {
+        text-align: center;
+    }
     & > .column{
-        padding: 4rem !important;
-        & > input {
+        min-width: 16rem;
+        max-width: 36rem;
+        padding: 2rem;
+        margin: auto;
+        & > * {
             margin: auto;
+        }
+        padding: 2rem 0 !important;
+        & .inputs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            & .steps{
+                display: flex;
+                gap: 1rem;
+                flex-grow: 1;
+                flex-shrink: 1;
+                & .tag{
+                    flex-grow: 1;
+                }
+            }
+            & > button {
+                flex: 1 1 50%;
+                margin: auto;
+            }
         }
     }
 }
@@ -256,6 +284,7 @@
     }
 }
 .box, .panel {
+    box-shadow: 0 0.5rem 1rem -0.125rem #0001, 0 0px .5rem .125rem #0001;
     margin: 0 .5rem .5rem .5rem;
     &:not(:last-child){
         margin-bottom: .5rem;

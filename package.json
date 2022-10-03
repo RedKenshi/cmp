@@ -1,5 +1,5 @@
 {
-  "name": "meteor251",
+  "name": "cmp",
   "private": true,
   "scripts": {
     "scss": "gulp sass",
