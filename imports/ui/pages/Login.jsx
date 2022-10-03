@@ -72,7 +72,7 @@ const AppBody = props => {
                         <Carl />
                     </div>
                     <div className='column is-half'>
-                        <form className="form box children-spaced">
+                        <div className="form box children-spaced">
                             <h1>Welcome please login or register</h1>
                             <input className="input is-primary" name="mail" placeholder="mail" onChange={handleChange}/>
                             <input className="input is-primary" name="pass" placeholder="pass" onChange={handleChange} type="password"/>
@@ -80,7 +80,7 @@ const AppBody = props => {
                                 <button className='margined-bottom16 button is-primary' onClick={login} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Se connecter</button>
                                 <button className='button is-primary is-outlined text-center center' onClick={()=>setAction({action:"register"})}>Créer un compte</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             );
@@ -107,7 +107,7 @@ const AppBody = props => {
                         <Carl />
                     </div>
                     <div className='column is-half'>
-                        <form className="form box children-spaced">
+                        <div className="form box children-spaced">
                             <h1>Welcome please login or register</h1>
                             <input className="input is-primary" name="newmail" placeholder="mail" onChange={handleChange}/>
                             <input className="input is-primary" name="firstname" placeholder="firstname" onChange={handleChange}/>
@@ -124,7 +124,7 @@ const AppBody = props => {
                                 <button disabled={error} className='margined-bottom16 button is-primary' onClick={(error ? ()=>{} : register)} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Créer le compte</button>
                                 <button className='button is-primary is-outlined text-center center' onClick={()=>setAction("login")}>J'ai déjà un compte</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             );
