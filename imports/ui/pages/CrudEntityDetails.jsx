@@ -22,11 +22,9 @@ export const CrudEntityDetails = props => {
     ]
     const [modalActiveFieldType, setModalActiveFieldType] = useState("required")
     const [structureInstancesRaw,setStructureInstancesRaw] = useState([]);
-    const [structureInstancesColumns,setStructureInstancesColumns] = useState([]);
     const [structureInstanceFieldValues,setStructureInstanceFieldValues] = useState([]);
     const [structureRaw,setStructureRaw] = useState([]);
     const [structureId,setStructureId] = useState([]);
-    const [layoutOptions,setLayoutOptions] = useState(JSON.parse(props.layoutOptions));
     const [loadingStructure,setLoadingStructure] = useState(true);
     const [loadingInstances,setLoadingInstances] = useState(true);
     const [openModalDate,setOpenModalDate] = useState(false);
@@ -52,7 +50,6 @@ export const CrudEntityDetails = props => {
             name
         }
     }`;
-
     const structureInstancesQuery = gql` query structureInstances($_id:String) {
         structureInstances(_id:$_id) {
             _id
@@ -74,14 +71,12 @@ export const CrudEntityDetails = props => {
             message
         }
     }`;
-
     const handleFieldInputChange = e => {
         setStructureInstanceFieldValues({
             ...structureInstanceFieldValues,
             [e.target.name] : e.target.value
         })
     }
-
     const onValidateDatePicker = (target,value) => {
         closeModal();
     }
@@ -104,7 +99,7 @@ export const CrudEntityDetails = props => {
             query:structureQuery,
             fetchPolicy:"network-only",
             variables:{
-                uid:parseInt(layoutOptions.structureEntityUID),
+                uid:parseInt(props.layoutOptions.structureEntityUID),
             }
         }).then(({data})=>{
             setFieldsOrder(data.structure.fields.map(f=>{
@@ -187,37 +182,7 @@ export const CrudEntityDetails = props => {
 
     return (
         <Fragment>
-            <div className='box basic-crud-search-layout'>
-                <div>
-                    <input className='input' type="text"/>
-                </div>
-                <div>
-                    <button className='button is-light is-link' onClick={()=>setOpenModalAdd(true)}>
-                        <i className='fa-regular fa-plus'/>
-                    </button>
-                </div>
-                <div className='entries-container'>
-                    <table className="table is-fullwidth is-stripped is-hoverable">
-                        <thead>
-                            <tr>
-                                {!loadingStructure && structureRaw.fields.map(f=>{
-                                    return(
-                                        <td>{f.label}</td>
-                                    )
-                                })}
-                                <td className='is-narrow'></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {(!loadingInstances && structureInstancesRaw.map(ce=>{
-                                return(
-                                    <CrudEntityRow key={ce._id} showModalDelete={showModalDelete} fields={fieldsOrder} crudEntity={ce}/>
-                                )
-                            }))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            HEY CRUD ENTITY DETAILS
             <ModalGenericDatePicker open={openModalDate} close={closeModalDate} headerLabel={"Header here"} selected={new Date()}onValidate={onValidateDatePicker} target={"datePickerTarget"}/>
             <div className={"modal" + (openModalAdd != false ? " is-active" : "")}>
                 <div className="modal-background"></div>

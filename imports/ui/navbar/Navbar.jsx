@@ -65,10 +65,10 @@ export const Navbar = props => {
             </a>
           </li>
           <hr/>
-          {getMenuItemsList().map(item => {
+          {getMenuItemsList().map((item,i) => {
             if(item.display){
               return(
-                <li className="nav-item" name={item.name} key={item.name}>
+                <li className="nav-item" name={item.name} key={item.name+"-"+i}>
                   <a className="nav-link" key={item.name} onClick={()=>{navigate(item.url)}} style={{textDecoration: 'none'}}>
                     <i style={props.style} className={"fa fa-"+props.fastylenav+" fa-"+ item.icon + " " + item.color}></i>
                     <span className="link-text">{item.label}</span>

@@ -23,7 +23,6 @@ const toColumns = i => {
     }
     return cols;
 }
-
 const loadFields = structure => {
     let fields = StructureFields.find({structure:structure._id._str}).fetch() || {};
     structure.fields = fields;
@@ -34,7 +33,7 @@ export default {
     Query : {
         async structure(obj, {uid}, { user }){
             let structure = Structures.findOne({entityUID:uid});
-            return loadFields(structure)
+            return loadFields(structure);
         },
         async structures(obj, args){
             return Structures.find({}).fetch() || {};

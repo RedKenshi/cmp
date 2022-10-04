@@ -37,6 +37,8 @@ export const UserProvider = props => {
             _id
             entityUID
             parentUID
+            layout
+            layoutOptions
             title
             name
             url
@@ -47,6 +49,8 @@ export const UserProvider = props => {
                 _id
                 entityUID
                 parentUID
+                layout
+                layoutOptions
                 title
                 name
                 url
@@ -57,6 +61,8 @@ export const UserProvider = props => {
                     _id
                     entityUID
                     parentUID
+                    layout
+                    layoutOptions
                     title
                     name
                     url
@@ -67,6 +73,8 @@ export const UserProvider = props => {
                         _id
                         entityUID
                         parentUID
+                        layout
+                        layoutOptions
                         title
                         name
                         url

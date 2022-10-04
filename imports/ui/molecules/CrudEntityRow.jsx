@@ -1,8 +1,10 @@
 import React, { useEffect, useState }  from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 
 export const CrudEntityRow = props => {
 
+    const navigate = useNavigate();
     const [columns,setColumns] = useState([]);
 
     useEffect(()=>{
@@ -21,7 +23,7 @@ export const CrudEntityRow = props => {
                 }
             })}
             <td className='flex align nowrap'>
-                <button className="button is-small is-link" >
+                <button className="button is-small is-link" onClick={()=>navigate(props.crudEntity._id)}>
                     <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
                 </button>
                 <button onClick={()=>{props.showModalDelete(props.crudEntity._id)}} className="button is-small is-danger">

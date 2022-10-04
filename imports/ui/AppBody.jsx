@@ -8,6 +8,7 @@ import Navbar from './navbar/Navbar';
 import Login from './pages/Login.jsx';
 import NeedActivation from './pages/NeedActivation.jsx';
 import CustomPage from './pages/CustomPage.jsx';
+import CrudEntityDetails from './pages/CrudEntityDetails';
 import Pages from './pages/Pages.jsx';
 import Structures from './pages/Structures.jsx';
 import Structure from './pages/Structure.jsx';
@@ -28,7 +29,18 @@ export const AppBody = props => {
     const extractSubRoutes = p => {
         let routes = [];
         if(p.active){
-            routes.push(<Route exact path={p.fullpath} key={p.fullpath} element={withNavbar(()=><CustomPage location={p.fullpath} />)({...props})}/>)
+            routes.push(
+                <Route exact path={p.fullpath} key={p.fullpath} element={withNavbar(()=>
+                    <CustomPage location={p.fullpath} />
+                )({...props})}/>
+            )
+            if(p.layout == "crud"){
+                routes.push(
+                    <Route exact path={p.fullpath+"/:id"} key={p.fullpath} element={withNavbar(()=>
+                        <CrudEntityDetails layout={p.layout} layoutOptions={JSON.parse(p.layoutOptions)} structureUID={p.entityUID} location={p.fullpath} />
+                    )({...props})}/>
+                )
+            }
             if(p.sub){
                 p.sub.map(s=>{routes.push(...extractSubRoutes(s));})
             }
