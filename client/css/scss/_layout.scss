@@ -257,6 +257,12 @@
 .info-display .column{
     align-self: center;
 }
+.demo-actions-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
 //REUSABLE
 .basic-crud-search-layout{
     height: 100%;

@@ -800,6 +800,13 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   align-self: center;
 }
 
+.demo-actions-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
 .basic-crud-search-layout {
   height: 100%;
   display: grid;

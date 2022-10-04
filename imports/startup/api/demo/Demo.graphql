@@ -1,0 +1,4 @@
+type Mutation{
+    resetDB: [QueryResultMessage]
+    factoryReset: [QueryResultMessage]
+}

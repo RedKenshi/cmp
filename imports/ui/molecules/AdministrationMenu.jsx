@@ -24,9 +24,12 @@ const AdministrationMenu = props => {
                 <li onClick={()=>navigate("/admin/accounts")}>
                     <a className={props.active == "accounts" ? "is-active" : ""}>User Accounts</a>
                 </li>
+                <li onClick={()=>navigate("/admin/demo")}>
+                    <a className={props.active == "demo" ? "is-active" : ""}>Démo</a>
+                </li>
             </ul>
         </div>
     )
 }
-  
-export default AdministrationMenu;
+
+export default (AdministrationMenu);

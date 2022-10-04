@@ -15,6 +15,7 @@ import Structure from './pages/Structure.jsx';
 import Statuses from './pages/Statuses.jsx';
 import Status from './pages/Status.jsx';
 import Accounts from './pages/Accounts.jsx';
+import Demo from './pages/Demo.jsx';
 
 export const AppBody = props => {
 
@@ -65,6 +66,7 @@ export const AppBody = props => {
                     {(props.isAdmin ? <Route exact path="/admin/status" element={withNavbar(Statuses)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/status/:uid" element={withNavbar(Status)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/accounts" element={withNavbar(Accounts)({...props})}/> : "")}
+                    {(props.isAdmin ? <Route exact path="/admin/demo" element={withNavbar(Demo)({...props})}/> : "")}
                 </Routes>
             )
         }else{
@@ -75,7 +77,6 @@ export const AppBody = props => {
             )
         }
     }else{
-
         return(
             <Routes>
                 <Route path="*" element={<Login />} />
@@ -103,6 +104,6 @@ const withUserContext = WrappedComponent => props => (
     <UserContext.Consumer>
         {ctx => <WrappedComponent {...ctx} {...props}/>}
     </UserContext.Consumer>
-  )
+)
   
 export default withUserContext(AppBody);

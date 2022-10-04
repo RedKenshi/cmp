@@ -25,7 +25,10 @@ import StatusResolvers from '../api/status/resolvers.js';
 import PlatformSchema from '../api/platform/Platform.graphql';
 import PlatformResolvers from '../api/platform/resolvers.js';
 
-// #0637
+import DemoSchema from '../api/demo/Demo.graphql';
+import DemoResolvers from '../api/demo/resolvers.js';
+
+// #0641
 
 const typeDefs = [
     UserSchema,
@@ -33,7 +36,8 @@ const typeDefs = [
     StructureSchema,
     LayoutSchema,
     StatusSchema,
-    PlatformSchema
+    PlatformSchema,
+    DemoSchema
 ];
 const resolvers = merge(
     UserResolvers,
@@ -41,7 +45,8 @@ const resolvers = merge(
     StructureResolvers,
     LayoutResolvers,
     StatusResolvers,
-    PlatformResolvers
+    PlatformResolvers,
+    DemoResolvers
 );  
 
 const app = express();
