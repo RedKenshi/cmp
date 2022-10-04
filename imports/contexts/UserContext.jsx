@@ -233,7 +233,8 @@ export const UserProvider = props => {
 
     return (
         <UserContext.Provider value={{
-            fastyle: "duotone",
+            fastyle: "solid",
+            fastylenav: "duotone",
             user: user,
             pagesTree: pagesTree,
             isOwner: isOwner,

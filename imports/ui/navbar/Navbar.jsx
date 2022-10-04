@@ -43,24 +43,24 @@ export const Navbar = props => {
           <li className="logo">
             <a className="nav-link nav-link-logo" key={"logout"}>
               <span className="link-text">CMP</span>
-              <i className={"fa-" + props.fastyle + " fa-chevrons-right"} color="blue"/>
+              <i className={"fa-"+props.fastylenav+" fa-chevrons-right"} color="blue"/>
             </a>
           </li>
           <li className="nav-item nav-expand" name={"expand"}>
             <a className="nav-link" onClick={()=>expand(true)}>
-              <i className={"fa fa-"+props.fastyle+" fa-bars dark"}></i>
+              <i className={"fa fa-"+props.fastylenav+" fa-bars dark"}></i>
             </a>
           </li>
           <li className="nav-item nav-collapse" name={"collapse"}>
             <a className="nav-link" onClick={()=>expand(false)}>
-              <i className={"fa fa-"+props.fastyle+" fa-xmark dark"}></i>
+              <i className={"fa fa-"+props.fastylenav+" fa-xmark dark"}></i>
             </a>
           </li>
         </ul>
         <ul className="navbar-nav navbar-home hide">
           <li className="nav-item">
             <a className="nav-link" onClick={()=>{navigateTo("/")}} style={{textDecoration: 'none'}}>
-              <i style={props.style} className={"fa fa-"+props.fastyle+" fa-home dark"}></i>
+              <i style={props.style} className={"fa fa-"+props.fastylenav+" fa-home dark"}></i>
               <span className="link-text">Home</span>
             </a>
           </li>
@@ -70,7 +70,7 @@ export const Navbar = props => {
               return(
                 <li className="nav-item" name={item.name} key={item.name}>
                   <a className="nav-link" key={item.name} onClick={()=>{navigate(item.url)}} style={{textDecoration: 'none'}}>
-                    <i style={props.style} className={"fa fa-"+props.fastyle+" fa-"+ item.icon + " " + item.color}></i>
+                    <i style={props.style} className={"fa fa-"+props.fastylenav+" fa-"+ item.icon + " " + item.color}></i>
                     <span className="link-text">{item.label}</span>
                   </a>
                 </li>
@@ -80,13 +80,13 @@ export const Navbar = props => {
           <hr/>
           <li className="nav-item">
             <a className="nav-link" onClick={()=>{navigateTo("/admin/pages")}} style={{textDecoration: 'none'}}>
-              <i style={props.style} className={"fa fa-"+props.fastyle+" fa-cogs dark"}></i>
+              <i style={props.style} className={"fa fa-"+props.fastylenav+" fa-cogs dark"}></i>
               <span className="link-text">Settings</span>
             </a>
           </li>
           <li className="nav-item">
             <a className="nav-link" onClick={()=>{navigateTo("/admin/accounts")}} style={{textDecoration: 'none'}}>
-              <i style={props.style} className={"fa fa-"+props.fastyle+" fa-shield-alt dark"}></i>
+              <i style={props.style} className={"fa fa-"+props.fastylenav+" fa-shield-alt dark"}></i>
               <span className="link-text">Administrattion</span>
             </a>
           </li>
@@ -94,7 +94,7 @@ export const Navbar = props => {
         <ul className="navbar-nav navbar-logout hide">
           <li className="nav-item" name={"logout"}>
             <a href="#" className="nav-link" key={"logout"} onClick={()=>logout()}>
-              <i className={"fa fa-"+props.fastyle+" fa-power-off red"}></i>
+              <i className={"fa fa-"+props.fastylenav+" fa-power-off red"}></i>
               <span className="link-text">SE DÉCONNECTER</span>
             </a>
           </li>

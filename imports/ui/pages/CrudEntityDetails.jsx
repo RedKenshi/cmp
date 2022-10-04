@@ -4,7 +4,7 @@ import CrudEntityRow from '../molecules/CrudEntityRow';
 import ModalGenericDatePicker from '../atoms/ModalDatePicker';
 import { gql } from 'graphql-tag';
 
-export const Crud = props => {
+export const CrudEntityDetails = props => {
     
     const fieldTypes = [
         {
@@ -197,7 +197,7 @@ export const Crud = props => {
                     </button>
                 </div>
                 <div className='entries-container'>
-                    <table className="table is-fullwidth is-striped is-hoverable">
+                    <table className="table is-fullwidth is-stripped is-hoverable">
                         <thead>
                             <tr>
                                 {!loadingStructure && structureRaw.fields.map(f=>{
@@ -299,4 +299,4 @@ const withUserContext = WrappedComponent => props => (
     </UserContext.Consumer>
 )
   
-export default wrappedInUserContext = withUserContext(Crud);
+export default wrappedInUserContext = withUserContext(CrudEntityDetails);

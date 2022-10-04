@@ -2370,20 +2370,20 @@ div.icon-text {
   width: 100%;
 }
 .table.is-hoverable tbody tr:not(.is-selected):hover {
-  background-color: hsl(0deg, 0%, 98%);
+  background-color: hsl(230deg, 100%, 95%);
 }
 .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover {
-  background-color: hsl(0deg, 0%, 98%);
+  background-color: hsl(230deg, 100%, 95%);
 }
 .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover:nth-child(even) {
-  background-color: hsl(0deg, 0%, 96%);
+  background-color: hsl(230deg, 100%, 95%);
 }
 .table.is-narrow td,
 .table.is-narrow th {
   padding: 0.25em 0.5em;
 }
 .table.is-striped tbody tr:not(.is-selected):nth-child(even) {
-  background-color: hsl(0deg, 0%, 98%);
+  background-color: hsl(225deg, 100%, 96%);
 }
 
 .table-container {

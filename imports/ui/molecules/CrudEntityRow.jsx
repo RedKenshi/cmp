@@ -21,10 +21,10 @@ export const CrudEntityRow = props => {
                 }
             })}
             <td className='flex align nowrap'>
-                <button className="button is-small is-link is-light" >
+                <button className="button is-small is-link" >
                     <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
                 </button>
-                <button onClick={()=>{props.showModalDelete(props.crudEntity._id)}} className="button is-small is-danger is-light">
+                <button onClick={()=>{props.showModalDelete(props.crudEntity._id)}} className="button is-small is-danger">
                     <i className={"fa-" + props.fastyle + " fa-trash"}></i>
                 </button>
             </td>
