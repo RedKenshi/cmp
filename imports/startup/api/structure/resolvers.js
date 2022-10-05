@@ -77,7 +77,7 @@ export default {
             }
             throw new Error('Unauthorized')
         },
-        async addFieldToStructure(obj,{_id,label,name,type,requiredAtCreation},{user}){
+        async addFieldToStructure(obj,{_id,label,name,type,requiredAtCreation,searchable},{user}){
             if(user._id){
                 StructureFields.insert({
                     _id:new Mongo.ObjectID(),
@@ -85,7 +85,8 @@ export default {
                     name: name,
                     label: label,
                     type: type,
-                    requiredAtCreation:requiredAtCreation
+                    requiredAtCreation:requiredAtCreation,
+                    searchable:searchable
                 });
                 return [{status:"success",message:'Création réussie'}];
             }

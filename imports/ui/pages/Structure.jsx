@@ -17,10 +17,13 @@ const Structure = props => {
         label:'',
         name:'',
         type:'string',
-        requiredAtCreation: "off"
+        requiredAtCreation: "off",
+        searchable: "off"
     });
     const [deleteTargetId, setDeleteTargetId] = useState("");
     const [openModalAdd,setOpenModalAdd] = useState(false);
+    const [modalAddStep, setModalAddStep] = useState(0)
+    const [selectedFieldType, setSelectedFieldType] = useState("")
     const [openModalDelete,setOpenModalDelete] = useState(false);
     const [openModalDeleteField,setOpenModalDeleteField] = useState(false);
     const [deleteFieldTarget,setDeleteFieldTarget] = useState(false);
@@ -42,8 +45,8 @@ const Structure = props => {
             name
         }
     }`;
-    const addFieldToStructureQuery = gql`mutation addFieldToStructure($_id: String!,$label: String, $name: String, $type: String!, $requiredAtCreation: Boolean!){
-        addFieldToStructure(_id:$_id, label:$label, name:$name, type:$type, requiredAtCreation:$requiredAtCreation){
+    const addFieldToStructureQuery = gql`mutation addFieldToStructure($_id: String!,$label: String, $name: String, $type: String!, $requiredAtCreation: Boolean!, $searchable: Boolean!){
+        addFieldToStructure(_id:$_id, label:$label, name:$name, type:$type, requiredAtCreation:$requiredAtCreation, searchable:$searchable){
             status
             message
         }
@@ -61,15 +64,16 @@ const Structure = props => {
         }
     }`;
 
-    const addFieldToStructure = type => {
+    const addFieldToStructure = () => {
         props.client.mutate({
             mutation:addFieldToStructureQuery,
             variables:{
                 _id:structureRaw._id,
                 label:fieldValues.label,
                 name:fieldValues.label.toLowerCase().replace(" ",""),
-                type:type,
-                requiredAtCreation:(fieldValues.requiredAtCreation == "on" ? true : false)
+                type:selectedFieldType,
+                requiredAtCreation:(fieldValues.requiredAtCreation == "on" ? true : false),
+                searchable:(fieldValues.searchable == "on" ? true : false)
             }
         }).then((data)=>{
             loadStructure();
@@ -77,7 +81,7 @@ const Structure = props => {
             props.toastQRM(data.data.addFieldToStructure)
         })
     }
-    const deleteFieldFromStructure = type => {
+    const deleteFieldFromStructure = () => {
         props.client.mutate({
             mutation:deleteFieldFromStructureQuery,
             variables:{
@@ -89,7 +93,7 @@ const Structure = props => {
             props.toastQRM(data.data.deleteFieldFromStructure)
         })
     }
-
+    
     const handleFormChange = e => {
         setFormValues({
             ...formValues,
@@ -104,11 +108,14 @@ const Structure = props => {
     }
     const resetFieldsValue = () => {
         document.getElementById("fieldCreationRequired").checked = false;
+        document.getElementById("searchable").checked = false;
+        setModalAddStep(0)
         setFieldValues({
             label:'',
             name:'',
             type:'string',
-            requiredAtCreation: "off"
+            requiredAtCreation: "off",
+            searchable: "off"
         })
     }
     const deleteStructure = () => {
@@ -182,13 +189,91 @@ const Structure = props => {
                         <tr>
                             <td>{type.label}</td>
                             <td>
-                                <button className="button is-small is-primary" onClick={()=>addFieldToStructure(type.name)}>Ajouter</button>
+                                <button className="button is-small is-primary" onClick={()=>selectAddFieldType(type.name)}>
+                                    <span>Choisir</span>
+                                    <span className="icon">
+                                        <i className="fa-light fa-chevron-right" />
+                                    </span>
+                                </button>
                             </td>
                         </tr>
                     )
                 })}
             </tbody>
         )
+    }
+    const selectAddFieldType = type => {
+        setSelectedFieldType(type);
+        setModalAddStep(1);
+    }
+    const getModalAddBody = () => {
+        if(modalAddStep == 0){
+            return (
+                <section className="modal-card-body is-fullwidth">
+                    <div className="columns">
+                        <div className="column is-narrow">
+                            <div className="tabs vertical margined-top16 fullwidth">
+                                {getFieldTypeMenu()}
+                            </div>
+                        </div>
+                        <div className="column">
+                            <table className="table is-fullwidth is-hoverable">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th className="is-narrow">Actions</th>
+                                    </tr>
+                                </thead>
+                                {getSelectedFieldTypeSubtype()}
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            )
+        }
+        if(modalAddStep == 1){
+            return (
+                <section className="modal-card-body">
+                    <div className="rows">
+                        <div className="row">
+                            <input className="input is-primary is-fullwidth" type="text" placeholder="Nom de la propriété" onChange={handleFieldChange} name="label"/>
+                        </div>
+                        <div className="row flex">
+                            <label className="checkbox flex align">
+                                <input className="checkbox" type="checkbox" onChange={handleFieldChange} name="requiredAtCreation" id="fieldCreationRequired"/>
+                                Requis à la création
+                            </label>
+                        </div>
+                        <div className="row flex">
+                            <label className="checkbox flex align">
+                                <input className="checkbox" type="checkbox" onChange={handleFieldChange} name="searchable" id="searchable"/>
+                                Searchable
+                            </label>
+                        </div>
+                    </div>
+                </section>
+            )
+        }
+    }
+    const getModalAddFooter = () => {
+        if(modalAddStep == 1){
+            return(
+                <footer className="modal-card-foot">
+                    <button className='button' onClick={closeModalAdd}>
+                        <span className="icon">
+                            <i className='fa-light fa-arrow-left'/>
+                        </span>
+                        <span>Annuler</span>
+                    </button>
+                    <button className='button is-primary' onClick={addFieldToStructure}>
+                        <span>Go</span>
+                        <span className="icon">
+                            <i className='fa-light fa-arrow-right'/>
+                        </span>
+                    </button>
+                </footer>
+            )
+        }
     }
     useEffect(() => {
         loadStructure();
@@ -202,11 +287,6 @@ const Structure = props => {
                 <div className="structure padded columns">
                     <div className="column is-narrow">
                         <AdministrationMenu active="structures"/>
-                        <div className="box rows">
-                            <button  className="button is-danger is-fullwidth">
-                                Action 1
-                            </button>
-                        </div>
                     </div>
                     <div className="column rows">
                         <div className="box">
@@ -261,37 +341,8 @@ const Structure = props => {
                             <p className="modal-card-title">Ajouter une propriété à la structure</p>
                             <button className="delete" aria-label="close" onClick={closeModalAdd}/>
                         </header>
-                        <section className="modal-card-body is-fullwidth">
-                            <div className="columns is-fullwidth">
-                                <div className="column">
-                                    <input className="input is-primary is-fullwidth" type="text" placeholder="Nom de la propriété" onChange={handleFieldChange} name="label"/>
-                                </div>
-                                <div className="column is-narrow flex">
-                                    <label className="checkbox flex align">
-                                        <input className="checkbox" type="checkbox" onChange={handleFieldChange} name="requiredAtCreation" id="fieldCreationRequired"/>
-                                        Requis à la création
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="columns">
-                                <div className="column is-narrow">
-                                    <div className="tabs vertical margined-top16 fullwidth">
-                                        {getFieldTypeMenu()}
-                                    </div>
-                                </div>
-                                <div className="column">
-                                    <table className="table is-fullwidth is-hoverable">
-                                        <thead>
-                                            <tr>
-                                                <th>Type</th>
-                                                <th className="is-narrow">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        {getSelectedFieldTypeSubtype()}
-                                    </table>
-                                </div>
-                            </div>
-                        </section>
+                        {getModalAddBody()}
+                        {getModalAddFooter()}
                     </div>
                 </div>
                 <div className={"modal" + (openModalDelete != false ? " is-active" : "")}>
@@ -303,12 +354,16 @@ const Structure = props => {
                         </header>
                         <footer className="modal-card-foot">
                             <button className='button' onClick={closeModalDelete}>
-                                <i className='fa-light fa-arrow-left'/>
-                                Annuler
+                                <span className="icon">
+                                    <i className='fa-light fa-arrow-left'/>
+                                </span>
+                                <span>Annuler</span>
                             </button>
                             <button className="button is-danger" onClick={deleteStructure}>
-                                <i className='fa-light fa-trash'/>
-                                Supprimer
+                                <span>Supprimer</span>
+                                <span className="icon">
+                                    <i className='fa-light fa-trash'/>
+                                </span>
                             </button>
                         </footer>
                     </div>
@@ -322,12 +377,16 @@ const Structure = props => {
                         </header>
                         <footer className="modal-card-foot">
                             <button className='button' onClick={closeModalDeleteField}>
-                                <i className='fa-light fa-arrow-left'/>
-                                Annuler
+                                <span className="icon">
+                                    <i className='fa-light fa-arrow-left'/>
+                                </span>
+                                <span>Annuler</span>
                             </button>
                             <button className="button is-danger" onClick={deleteFieldFromStructure}>
-                                <i className='fa-light fa-trash'/>
-                                Supprimer
+                                <span>Supprimer</span>
+                                <span className="icon">
+                                    <i className='fa-light fa-trash'/>
+                                </span>
                             </button>
                         </footer>
                     </div>

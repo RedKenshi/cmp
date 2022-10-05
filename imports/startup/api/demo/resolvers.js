@@ -17,7 +17,19 @@ export default {
     Mutation:{
         async resetDB(obj,arg,{user}){
             if(user._id){
-                
+                let structures = Structures.find({}).fetch() || {};
+                structures.map(s=>{
+                    let col = getCol(s._id._str);
+                    col.rawCollection().drop((err,success)=>{
+                        if(err){console.log(s.label + " collection : failed.")}
+                        if(success){console.log(s.label + " collection : deleted.")}
+                        Structures.remove(s._id);
+                        StructureFields.remove({structure:s._id._str});
+                    });
+                });
+                StructureFields.rawCollection().drop();
+                Structures.rawCollection().drop();
+                Pages.rawCollection().drop();
                 return [{status:"success",message:'Création réussie'}];
             }
             throw new Error('Unauthorized');

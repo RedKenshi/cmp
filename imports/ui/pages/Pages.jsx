@@ -207,12 +207,16 @@ const Pages = props => {
             </section>
             <footer className="modal-card-foot">
                 <button className='button' onClick={closeModalAdd}>
-                    <i className='fa-light fa-arrow-left'/>
-                    Annuler
+                    <span className="icon">
+                      <i className='fa-light fa-arrow-left'/>
+                    </span>
+                    <span>Annuler</span>
                 </button>
                 <button className="button is-primary" onClick={addPage}>
-                    <i className='fa-light fa-check'/>
-                    Créer
+                    <span>Créer</span>
+                    <span className="icon">
+                      <i className='fa-light fa-check'/>
+                    </span>
                 </button>
             </footer>
         </div>
@@ -226,12 +230,16 @@ const Pages = props => {
             </header>
             <footer className="modal-card-foot">
                 <button className='button' onClick={closeModalDelete}>
-                    <i className='fa-light fa-arrow-left'/>
-                    Annuler
+                    <span className="icon">
+                      <i className='fa-light fa-arrow-left'/>
+                    </span>
+                    <span>Annuler</span>
                 </button>
                 <button className="button is-danger" onClick={deletePage}>
+                  <span>Supprimer</span>
+                  <span className="icon">
                     <i className='fa-light fa-trash'/>
-                    Supprimer
+                  </span>
                 </button>
             </footer>
         </div>

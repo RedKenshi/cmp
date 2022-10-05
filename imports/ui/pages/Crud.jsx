@@ -24,6 +24,7 @@ export const Crud = props => {
     const [structureInstancesRaw,setStructureInstancesRaw] = useState([]);
     const [structureInstancesColumns,setStructureInstancesColumns] = useState([]);
     const [structureInstanceFieldValues,setStructureInstanceFieldValues] = useState([]);
+    const [structureInstancesFilter,setStructureInstancesFilter] = useState("");
     const [structureRaw,setStructureRaw] = useState([]);
     const [structureId,setStructureId] = useState([]);
     const [layoutOptions,setLayoutOptions] = useState(JSON.parse(props.layoutOptions));
@@ -75,11 +76,23 @@ export const Crud = props => {
         }
     }`;
 
+    const structureInstances = () => {
+        return structureInstancesRaw.filter(si=>{
+            return si.columns.some(c=>{
+                     return c.value.toString().toLowerCase().includes(structureInstancesFilter.toLowerCase())
+                }
+            )
+        })
+    }
+
     const handleFieldInputChange = e => {
         setStructureInstanceFieldValues({
             ...structureInstanceFieldValues,
             [e.target.name] : e.target.value
         })
+    }
+    const handleFilterChange = e => {
+        setStructureInstancesFilter(e.target.value)
     }
 
     const onValidateDatePicker = (target,value) => {
@@ -189,7 +202,7 @@ export const Crud = props => {
         <Fragment>
             <div className='box basic-crud-search-layout'>
                 <div>
-                    <input className='input' type="text"/>
+                    <input className='input' onChange={handleFilterChange} name="structureInstanceFilter" type="text"/>
                 </div>
                 <div>
                     <button className='button is-primary' onClick={()=>setOpenModalAdd(true)}>
@@ -209,7 +222,7 @@ export const Crud = props => {
                             </tr>
                         </thead>
                         <tbody>
-                            {(!loadingInstances && structureInstancesRaw.map(ce=>{
+                            {(!loadingInstances && structureInstances().map(ce=>{
                                 return(
                                     <CrudEntityRow key={ce._id} showModalDelete={showModalDelete} fields={fieldsOrder} crudEntity={ce}/>
                                 )
