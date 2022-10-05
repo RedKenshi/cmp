@@ -36,7 +36,7 @@ const HowItWorks = props => {
             <div className="illustration-section section-wrapper" style={{background:"#fff"}}>
                 <div className="section">
                     <div className='text-half half'>
-                        <h1>Create your a page tree that match your needs.</h1>
+                        <h1>Create a page tree that matches your needs.</h1>
                         <p>Create pages, set layout to these pages, find the best platform design to get the most value from your data.</p>
                     </div>
                     <div className='illustration-half half'>
