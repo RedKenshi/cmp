@@ -242,12 +242,16 @@ export const Crud = props => {
                     </div>
                     <footer className="modal-card-foot">
                         <button className='button' onClick={closeModalAdd}>
-                            <i className='fa-light fa-arrow-left'/>
-                            Annuler
+                            <span className='icon'>
+                                <i className='fa-light fa-arrow-left'/>
+                            </span>
+                            <span>Annuler</span>
                         </button>
                         <button className="button is-primary" onClick={addStructureInstance}>
-                            <i className='fa-light fa-check'/>
-                            Créer
+                            <span>Créer</span>
+                            <span className='icon'>
+                                <i className='fa-light fa-check'/>
+                            </span>
                         </button>
                     </footer>
                 </div>
@@ -279,12 +283,16 @@ export const Crud = props => {
                     </div>
                     <footer className="modal-card-foot">
                         <button className='button' onClick={closeModalDelete}>
-                            <i className='fa-light fa-arrow-left'/>
-                            Annuler
+                            <span className='icon'>
+                                <i className='fa-light fa-arrow-left'/>
+                            </span>
+                            <span>Annuler</span>
                         </button>
                         <button className="button is-danger" onClick={deleteStructureInstance}>
-                            <i className='fa-light fa-check'/>
-                            Supprimer
+                            <span>Supprimer</span>
+                            <span className='icon'>
+                                <i className='fa-light fa-check'/>
+                            </span>
                         </button>
                     </footer>
                 </div>
