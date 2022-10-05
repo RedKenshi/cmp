@@ -47,7 +47,7 @@ const InitPlarform = props => {
                         }
                     }
                 );
-                useNavigate("/home")
+                useNavigate("/app")
             }
         })
     }

@@ -18,6 +18,8 @@
     "babel-plugin-import-graphql": "^2.8.1",
     "babel-plugin-inline-import": "^3.0.0",
     "bulma": "^0.9.3",
+    "bulma-pricingtable": "^0.2.0",
+    "bulma-switch": "^2.0.4",
     "express": "^4.17.2",
     "graphql": "^15.8.0",
     "graphql-tag": "^2.12.6",

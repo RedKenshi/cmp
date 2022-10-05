@@ -539,6 +539,43 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
+.public-landing .pricing-section .pricing-table {
+  display: flex;
+}
+.public-landing .pricing-section .pricing-table .pricing-plan {
+  flex-basis: 16rem;
+}
+.public-landing .section-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.public-landing .section-wrapper:nth-child(even) {
+  background-color: hsl(0deg, 0%, 92%);
+}
+.public-landing .section-wrapper > .section {
+  align-content: center;
+  display: grid;
+  max-width: 75rem;
+  width: 100%;
+}
+.public-landing .illustration-section .section {
+  margin: auto;
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: 1fr 1fr;
+}
+.public-landing .illustration-section .section .half {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+}
+.public-landing .illustration-section .section .text-half h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
 .landing-container {
   width: 100vw;
   max-width: 64rem;
@@ -1141,6 +1178,12 @@ ul, li {
   max-height: 100vh;
   min-height: 100vh;
   height: 100vh;
+}
+
+.half-screen-height {
+  max-height: 50vh;
+  min-height: 50vh;
+  height: 50vh;
 }
 
 .text-center {

@@ -60,7 +60,7 @@ const AppBody = props => {
                         }
                     }
                 );
-                useNavigate("/home")
+                useNavigate("/app")
             }
         })
     }
@@ -74,8 +74,8 @@ const AppBody = props => {
                     <div className='column is-half'>
                         <div className="form box children-spaced">
                             <h1>Welcome please login or register</h1>
-                            <input className="input is-primary" name="mail" placeholder="mail" onChange={handleChange}/>
-                            <input className="input is-primary" name="pass" placeholder="pass" onChange={handleChange} type="password"/>
+                            <input className="input is-dark" name="mail" placeholder="mail" onChange={handleChange}/>
+                            <input className="input is-dark" name="pass" placeholder="pass" onChange={handleChange} type="password"/>
                             <div className='inputs'>
                                 <button className='margined-bottom16 button is-primary' onClick={login} icon={"fa-"+props.fastyle + " fa-arrow-right"}>Se connecter</button>
                                 <button className='button is-primary is-outlined text-center center' onClick={()=>setAction({action:"register"})}>Créer un compte</button>
@@ -109,11 +109,11 @@ const AppBody = props => {
                     <div className='column is-half'>
                         <div className="form box children-spaced">
                             <h1>Welcome please login or register</h1>
-                            <input className="input is-primary" name="newmail" placeholder="mail" onChange={handleChange}/>
-                            <input className="input is-primary" name="firstname" placeholder="firstname" onChange={handleChange}/>
-                            <input className="input is-primary" name="lastname" placeholder="lastname" onChange={handleChange}/>
-                            <input className="input is-primary" name="newpass" placeholder="pass" onChange={handleChange} type="password"/>
-                            <input className="input is-primary" name="newpassconfirm" placeholder="confirm pass" onChange={handleChange} type="password"/>
+                            <input className="input is-dark" name="newmail" placeholder="Mail address" onChange={handleChange}/>
+                            <input className="input is-dark" name="firstname" placeholder="Firstname" onChange={handleChange}/>
+                            <input className="input is-dark" name="lastname" placeholder="Lastname" onChange={handleChange}/>
+                            <input className="input is-dark" name="newpass" placeholder="Password" onChange={handleChange} type="password"/>
+                            <input className="input is-dark" name="newpassconfirm" placeholder="Confirm password" onChange={handleChange} type="password"/>
                             <div className={"message " + errorColor + " is-small margined-auto"+ (error ? "" : " hidden")}>
                                 <div className="message-body">
                                     <p><strong>{errorTitle}</strong></p>

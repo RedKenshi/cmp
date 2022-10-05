@@ -114,7 +114,7 @@ const CustomPage = props => {
       return (
         <nav className="breadcrumb padded-top16 padded-bottom16 padded-left16" aria-label="breadcrumbs">
           <ul>
-            <li onClick={()=>navigate("/")} style={{cursor:"pointer"}}><a>Home</a></li>
+            <li onClick={()=>navigate("/app")} style={{cursor:"pointer"}}><a>Home</a></li>
             {breadcrumbs.map(p=>{
               return(
                 <li key={"bclocation" +p.fullpath} onClick={()=>navigate(p.fullpath)} style={{cursor:"pointer"}} className={p.fullpath == location.pathname ? "is-active" : ""} aria-current={p.fullpath == location.pathname ? "is-active" : ""}><a>{p.title}</a></li>

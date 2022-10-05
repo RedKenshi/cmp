@@ -6,6 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 import Home from './pages/Home.jsx';
 import Navbar from './navbar/Navbar';
 import Login from './pages/Login.jsx';
+import Landing from './pages/Landing.jsx';
 import NeedActivation from './pages/NeedActivation.jsx';
 import CustomPage from './pages/CustomPage.jsx';
 import CrudEntityDetails from './pages/CrudEntityDetails';
@@ -48,7 +49,6 @@ export const AppBody = props => {
         }
         return routes;
     }
-
     if(Meteor.userId() != null){
         if(props.isActivated == "loading"){
             return <p>loading ...</p>
@@ -56,8 +56,9 @@ export const AppBody = props => {
         if(props.isActivated){
             return (
                 <Routes>
+                    <Route exact path="/home" element={<Landing />} />
                     <Route path="/" element={withNavbar(Home)({...props})} />
-                    <Route exact path="/home" element={withNavbar(Home)({...props})}/>
+                    <Route exact path="/app" element={withNavbar(Home)({...props})}/>
                     {getRoutes()}
                     {(props.isAdmin ? <Route exact path="/admin" element={withNavbar(Pages)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/pages" element={withNavbar(Pages)({...props})}/> : "")}
@@ -79,12 +80,13 @@ export const AppBody = props => {
     }else{
         return(
             <Routes>
-                <Route path="*" element={<Login />} />
+                <Route exact path="/sign-in" element={<Login />} />
+                <Route exact path="/home" element={<Landing />} />
+                <Route path="*" element={<Landing />} />
             </Routes>
         )
     }
 }
-
 const withNavbar = Component => props => (
     
     <div className="main-container-navbar">

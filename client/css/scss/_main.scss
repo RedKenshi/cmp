@@ -58,6 +58,11 @@ ul,li { margin:0; padding:0; }
     min-height: 100vh;
     height: 100vh;
 }
+.half-screen-height{
+    max-height: 50vh;
+    min-height: 50vh;
+    height: 50vh;
+}
 .text-center{
     text-align: center;
 }

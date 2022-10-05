@@ -2,6 +2,58 @@
 @import '../../../node_modules/bulma/sass/helpers/color.sass';
 @import 'variables';
 
+.public-landing{
+    & .pricing-section{
+        & .pricing-table{
+            display: flex;
+            & .pricing-plan{
+                flex-basis: 16rem;
+            }
+        }
+    }
+    & .section-wrapper{
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:nth-child(even){
+            background-color: hsl(0deg,0%,92%);
+        }
+        & > .section {
+            align-content: center;
+            display: grid;
+            max-width: 75rem;
+            width: 100%;
+        }
+    }
+    & .illustration-section .section{
+        margin: auto;
+        display: grid;
+        gap: 4rem;
+        grid-template-columns: 1fr 1fr;
+        & .half{
+            display: flex;
+            flex-direction: column;
+            place-content: center;
+        }
+        & .text-half{
+            & h1{
+                font-size: 3rem;
+                font-weight: 700;
+            }
+            & p{
+
+            }
+        }
+        & .illustration-half{
+            & .illustration{
+
+            }
+        }
+    }
+}
+
 .landing-container{
     width: 100vw;
     max-width: 64rem;

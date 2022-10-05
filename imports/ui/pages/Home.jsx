@@ -2,7 +2,7 @@ import React from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import Carl from '../atoms/Carl';
 
-const AppBody = props => {
+const Home = props => {
     return (
         <div className="home-container one-screen-height">
             <section className='flex align flex-column'>
@@ -29,4 +29,4 @@ const withUserContext = WrappedComponent => props => (
     </UserContext.Consumer>
   )
   
-export default withUserContext(AppBody);
+export default withUserContext(Home);

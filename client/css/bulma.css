@@ -10280,3 +10280,1229 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: hsl(210deg, 29%, 98%);
   padding: 3rem 1.5rem 6rem;
 }
+
+.pricing-table {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.pricing-table.is-comparative .pricing-plan {
+  border-radius: initial;
+  margin: 0;
+}
+.pricing-table.is-comparative .pricing-plan:not(:last-child) {
+  border-right: none;
+}
+.pricing-table.is-comparative .pricing-plan:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pricing-table.is-comparative .pricing-plan:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pricing-table.is-comparative .pricing-plan.is-active {
+  border: 0.1rem solid hsl(210deg, 29%, 96%);
+  border-radius: 4px;
+}
+.pricing-table .pricing-plan {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  background-color: hsl(210deg, 29%, 100%);
+  border: 0.1rem solid hsl(210deg, 29%, 96%);
+  border-radius: 4px;
+  list-style-type: none;
+  transition: 0.25s;
+  margin: 0.5em;
+}
+.pricing-table .pricing-plan .plan-header {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: hsl(210deg, 29%, 100%);
+  color: hsl(210deg, 29%, 29%);
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 0.75em;
+  align-content: center;
+  text-align: center;
+}
+.pricing-table .pricing-plan .plan-item {
+  background: hsl(210deg, 29%, 96%);
+  border-bottom: 0.1rem solid hsl(210deg, 29%, 100%);
+  padding: 0.75em;
+  align-content: center;
+  text-align: center;
+  font-size: 0.9em;
+  color: hsl(210deg, 29%, 48%);
+}
+.pricing-table .pricing-plan .plan-price {
+  background-color: white;
+  color: hsl(210deg, 29%, 29%);
+  font-size: 0.75rem;
+  font-weight: 400;
+  padding: 0.75em;
+  align-content: center;
+  text-align: center;
+}
+.pricing-table .pricing-plan .plan-price .plan-price-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.pricing-table .pricing-plan .plan-price .plan-price-amount .plan-price-currency {
+  vertical-align: super;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  color: hsl(210deg, 29%, 29%);
+  margin-right: 0.25rem;
+}
+.pricing-table .pricing-plan .plan-footer {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 0.75em;
+  align-content: center;
+  text-align: center;
+  margin-top: auto;
+}
+.pricing-table .pricing-plan.is-active {
+  box-shadow: 0 8px 12px 0 rgba(87, 122, 158, 0.2);
+  transform: scale(1.05);
+}
+.pricing-table .pricing-plan.is-active .plan-price .plan-price-amount {
+  color: hsl(37deg, 90%, 64%);
+}
+.pricing-table .pricing-plan.is-active .plan-footer .button {
+  background-color: hsl(37deg, 90%, 64%);
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-active .plan-footer .button:hover, .pricing-table .pricing-plan.is-active .plan-footer .button.is-hovered {
+  background-color: #f5b144;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-active .plan-footer .button:focus, .pricing-table .pricing-plan.is-active .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(246, 182, 81, 0.25);
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-active .plan-footer .button:active, .pricing-table .pricing-plan.is-active .plan-footer .button.is-active {
+  background-color: #f5ac38;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-active .plan-footer .button[disabled] {
+  background-color: hsl(37deg, 90%, 64%);
+  border-color: transparent;
+}
+.pricing-table .pricing-plan.is-white .plan-price .plan-price-amount {
+  color: hsl(210deg, 29%, 100%);
+}
+.pricing-table .pricing-plan.is-white .plan-footer .button {
+  background-color: hsl(210deg, 29%, 100%);
+  border-color: transparent;
+  color: hsl(210deg, 29%, 4%);
+}
+.pricing-table .pricing-plan.is-white .plan-footer .button:hover, .pricing-table .pricing-plan.is-white .plan-footer .button.is-hovered {
+  background-color: #f7f9fa;
+  border-color: transparent;
+  color: hsl(210deg, 29%, 4%);
+}
+.pricing-table .pricing-plan.is-white .plan-footer .button:focus, .pricing-table .pricing-plan.is-white .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(255, 255, 255, 0.25);
+  color: hsl(210deg, 29%, 4%);
+}
+.pricing-table .pricing-plan.is-white .plan-footer .button:active, .pricing-table .pricing-plan.is-white .plan-footer .button.is-active {
+  background-color: #eff2f6;
+  border-color: transparent;
+  color: hsl(210deg, 29%, 4%);
+}
+.pricing-table .pricing-plan.is-white .plan-footer .button[disabled] {
+  background-color: hsl(210deg, 29%, 100%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-black .plan-price .plan-price-amount {
+  color: hsl(210deg, 29%, 4%);
+}
+.pricing-table .pricing-plan.is-black .plan-footer .button {
+  background-color: hsl(210deg, 29%, 4%);
+  border-color: transparent;
+  color: hsl(210deg, 29%, 100%);
+}
+.pricing-table .pricing-plan.is-black .plan-footer .button:hover, .pricing-table .pricing-plan.is-black .plan-footer .button.is-hovered {
+  background-color: #030405;
+  border-color: transparent;
+  color: hsl(210deg, 29%, 100%);
+}
+.pricing-table .pricing-plan.is-black .plan-footer .button:focus, .pricing-table .pricing-plan.is-black .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(7, 10, 13, 0.25);
+  color: hsl(210deg, 29%, 100%);
+}
+.pricing-table .pricing-plan.is-black .plan-footer .button:active, .pricing-table .pricing-plan.is-black .plan-footer .button.is-active {
+  background-color: black;
+  border-color: transparent;
+  color: hsl(210deg, 29%, 100%);
+}
+.pricing-table .pricing-plan.is-black .plan-footer .button[disabled] {
+  background-color: hsl(210deg, 29%, 4%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-light .plan-price .plan-price-amount {
+  color: hsl(210deg, 29%, 96%);
+}
+.pricing-table .pricing-plan.is-light .plan-footer .button {
+  background-color: hsl(210deg, 29%, 96%);
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-light .plan-footer .button:hover, .pricing-table .pricing-plan.is-light .plan-footer .button.is-hovered {
+  background-color: #eaeef3;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-light .plan-footer .button:focus, .pricing-table .pricing-plan.is-light .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(242, 245, 248, 0.25);
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-light .plan-footer .button:active, .pricing-table .pricing-plan.is-light .plan-footer .button.is-active {
+  background-color: #e1e8ef;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+.pricing-table .pricing-plan.is-light .plan-footer .button[disabled] {
+  background-color: hsl(210deg, 29%, 96%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-dark .plan-price .plan-price-amount {
+  color: hsl(210deg, 29%, 21%);
+}
+.pricing-table .pricing-plan.is-dark .plan-footer .button {
+  background-color: hsl(210deg, 29%, 21%);
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-dark .plan-footer .button:hover, .pricing-table .pricing-plan.is-dark .plan-footer .button.is-hovered {
+  background-color: #212f3d;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-dark .plan-footer .button:focus, .pricing-table .pricing-plan.is-dark .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(38, 54, 69, 0.25);
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-dark .plan-footer .button:active, .pricing-table .pricing-plan.is-dark .plan-footer .button.is-active {
+  background-color: #1d2935;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-dark .plan-footer .button[disabled] {
+  background-color: hsl(210deg, 29%, 21%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-primary .plan-price .plan-price-amount {
+  color: hsl(37deg, 90%, 64%);
+}
+.pricing-table .pricing-plan.is-primary .plan-footer .button {
+  background-color: hsl(37deg, 90%, 64%);
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-primary .plan-footer .button:hover, .pricing-table .pricing-plan.is-primary .plan-footer .button.is-hovered {
+  background-color: #f5b144;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-primary .plan-footer .button:focus, .pricing-table .pricing-plan.is-primary .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(246, 182, 81, 0.25);
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-primary .plan-footer .button:active, .pricing-table .pricing-plan.is-primary .plan-footer .button.is-active {
+  background-color: #f5ac38;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-primary .plan-footer .button[disabled] {
+  background-color: hsl(37deg, 90%, 64%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-link .plan-price .plan-price-amount {
+  color: hsl(229deg, 53%, 53%);
+}
+.pricing-table .pricing-plan.is-link .plan-footer .button {
+  background-color: hsl(229deg, 53%, 53%);
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-link .plan-footer .button:hover, .pricing-table .pricing-plan.is-link .plan-footer .button.is-hovered {
+  background-color: #3e56c4;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-link .plan-footer .button:focus, .pricing-table .pricing-plan.is-link .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(72, 95, 199, 0.25);
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-link .plan-footer .button:active, .pricing-table .pricing-plan.is-link .plan-footer .button.is-active {
+  background-color: #3a51bb;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-link .plan-footer .button[disabled] {
+  background-color: hsl(229deg, 53%, 53%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-info .plan-price .plan-price-amount {
+  color: hsl(207deg, 61%, 53%);
+}
+.pricing-table .pricing-plan.is-info .plan-footer .button {
+  background-color: hsl(207deg, 61%, 53%);
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-info .plan-footer .button:hover, .pricing-table .pricing-plan.is-info .plan-footer .button.is-hovered {
+  background-color: #3488ce;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-info .plan-footer .button:focus, .pricing-table .pricing-plan.is-info .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(62, 142, 208, 0.25);
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-info .plan-footer .button:active, .pricing-table .pricing-plan.is-info .plan-footer .button.is-active {
+  background-color: #3082c5;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-info .plan-footer .button[disabled] {
+  background-color: hsl(207deg, 61%, 53%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-success .plan-price .plan-price-amount {
+  color: hsl(153deg, 53%, 53%);
+}
+.pricing-table .pricing-plan.is-success .plan-footer .button {
+  background-color: hsl(153deg, 53%, 53%);
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-success .plan-footer .button:hover, .pricing-table .pricing-plan.is-success .plan-footer .button.is-hovered {
+  background-color: #3ec487;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-success .plan-footer .button:focus, .pricing-table .pricing-plan.is-success .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(72, 199, 142, 0.25);
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-success .plan-footer .button:active, .pricing-table .pricing-plan.is-success .plan-footer .button.is-active {
+  background-color: #3abb81;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-success .plan-footer .button[disabled] {
+  background-color: hsl(153deg, 53%, 53%);
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-warning .plan-price .plan-price-amount {
+  color: #fdcb6e;
+}
+.pricing-table .pricing-plan.is-warning .plan-footer .button {
+  background-color: #fdcb6e;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.5333333333);
+}
+.pricing-table .pricing-plan.is-warning .plan-footer .button:hover, .pricing-table .pricing-plan.is-warning .plan-footer .button.is-hovered {
+  background-color: #fdc661;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.5333333333);
+}
+.pricing-table .pricing-plan.is-warning .plan-footer .button:focus, .pricing-table .pricing-plan.is-warning .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(253, 203, 110, 0.25);
+  color: rgba(0, 0, 0, 0.5333333333);
+}
+.pricing-table .pricing-plan.is-warning .plan-footer .button:active, .pricing-table .pricing-plan.is-warning .plan-footer .button.is-active {
+  background-color: #fdc255;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.5333333333);
+}
+.pricing-table .pricing-plan.is-warning .plan-footer .button[disabled] {
+  background-color: #fdcb6e;
+  border-color: transparent;
+  box-shadow: none;
+}
+.pricing-table .pricing-plan.is-danger .plan-price .plan-price-amount {
+  color: #e74c3c;
+}
+.pricing-table .pricing-plan.is-danger .plan-footer .button {
+  background-color: #e74c3c;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-danger .plan-footer .button:hover, .pricing-table .pricing-plan.is-danger .plan-footer .button.is-hovered {
+  background-color: #e64231;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-danger .plan-footer .button:focus, .pricing-table .pricing-plan.is-danger .plan-footer .button.is-focused {
+  border-color: transparent;
+  box-shadow: 0 0 0.5em rgba(231, 76, 60, 0.25);
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-danger .plan-footer .button:active, .pricing-table .pricing-plan.is-danger .plan-footer .button.is-active {
+  background-color: #e43725;
+  border-color: transparent;
+  color: #fff;
+}
+.pricing-table .pricing-plan.is-danger .plan-footer .button[disabled] {
+  background-color: #e74c3c;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media screen and (min-width: 769px), print {
+  .pricing-table.is-comparative {
+    margin: 0.5rem;
+  }
+  .pricing-table.is-comparative.is-features {
+    display: none;
+  }
+  .pricing-table.is-comparative .plan-item::before {
+    content: attr("data-feature");
+  }
+  .pricing-table.is-horizontal .pricing-plan {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+  }
+  .pricing-table.is-horizontal .pricing-plan .plan-header {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .pricing-table.is-horizontal .pricing-plan .plan-price {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .pricing-table.is-horizontal .pricing-plan .plan-items {
+    width: 100%;
+    background-color: hsl(210deg, 29%, 96%);
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    column-gap: 0.1rem;
+  }
+  .pricing-table.is-horizontal .pricing-plan .plan-footer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  .pricing-table.is-comparative .pricing-plan {
+    margin: 0.5rem;
+  }
+  .pricing-table.is-comparative .pricing-plan.is-plan-first-mobile {
+    order: -1;
+  }
+  .pricing-table.is-comparative .pricing-plan.is-features {
+    display: none;
+  }
+  .pricing-table.is-comparative .pricing-plan .plan-item::before {
+    content: attr(data-feature);
+    display: block;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: hsl(210deg, 29%, 71%);
+  }
+}
+.switch[type=checkbox] {
+  outline: 0;
+  user-select: none;
+  display: inline-block;
+  position: absolute;
+  opacity: 0;
+}
+.switch[type=checkbox]:focus + label::before, .switch[type=checkbox]:focus + label:before, .switch[type=checkbox]:focus + label::after, .switch[type=checkbox]:focus + label:after {
+  outline: 1px dotted hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox][disabled] {
+  cursor: not-allowed;
+}
+.switch[type=checkbox][disabled] + label {
+  opacity: 0.5;
+}
+.switch[type=checkbox][disabled] + label::before, .switch[type=checkbox][disabled] + label:before {
+  opacity: 0.5;
+}
+.switch[type=checkbox][disabled] + label::after, .switch[type=checkbox][disabled] + label:after {
+  opacity: 0.5;
+}
+.switch[type=checkbox][disabled] + label:hover {
+  cursor: not-allowed;
+}
+.switch[type=checkbox] + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  padding-left: 3.5rem;
+  padding-top: 0.2rem;
+  cursor: pointer;
+}
+.switch[type=checkbox] + label::before, .switch[type=checkbox] + label:before {
+  position: absolute;
+  display: block;
+  top: calc( 50% - 1.5rem * 0.5 );
+  left: 0;
+  width: 3rem;
+  height: 1.5rem;
+  border: 0.1rem solid transparent;
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 71%);
+  content: "";
+}
+.switch[type=checkbox] + label::after, .switch[type=checkbox] + label:after {
+  display: block;
+  position: absolute;
+  top: calc( 50% - 1rem * 0.5 );
+  left: 0.25rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 100%);
+  transition: all 0.25s ease-out;
+  content: "";
+}
+.switch[type=checkbox] + label .switch-active, .switch[type=checkbox] + label .switch-inactive {
+  font-size: 0.9rem;
+  z-index: 1;
+  margin-top: -4px;
+}
+.switch[type=checkbox] + label.has-text-inside .switch-inactive {
+  margin-left: -1.925rem;
+}
+.switch[type=checkbox] + label.has-text-inside .switch-active {
+  margin-left: -3.25rem;
+}
+.switch[type=checkbox].is-rtl + label {
+  padding-left: 0;
+  padding-right: 3.5rem;
+}
+.switch[type=checkbox].is-rtl + label::before, .switch[type=checkbox].is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+.switch[type=checkbox].is-rtl + label::after, .switch[type=checkbox].is-rtl + label:after {
+  left: auto;
+  right: 1.625rem;
+}
+.switch[type=checkbox]:checked + label::before, .switch[type=checkbox]:checked + label:before {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox]:checked + label::after {
+  left: 1.625rem;
+}
+.switch[type=checkbox]:checked.is-rtl + label::after, .switch[type=checkbox]:checked.is-rtl + label:after {
+  left: auto;
+  right: 0.25rem;
+}
+.switch[type=checkbox].is-outlined + label::before, .switch[type=checkbox].is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-outlined + label::after, .switch[type=checkbox].is-outlined + label:after {
+  background: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-outlined:checked + label::before, .switch[type=checkbox].is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-outlined:checked + label::after, .switch[type=checkbox].is-outlined:checked + label:after {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-thin + label::before, .switch[type=checkbox].is-thin + label:before {
+  top: 0.5454545456rem;
+  height: 0.375rem;
+}
+.switch[type=checkbox].is-thin + label::after, .switch[type=checkbox].is-thin + label:after {
+  box-shadow: 0px 0px 3px hsl(210deg, 29%, 48%);
+}
+.switch[type=checkbox].is-rounded + label::before, .switch[type=checkbox].is-rounded + label:before {
+  border-radius: 24px;
+}
+.switch[type=checkbox].is-rounded + label::after, .switch[type=checkbox].is-rounded + label:after {
+  border-radius: 50%;
+}
+.switch[type=checkbox].is-small + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.75rem;
+  height: 2.5em;
+  line-height: 1.5;
+  padding-left: 2.75rem;
+  padding-top: 0.2rem;
+  cursor: pointer;
+}
+.switch[type=checkbox].is-small + label::before, .switch[type=checkbox].is-small + label:before {
+  position: absolute;
+  display: block;
+  top: calc( 50% - 1.125rem * 0.5 );
+  left: 0;
+  width: 2.25rem;
+  height: 1.125rem;
+  border: 0.1rem solid transparent;
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 71%);
+  content: "";
+}
+.switch[type=checkbox].is-small + label::after, .switch[type=checkbox].is-small + label:after {
+  display: block;
+  position: absolute;
+  top: calc( 50% - 0.625rem * 0.5 );
+  left: 0.25rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 100%);
+  transition: all 0.25s ease-out;
+  content: "";
+}
+.switch[type=checkbox].is-small + label .switch-active, .switch[type=checkbox].is-small + label .switch-inactive {
+  font-size: 0.65rem;
+  z-index: 1;
+  margin-top: -4px;
+}
+.switch[type=checkbox].is-small + label.has-text-inside .switch-inactive {
+  margin-left: -1.55rem;
+}
+.switch[type=checkbox].is-small + label.has-text-inside .switch-active {
+  margin-left: -2.5rem;
+}
+.switch[type=checkbox].is-small.is-rtl + label {
+  padding-left: 0;
+  padding-right: 2.75rem;
+}
+.switch[type=checkbox].is-small.is-rtl + label::before, .switch[type=checkbox].is-small.is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+.switch[type=checkbox].is-small.is-rtl + label::after, .switch[type=checkbox].is-small.is-rtl + label:after {
+  left: auto;
+  right: 1.25rem;
+}
+.switch[type=checkbox].is-small:checked + label::before, .switch[type=checkbox].is-small:checked + label:before {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-small:checked + label::after {
+  left: 1.25rem;
+}
+.switch[type=checkbox].is-small:checked.is-rtl + label::after, .switch[type=checkbox].is-small:checked.is-rtl + label:after {
+  left: auto;
+  right: 0.25rem;
+}
+.switch[type=checkbox].is-small.is-outlined + label::before, .switch[type=checkbox].is-small.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-small.is-outlined + label::after, .switch[type=checkbox].is-small.is-outlined + label:after {
+  background: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-small.is-outlined:checked + label::before, .switch[type=checkbox].is-small.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-small.is-outlined:checked + label::after, .switch[type=checkbox].is-small.is-outlined:checked + label:after {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-small.is-thin + label::before, .switch[type=checkbox].is-small.is-thin + label:before {
+  top: 0.4090909093rem;
+  height: 0.28125rem;
+}
+.switch[type=checkbox].is-small.is-thin + label::after, .switch[type=checkbox].is-small.is-thin + label:after {
+  box-shadow: 0px 0px 3px hsl(210deg, 29%, 48%);
+}
+.switch[type=checkbox].is-small.is-rounded + label::before, .switch[type=checkbox].is-small.is-rounded + label:before {
+  border-radius: 24px;
+}
+.switch[type=checkbox].is-small.is-rounded + label::after, .switch[type=checkbox].is-small.is-rounded + label:after {
+  border-radius: 50%;
+}
+.switch[type=checkbox].is-medium + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.25rem;
+  height: 2.5em;
+  line-height: 1.5;
+  padding-left: 4.25rem;
+  padding-top: 0.2rem;
+  cursor: pointer;
+}
+.switch[type=checkbox].is-medium + label::before, .switch[type=checkbox].is-medium + label:before {
+  position: absolute;
+  display: block;
+  top: calc( 50% - 1.875rem * 0.5 );
+  left: 0;
+  width: 3.75rem;
+  height: 1.875rem;
+  border: 0.1rem solid transparent;
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 71%);
+  content: "";
+}
+.switch[type=checkbox].is-medium + label::after, .switch[type=checkbox].is-medium + label:after {
+  display: block;
+  position: absolute;
+  top: calc( 50% - 1.375rem * 0.5 );
+  left: 0.25rem;
+  width: 1.375rem;
+  height: 1.375rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 100%);
+  transition: all 0.25s ease-out;
+  content: "";
+}
+.switch[type=checkbox].is-medium + label .switch-active, .switch[type=checkbox].is-medium + label .switch-inactive {
+  font-size: 1.15rem;
+  z-index: 1;
+  margin-top: -4px;
+}
+.switch[type=checkbox].is-medium + label.has-text-inside .switch-inactive {
+  margin-left: -2.3rem;
+}
+.switch[type=checkbox].is-medium + label.has-text-inside .switch-active {
+  margin-left: -4rem;
+}
+.switch[type=checkbox].is-medium.is-rtl + label {
+  padding-left: 0;
+  padding-right: 4.25rem;
+}
+.switch[type=checkbox].is-medium.is-rtl + label::before, .switch[type=checkbox].is-medium.is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+.switch[type=checkbox].is-medium.is-rtl + label::after, .switch[type=checkbox].is-medium.is-rtl + label:after {
+  left: auto;
+  right: 2rem;
+}
+.switch[type=checkbox].is-medium:checked + label::before, .switch[type=checkbox].is-medium:checked + label:before {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-medium:checked + label::after {
+  left: 2rem;
+}
+.switch[type=checkbox].is-medium:checked.is-rtl + label::after, .switch[type=checkbox].is-medium:checked.is-rtl + label:after {
+  left: auto;
+  right: 0.25rem;
+}
+.switch[type=checkbox].is-medium.is-outlined + label::before, .switch[type=checkbox].is-medium.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-medium.is-outlined + label::after, .switch[type=checkbox].is-medium.is-outlined + label:after {
+  background: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-medium.is-outlined:checked + label::before, .switch[type=checkbox].is-medium.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-medium.is-outlined:checked + label::after, .switch[type=checkbox].is-medium.is-outlined:checked + label:after {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-medium.is-thin + label::before, .switch[type=checkbox].is-medium.is-thin + label:before {
+  top: 0.6818181819rem;
+  height: 0.46875rem;
+}
+.switch[type=checkbox].is-medium.is-thin + label::after, .switch[type=checkbox].is-medium.is-thin + label:after {
+  box-shadow: 0px 0px 3px hsl(210deg, 29%, 48%);
+}
+.switch[type=checkbox].is-medium.is-rounded + label::before, .switch[type=checkbox].is-medium.is-rounded + label:before {
+  border-radius: 24px;
+}
+.switch[type=checkbox].is-medium.is-rounded + label::after, .switch[type=checkbox].is-medium.is-rounded + label:after {
+  border-radius: 50%;
+}
+.switch[type=checkbox].is-large + label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.5rem;
+  height: 2.5em;
+  line-height: 1.5;
+  padding-left: 5rem;
+  padding-top: 0.2rem;
+  cursor: pointer;
+}
+.switch[type=checkbox].is-large + label::before, .switch[type=checkbox].is-large + label:before {
+  position: absolute;
+  display: block;
+  top: calc( 50% - 2.25rem * 0.5 );
+  left: 0;
+  width: 4.5rem;
+  height: 2.25rem;
+  border: 0.1rem solid transparent;
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 71%);
+  content: "";
+}
+.switch[type=checkbox].is-large + label::after, .switch[type=checkbox].is-large + label:after {
+  display: block;
+  position: absolute;
+  top: calc( 50% - 1.75rem * 0.5 );
+  left: 0.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  background: hsl(210deg, 29%, 100%);
+  transition: all 0.25s ease-out;
+  content: "";
+}
+.switch[type=checkbox].is-large + label .switch-active, .switch[type=checkbox].is-large + label .switch-inactive {
+  font-size: 1.4rem;
+  z-index: 1;
+  margin-top: -4px;
+}
+.switch[type=checkbox].is-large + label.has-text-inside .switch-inactive {
+  margin-left: -2.675rem;
+}
+.switch[type=checkbox].is-large + label.has-text-inside .switch-active {
+  margin-left: -4.75rem;
+}
+.switch[type=checkbox].is-large.is-rtl + label {
+  padding-left: 0;
+  padding-right: 5rem;
+}
+.switch[type=checkbox].is-large.is-rtl + label::before, .switch[type=checkbox].is-large.is-rtl + label:before {
+  left: auto;
+  right: 0;
+}
+.switch[type=checkbox].is-large.is-rtl + label::after, .switch[type=checkbox].is-large.is-rtl + label:after {
+  left: auto;
+  right: 2.375rem;
+}
+.switch[type=checkbox].is-large:checked + label::before, .switch[type=checkbox].is-large:checked + label:before {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-large:checked + label::after {
+  left: 2.375rem;
+}
+.switch[type=checkbox].is-large:checked.is-rtl + label::after, .switch[type=checkbox].is-large:checked.is-rtl + label:after {
+  left: auto;
+  right: 0.25rem;
+}
+.switch[type=checkbox].is-large.is-outlined + label::before, .switch[type=checkbox].is-large.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-large.is-outlined + label::after, .switch[type=checkbox].is-large.is-outlined + label:after {
+  background: hsl(210deg, 29%, 71%);
+}
+.switch[type=checkbox].is-large.is-outlined:checked + label::before, .switch[type=checkbox].is-large.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-large.is-outlined:checked + label::after, .switch[type=checkbox].is-large.is-outlined:checked + label:after {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-large.is-thin + label::before, .switch[type=checkbox].is-large.is-thin + label:before {
+  top: 0.8181818183rem;
+  height: 0.5625rem;
+}
+.switch[type=checkbox].is-large.is-thin + label::after, .switch[type=checkbox].is-large.is-thin + label:after {
+  box-shadow: 0px 0px 3px hsl(210deg, 29%, 48%);
+}
+.switch[type=checkbox].is-large.is-rounded + label::before, .switch[type=checkbox].is-large.is-rounded + label:before {
+  border-radius: 24px;
+}
+.switch[type=checkbox].is-large.is-rounded + label::after, .switch[type=checkbox].is-large.is-rounded + label:after {
+  border-radius: 50%;
+}
+.switch[type=checkbox].is-white + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-white + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-white:checked + label::before, .switch[type=checkbox].is-white:checked + label:before {
+  background: hsl(210deg, 29%, 100%);
+}
+.switch[type=checkbox].is-white:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-white:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-white.is-outlined:checked + label::before, .switch[type=checkbox].is-white.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 100%) !important;
+}
+.switch[type=checkbox].is-white.is-outlined:checked + label::after, .switch[type=checkbox].is-white.is-outlined:checked + label:after {
+  background: hsl(210deg, 29%, 100%);
+}
+.switch[type=checkbox].is-white.is-thin.is-outlined + label::after, .switch[type=checkbox].is-white.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-white + label::before, .switch[type=checkbox].is-unchecked-white + label:before {
+  background: hsl(210deg, 29%, 100%);
+}
+.switch[type=checkbox].is-unchecked-white.is-outlined + label::before, .switch[type=checkbox].is-unchecked-white.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 100%) !important;
+}
+.switch[type=checkbox].is-unchecked-white.is-outlined + label::after, .switch[type=checkbox].is-unchecked-white.is-outlined + label:after {
+  background: hsl(210deg, 29%, 100%);
+}
+.switch[type=checkbox].is-black + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-black + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-black:checked + label::before, .switch[type=checkbox].is-black:checked + label:before {
+  background: hsl(210deg, 29%, 4%);
+}
+.switch[type=checkbox].is-black:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-black:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-black.is-outlined:checked + label::before, .switch[type=checkbox].is-black.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 4%) !important;
+}
+.switch[type=checkbox].is-black.is-outlined:checked + label::after, .switch[type=checkbox].is-black.is-outlined:checked + label:after {
+  background: hsl(210deg, 29%, 4%);
+}
+.switch[type=checkbox].is-black.is-thin.is-outlined + label::after, .switch[type=checkbox].is-black.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-black + label::before, .switch[type=checkbox].is-unchecked-black + label:before {
+  background: hsl(210deg, 29%, 4%);
+}
+.switch[type=checkbox].is-unchecked-black.is-outlined + label::before, .switch[type=checkbox].is-unchecked-black.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 4%) !important;
+}
+.switch[type=checkbox].is-unchecked-black.is-outlined + label::after, .switch[type=checkbox].is-unchecked-black.is-outlined + label:after {
+  background: hsl(210deg, 29%, 4%);
+}
+.switch[type=checkbox].is-light + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-light + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-light:checked + label::before, .switch[type=checkbox].is-light:checked + label:before {
+  background: hsl(210deg, 29%, 96%);
+}
+.switch[type=checkbox].is-light:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-light:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-light.is-outlined:checked + label::before, .switch[type=checkbox].is-light.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 96%) !important;
+}
+.switch[type=checkbox].is-light.is-outlined:checked + label::after, .switch[type=checkbox].is-light.is-outlined:checked + label:after {
+  background: hsl(210deg, 29%, 96%);
+}
+.switch[type=checkbox].is-light.is-thin.is-outlined + label::after, .switch[type=checkbox].is-light.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-light + label::before, .switch[type=checkbox].is-unchecked-light + label:before {
+  background: hsl(210deg, 29%, 96%);
+}
+.switch[type=checkbox].is-unchecked-light.is-outlined + label::before, .switch[type=checkbox].is-unchecked-light.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 96%) !important;
+}
+.switch[type=checkbox].is-unchecked-light.is-outlined + label::after, .switch[type=checkbox].is-unchecked-light.is-outlined + label:after {
+  background: hsl(210deg, 29%, 96%);
+}
+.switch[type=checkbox].is-dark + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-dark + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-dark:checked + label::before, .switch[type=checkbox].is-dark:checked + label:before {
+  background: hsl(210deg, 29%, 21%);
+}
+.switch[type=checkbox].is-dark:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-dark:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-dark.is-outlined:checked + label::before, .switch[type=checkbox].is-dark.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 21%) !important;
+}
+.switch[type=checkbox].is-dark.is-outlined:checked + label::after, .switch[type=checkbox].is-dark.is-outlined:checked + label:after {
+  background: hsl(210deg, 29%, 21%);
+}
+.switch[type=checkbox].is-dark.is-thin.is-outlined + label::after, .switch[type=checkbox].is-dark.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-dark + label::before, .switch[type=checkbox].is-unchecked-dark + label:before {
+  background: hsl(210deg, 29%, 21%);
+}
+.switch[type=checkbox].is-unchecked-dark.is-outlined + label::before, .switch[type=checkbox].is-unchecked-dark.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(210deg, 29%, 21%) !important;
+}
+.switch[type=checkbox].is-unchecked-dark.is-outlined + label::after, .switch[type=checkbox].is-unchecked-dark.is-outlined + label:after {
+  background: hsl(210deg, 29%, 21%);
+}
+.switch[type=checkbox].is-primary + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-primary + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-primary:checked + label::before, .switch[type=checkbox].is-primary:checked + label:before {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-primary:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-primary:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-primary.is-outlined:checked + label::before, .switch[type=checkbox].is-primary.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(37deg, 90%, 64%) !important;
+}
+.switch[type=checkbox].is-primary.is-outlined:checked + label::after, .switch[type=checkbox].is-primary.is-outlined:checked + label:after {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-primary.is-thin.is-outlined + label::after, .switch[type=checkbox].is-primary.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-primary + label::before, .switch[type=checkbox].is-unchecked-primary + label:before {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-unchecked-primary.is-outlined + label::before, .switch[type=checkbox].is-unchecked-primary.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(37deg, 90%, 64%) !important;
+}
+.switch[type=checkbox].is-unchecked-primary.is-outlined + label::after, .switch[type=checkbox].is-unchecked-primary.is-outlined + label:after {
+  background: hsl(37deg, 90%, 64%);
+}
+.switch[type=checkbox].is-link + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-link + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-link:checked + label::before, .switch[type=checkbox].is-link:checked + label:before {
+  background: hsl(229deg, 53%, 53%);
+}
+.switch[type=checkbox].is-link:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-link:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-link.is-outlined:checked + label::before, .switch[type=checkbox].is-link.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(229deg, 53%, 53%) !important;
+}
+.switch[type=checkbox].is-link.is-outlined:checked + label::after, .switch[type=checkbox].is-link.is-outlined:checked + label:after {
+  background: hsl(229deg, 53%, 53%);
+}
+.switch[type=checkbox].is-link.is-thin.is-outlined + label::after, .switch[type=checkbox].is-link.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-link + label::before, .switch[type=checkbox].is-unchecked-link + label:before {
+  background: hsl(229deg, 53%, 53%);
+}
+.switch[type=checkbox].is-unchecked-link.is-outlined + label::before, .switch[type=checkbox].is-unchecked-link.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(229deg, 53%, 53%) !important;
+}
+.switch[type=checkbox].is-unchecked-link.is-outlined + label::after, .switch[type=checkbox].is-unchecked-link.is-outlined + label:after {
+  background: hsl(229deg, 53%, 53%);
+}
+.switch[type=checkbox].is-info + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-info + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-info:checked + label::before, .switch[type=checkbox].is-info:checked + label:before {
+  background: hsl(207deg, 61%, 53%);
+}
+.switch[type=checkbox].is-info:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-info:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-info.is-outlined:checked + label::before, .switch[type=checkbox].is-info.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(207deg, 61%, 53%) !important;
+}
+.switch[type=checkbox].is-info.is-outlined:checked + label::after, .switch[type=checkbox].is-info.is-outlined:checked + label:after {
+  background: hsl(207deg, 61%, 53%);
+}
+.switch[type=checkbox].is-info.is-thin.is-outlined + label::after, .switch[type=checkbox].is-info.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-info + label::before, .switch[type=checkbox].is-unchecked-info + label:before {
+  background: hsl(207deg, 61%, 53%);
+}
+.switch[type=checkbox].is-unchecked-info.is-outlined + label::before, .switch[type=checkbox].is-unchecked-info.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(207deg, 61%, 53%) !important;
+}
+.switch[type=checkbox].is-unchecked-info.is-outlined + label::after, .switch[type=checkbox].is-unchecked-info.is-outlined + label:after {
+  background: hsl(207deg, 61%, 53%);
+}
+.switch[type=checkbox].is-success + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-success + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-success:checked + label::before, .switch[type=checkbox].is-success:checked + label:before {
+  background: hsl(153deg, 53%, 53%);
+}
+.switch[type=checkbox].is-success:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-success:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-success.is-outlined:checked + label::before, .switch[type=checkbox].is-success.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: hsl(153deg, 53%, 53%) !important;
+}
+.switch[type=checkbox].is-success.is-outlined:checked + label::after, .switch[type=checkbox].is-success.is-outlined:checked + label:after {
+  background: hsl(153deg, 53%, 53%);
+}
+.switch[type=checkbox].is-success.is-thin.is-outlined + label::after, .switch[type=checkbox].is-success.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-success + label::before, .switch[type=checkbox].is-unchecked-success + label:before {
+  background: hsl(153deg, 53%, 53%);
+}
+.switch[type=checkbox].is-unchecked-success.is-outlined + label::before, .switch[type=checkbox].is-unchecked-success.is-outlined + label:before {
+  background-color: transparent;
+  border-color: hsl(153deg, 53%, 53%) !important;
+}
+.switch[type=checkbox].is-unchecked-success.is-outlined + label::after, .switch[type=checkbox].is-unchecked-success.is-outlined + label:after {
+  background: hsl(153deg, 53%, 53%);
+}
+.switch[type=checkbox].is-warning + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-warning + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-warning:checked + label::before, .switch[type=checkbox].is-warning:checked + label:before {
+  background: #fdcb6e;
+}
+.switch[type=checkbox].is-warning:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-warning:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-warning.is-outlined:checked + label::before, .switch[type=checkbox].is-warning.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #fdcb6e !important;
+}
+.switch[type=checkbox].is-warning.is-outlined:checked + label::after, .switch[type=checkbox].is-warning.is-outlined:checked + label:after {
+  background: #fdcb6e;
+}
+.switch[type=checkbox].is-warning.is-thin.is-outlined + label::after, .switch[type=checkbox].is-warning.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-warning + label::before, .switch[type=checkbox].is-unchecked-warning + label:before {
+  background: #fdcb6e;
+}
+.switch[type=checkbox].is-unchecked-warning.is-outlined + label::before, .switch[type=checkbox].is-unchecked-warning.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #fdcb6e !important;
+}
+.switch[type=checkbox].is-unchecked-warning.is-outlined + label::after, .switch[type=checkbox].is-unchecked-warning.is-outlined + label:after {
+  background: #fdcb6e;
+}
+.switch[type=checkbox].is-danger + label .switch-active {
+  display: none;
+}
+.switch[type=checkbox].is-danger + label .switch-inactive {
+  display: inline-block;
+}
+.switch[type=checkbox].is-danger:checked + label::before, .switch[type=checkbox].is-danger:checked + label:before {
+  background: #e74c3c;
+}
+.switch[type=checkbox].is-danger:checked + label .switch-active {
+  display: inline-block;
+}
+.switch[type=checkbox].is-danger:checked + label .switch-inactive {
+  display: none;
+}
+.switch[type=checkbox].is-danger.is-outlined:checked + label::before, .switch[type=checkbox].is-danger.is-outlined:checked + label:before {
+  background-color: transparent;
+  border-color: #e74c3c !important;
+}
+.switch[type=checkbox].is-danger.is-outlined:checked + label::after, .switch[type=checkbox].is-danger.is-outlined:checked + label:after {
+  background: #e74c3c;
+}
+.switch[type=checkbox].is-danger.is-thin.is-outlined + label::after, .switch[type=checkbox].is-danger.is-thin.is-outlined + label:after {
+  box-shadow: none;
+}
+.switch[type=checkbox].is-unchecked-danger + label::before, .switch[type=checkbox].is-unchecked-danger + label:before {
+  background: #e74c3c;
+}
+.switch[type=checkbox].is-unchecked-danger.is-outlined + label::before, .switch[type=checkbox].is-unchecked-danger.is-outlined + label:before {
+  background-color: transparent;
+  border-color: #e74c3c !important;
+}
+.switch[type=checkbox].is-unchecked-danger.is-outlined + label::after, .switch[type=checkbox].is-unchecked-danger.is-outlined + label:after {
+  background: #e74c3c;
+}
+
+.field-body .switch[type=checkbox] + label {
+  margin-top: 0.375em;
+}

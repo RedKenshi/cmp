@@ -59,7 +59,7 @@ export const Navbar = props => {
         </ul>
         <ul className="navbar-nav navbar-home hide">
           <li className="nav-item">
-            <a className="nav-link" onClick={()=>{navigateTo("/")}} style={{textDecoration: 'none'}}>
+            <a className="nav-link" onClick={()=>{navigateTo("/app")}} style={{textDecoration: 'none'}}>
               <i style={props.style} className={"fa fa-"+props.fastylenav+" fa-home dark"}></i>
               <span className="link-text">Home</span>
             </a>

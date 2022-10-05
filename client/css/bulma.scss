@@ -34,3 +34,5 @@ $menu-item-active-background-color: $primary;
 $menu-item-active-color: $primary-invert;
 
 @import '../../node_modules/bulma/bulma.sass';
+@import '../../node_modules/bulma-pricingtable/src/sass/index.sass';
+@import '../../node_modules/bulma-switch/src/sass/index.sass';
