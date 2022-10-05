@@ -28,6 +28,7 @@ const AppBody = props => {
         Meteor.loginWithPassword(formValues.mail, formValues.pass,
             error=>{
                 if(!error){
+                    navigate("/app")
                     props.loadUser();
                 }else{
                     props.toast({message:error.reason,type:"error"})
@@ -61,7 +62,7 @@ const AppBody = props => {
                         }
                     }
                 );
-                useNavigate("/app")
+                navigate("/app")
             }
         })
     }

@@ -60,12 +60,12 @@ export const AppBody = props => {
         if(props.isActivated){
             return (
                 <Routes>
+                    <Route exact path="/" element={withNavbar(Home)({...props})} />
+                    <Route exact path="/app" element={withNavbar(Home)({...props})}/>
                     <Route exact path="/home" element={<Landing />} />
                     <Route exact path="/pricing" element={<Pricing />} />
                     <Route exact path="/how-it-works" element={<HowItWorks />} />
                     <Route exact path="/about-us" element={<AboutUs />} />
-                    <Route path="/" element={withNavbar(Home)({...props})} />
-                    <Route exact path="/app" element={withNavbar(Home)({...props})}/>
                     {getRoutes()}
                     {(props.isAdmin ? <Route exact path="/admin" element={withNavbar(Pages)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/pages" element={withNavbar(Pages)({...props})}/> : "")}
@@ -75,6 +75,7 @@ export const AppBody = props => {
                     {(props.isAdmin ? <Route exact path="/admin/status/:uid" element={withNavbar(Status)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/accounts" element={withNavbar(Accounts)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/demo" element={withNavbar(Demo)({...props})}/> : "")}
+                    <Route path="*" element={withNavbar(Home)({...props})} />
                 </Routes>
             )
         }else{
