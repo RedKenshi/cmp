@@ -30,7 +30,7 @@
   box-shadow: 0.75rem 0.75rem 2rem rgba(0, 0, 0, 0.4666666667), inset 0.75rem -0.75rem 1.5rem #ffffff;
   border-radius: 50%;
   aspect-ratio: 1;
-  background-color: hsl(42deg, 45%, 96%);
+  background-color: hsl(0deg, 100%, 100%);
 }
 
 @keyframes rotate-gradient {
@@ -91,6 +91,12 @@
   place-self: center;
 }
 
+@font-face {
+  font-family: "Pacifico";
+  src: url("../fonts/Pacifico-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
 @font-face {
   font-family: "Montserrat";
   src: url("../fonts/Montserrat-Thin.ttf") format("truetype");
@@ -248,39 +254,39 @@ a.has-text-dark:hover, a.has-text-dark:focus {
 }
 
 .has-text-primary {
-  color: #74b9ff !important;
+  color: hsl(171deg, 100%, 41%) !important;
 }
 
 a.has-text-primary:hover, a.has-text-primary:focus {
-  color: #419fff !important;
+  color: #009e86 !important;
 }
 
 .has-background-primary {
-  background-color: #74b9ff !important;
+  background-color: hsl(171deg, 100%, 41%) !important;
 }
 
 .has-text-primary-light {
-  color: #ebf5ff !important;
+  color: #ebfffc !important;
 }
 
 a.has-text-primary-light:hover, a.has-text-primary-light:focus {
-  color: #b8dbff !important;
+  color: #b8fff4 !important;
 }
 
 .has-background-primary-light {
-  background-color: #ebf5ff !important;
+  background-color: #ebfffc !important;
 }
 
 .has-text-primary-dark {
-  color: #004c99 !important;
+  color: #00947e !important;
 }
 
 a.has-text-primary-dark:hover, a.has-text-primary-dark:focus {
-  color: #0065cc !important;
+  color: #00c7a9 !important;
 }
 
 .has-background-primary-dark {
-  background-color: #004c99 !important;
+  background-color: #00947e !important;
 }
 
 .has-text-link {
@@ -539,6 +545,44 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
 /*SELECTED COLORS*/
+.waves {
+  margin-bottom: -0.5rem;
+}
+
+.cmp-logo {
+  font-size: 2.5rem;
+  letter-spacing: 0.3ch;
+  font-weight: 400;
+  font-family: Pacifico;
+}
+
+.public-landing .scroll-down-icon {
+  font-size: 3rem;
+  place-self: center;
+  animation: bounce 1.5s ease infinite;
+}
+.public-landing .cta-discover {
+  place-self: center;
+}
+.public-landing .signed-out-header {
+  height: 6rem;
+  align-items: end;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 3rem;
+}
+.public-landing .signed-out-header .button.sign-in {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.public-landing .signed-out-header .cmp-logo {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .public-landing .pricing-section .pricing-table {
   display: flex;
 }
@@ -546,26 +590,25 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   flex-basis: 16rem;
 }
 .public-landing .section-wrapper {
-  min-height: 100vh;
+  min-height: 50vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.public-landing .section-wrapper:nth-child(even) {
-  background-color: hsl(0deg, 0%, 92%);
-}
 .public-landing .section-wrapper > .section {
+  padding: 0 3rem;
   align-content: center;
   display: grid;
-  max-width: 75rem;
+  max-width: 72rem;
   width: 100%;
 }
 .public-landing .illustration-section .section {
   margin: auto;
   display: grid;
-  gap: 4rem;
-  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 .public-landing .illustration-section .section .half {
   display: flex;
@@ -576,9 +619,28 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   font-size: 3rem;
   font-weight: 700;
 }
+.public-landing .illustration-section .section .illustration-half .illustration {
+  max-height: 28rem;
+}
+
+@media screen and (min-width: 56rem) {
+  .public-landing .illustration-section .section {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.back-to-home {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .landing-container {
+  position: relative;
   width: 100vw;
   max-width: 64rem;
+  gap: 4rem;
   padding: 1rem;
   margin: auto;
   height: 100vh;
@@ -824,7 +886,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .structure-row-wrapper {
   border-radius: 0.25rem;
   padding: 1rem 2rem 1rem 1rem;
-  border-left: 0.4rem solid #74b9ff;
+  border-left: 0.4rem solid hsl(171deg, 100%, 41%);
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto auto;
@@ -964,6 +1026,17 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   border: none;
 }
 
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(2rem);
+  }
+  60% {
+    transform: translateY(1rem);
+  }
+}
 /*COLORS FROM FLAT UI COLOR PALETTE 1*/
 /*COLORS FROM SEMANTIC UI REACT BUTTONS*/
 /*3 COLORS THEME*/
@@ -1148,7 +1221,7 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-color: hsl(42deg, 45%, 96%);
+  background-color: hsl(0deg, 100%, 100%);
   background-attachment: fixed;
   min-height: 100vh;
   min-width: 100vw;
@@ -1588,7 +1661,7 @@ input.checkbox {
   flex-direction: column;
   z-index: 1000;
   position: fixed;
-  background-color: hsl(42deg, 45%, 96%);
+  background-color: hsl(0deg, 100%, 100%);
 }
 .navbar hr {
   text-align: center;

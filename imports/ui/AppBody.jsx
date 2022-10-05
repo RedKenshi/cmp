@@ -3,10 +3,14 @@ import { Routes, Route } from "react-router-dom";
 
 import { UserContext } from '../contexts/UserContext';
 
+import Landing from './pages/signedout/Landing';
+import Pricing from './pages/signedout/Pricing';
+import HowItWorks from './pages/signedout/HowItWorks';
+import AboutUs from './pages/signedout/AboutUs';
+
 import Home from './pages/Home.jsx';
 import Navbar from './navbar/Navbar';
 import Login from './pages/Login.jsx';
-import Landing from './pages/Landing.jsx';
 import NeedActivation from './pages/NeedActivation.jsx';
 import CustomPage from './pages/CustomPage.jsx';
 import CrudEntityDetails from './pages/CrudEntityDetails';
@@ -57,6 +61,9 @@ export const AppBody = props => {
             return (
                 <Routes>
                     <Route exact path="/home" element={<Landing />} />
+                    <Route exact path="/pricing" element={<Pricing />} />
+                    <Route exact path="/how-it-works" element={<HowItWorks />} />
+                    <Route exact path="/about-us" element={<AboutUs />} />
                     <Route path="/" element={withNavbar(Home)({...props})} />
                     <Route exact path="/app" element={withNavbar(Home)({...props})}/>
                     {getRoutes()}
@@ -80,8 +87,11 @@ export const AppBody = props => {
     }else{
         return(
             <Routes>
-                <Route exact path="/sign-in" element={<Login />} />
                 <Route exact path="/home" element={<Landing />} />
+                <Route exact path="/pricing" element={<Pricing />} />
+                <Route exact path="/how-it-works" element={<HowItWorks />} />
+                <Route exact path="/about-us" element={<AboutUs />} />
+                <Route exact path="/sign-in" element={<Login />} />
                 <Route path="*" element={<Landing />} />
             </Routes>
         )

@@ -1,10 +1,12 @@
 import React from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../../contexts/UserContext';
+import SignedOutHeader from '../../molecules/SignedOutHeader';
 
-const Landing = props => {
+const Pricing = props => {
 
-    const getPricingTable = () => {
-        return(
+    return (
+        <div className="public-landing">
+            <SignedOutHeader active="pricing"/>
             <div className="pricing-section section-wrapper">
                 <div class="section">
                     <div class="pricing-table">
@@ -50,45 +52,6 @@ const Landing = props => {
                     </div>
                 </div>
             </div>
-        )
-    }
-
-    return (
-        <div className="public-landing">
-            <div className="illustration-section section-wrapper">
-                <div className="section">
-                    <div className='text-half half'>
-                        <h1>Lorem ipsum and stuff</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem fugiat possimus ad iste similique fugit.</p>
-                    </div>
-                    <div className='illustration-half half'>
-                        <img className='illustration' src="/img/cmp-file.svg"/>
-                    </div>
-                </div>
-            </div>
-            <div className="illustration-section section-wrapper">
-                <div className="section">
-                    <div className='illustration-half half'>
-                        <img className='illustration' src="/img/cmp-customize.svg"/>
-                    </div>
-                    <div className='text-half half'>
-                        <h1>Lorem ipsum and stuff</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem fugiat possimus ad iste similique fugit.</p>
-                    </div>
-                </div>
-            </div>
-            <div className="illustration-section section-wrapper">
-                <div className="section">
-                    <div className='text-half half'>
-                        <h1>Lorem ipsum and stuff</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem fugiat possimus ad iste similique fugit.</p>
-                    </div>
-                    <div className='illustration-half half'>
-                        <img className='illustration' src="/img/cmp-wireframe.svg"/>
-                    </div>
-                </div>
-            </div>
-            {getPricingTable()}
         </div>
     );
 };
@@ -99,4 +62,4 @@ const withUserContext = WrappedComponent => props => (
     </UserContext.Consumer>
 )
   
-export default withUserContext(Landing);
+export default withUserContext(Pricing);
