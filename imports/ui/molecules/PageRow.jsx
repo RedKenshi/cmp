@@ -65,14 +65,13 @@ const PageRow = props => {
                             <p>{props.page.title}</p>
                         </div>
                         <div className="page-row-actions">
-
-                            <button onClick={()=>props.addSubPage(props.page.entityUID)} className="button is-small is-link is-light">
+                            <button onClick={()=>props.addSubPage(props.page.entityUID)} className="button is-small is-info">
                                 <i className="fa-light fa-fw fa-plus"></i>
                             </button>
-                            <button onClick={toggleActive} className={"button is-small is-light " +(props.page.active ? "is-warning" : "is-success")}>
+                            <button onClick={toggleActive} className={"button is-small" +(props.page.active ? " is-warning" : " is-success")}>
                                 {(props.page.active ? <i className="fa-light fa-fw fa-cancel"></i> : <i className="fa-light fa-fw fa-check"></i>)}
                             </button>
-                            <button onClick={()=>props.showModalDelete(props.page._id)} className="button is-small is-danger is-light">
+                            <button onClick={()=>props.showModalDelete(props.page._id)} className="button is-small is-danger">
                                 <i className="fa-light fa-fw fa-trash"></i>
                             </button>
 

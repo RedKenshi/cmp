@@ -306,6 +306,13 @@
     height: 50vh;
 }
 //REUSABLE
+.modal-card-body .field{
+    margin: auto;
+    max-width: 24rem;
+}
+.modal-card-foot{
+    justify-content: space-between;
+}
 .basic-crud-search-layout{
     height: 100%;
     display: grid;
@@ -337,10 +344,6 @@
     &:not(:last-child){
         margin-bottom: .5rem;
     }
-}
-.center-field{
-    margin: auto;
-    max-width: 24rem;
 }
 .column {
     padding: 0.25rem !important;

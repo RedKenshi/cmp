@@ -11,7 +11,7 @@ const LayoutPicker = props => {
     return (
         <div className="box">
             <div className="is-fullwidth">
-                <article className="message is-link">
+                <article className="message">
                 <div className="message-header">
                     <p>Aucun type de page affecté</p>
                 </div>

@@ -212,7 +212,7 @@ const Structure = props => {
                         <div className="box">
                             <h1 className="block title is-1" >{structureRaw.label}</h1>
                         </div>
-                        <nav className="panel is-link">
+                        <nav className="panel is-primary">
                             <p className="panel-heading has-background-link-light has-text-link">
                                 Propriétés
                             </p>
@@ -223,7 +223,7 @@ const Structure = props => {
                                         <i className={"fa-"+props.fastyle + " fa-search"} aria-hidden="true"></i>
                                     </span>
                                 </p>
-                                <button className="button is-light is-link" onClick={()=>showModalAdd(0)}>
+                                <button className="button is-primary" onClick={()=>showModalAdd(0)}>
                                     <i className={"fa-"+props.fastyle+" fa-plus"}></i>
                                 </button>
                             </div>
@@ -264,7 +264,7 @@ const Structure = props => {
                         <section className="modal-card-body is-fullwidth">
                             <div className="columns is-fullwidth">
                                 <div className="column">
-                                    <input className="input is-link is-fullwidth" type="text" placeholder="Nom de la propriété" onChange={handleFieldChange} name="label"/>
+                                    <input className="input is-primary is-fullwidth" type="text" placeholder="Nom de la propriété" onChange={handleFieldChange} name="label"/>
                                 </div>
                                 <div className="column is-narrow flex">
                                     <label className="checkbox flex align">

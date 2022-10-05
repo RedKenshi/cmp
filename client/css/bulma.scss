@@ -5,11 +5,28 @@ $table-striped-row-even-background-color : hsl(225,100%,96%);
 $table-row-hover-background-color : hsl(230,100%,95%);
 $table-striped-row-even-hover-background-color : hsl(230,100%,95%);
 
-$primary: #74b9ff;
-$primary-light: hsl(210, 100%, 94%);
+$black: hsl(210, 29%, 4%);
+$black-bis: hsl(210, 29%, 7%);
+$black-ter: hsl(210, 29%, 14%);
+$grey-darker: hsl(210, 29%, 21%);
+$grey-dark: hsl(210, 29%, 29%);
+$grey: hsl(210, 29%, 48%);
+$grey-light: hsl(210, 29%, 71%);
+$grey-lighter: hsl(210, 29%, 86%);
+$grey-lightest: hsl(210, 29%, 93%);
+$white-ter: hsl(210, 29%, 96%);
+$white-bis: hsl(210, 29%, 98%);
+$white: hsl(210, 29%, 100%);
+
+$primary:hsl(37, 90%, 64%);
+$primary-light:	hsl(37, 90%, 96%);
 $primary-invert: #fff;
+
 $warning: #fdcb6e;
 $warning-light: hsl(39, 97%, 92%);
 $warning-invert: #0008;
+
+$menu-item-active-background-color: $primary;
+$menu-item-active-color: $primary-invert;
 
 @import '../../node_modules/bulma/bulma.sass';

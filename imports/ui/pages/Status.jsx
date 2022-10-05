@@ -163,7 +163,7 @@ const Status = props => {
                         <div className="box">
                             <h1 className="block title is-1" >{statusRaw.label}</h1>
                         </div>
-                        <nav className="panel is-link">
+                        <nav className="panel is-primary">
                             <p className="panel-heading has-background-link-light has-text-link">
                                 Paramètres
                             </p>
@@ -171,7 +171,7 @@ const Status = props => {
                                 <div className="flex align center">
                                     Apparence
                                 </div>
-                                <div className="select is-link">
+                                <div className="select is-primary">
                                     <select onChange={props.onChange}>
                                         <option value="" selected disabled hidden>Choisir une apparence ...</option>
                                         <option value="multiple">Choix multiple</option>
@@ -180,7 +180,7 @@ const Status = props => {
                                 </div>
                             </a>
                         </nav>
-                        <nav className="panel is-link">
+                        <nav className="panel is-primary">
                             <p className="panel-heading has-background-link-light has-text-link">
                                 Valeurs
                             </p>
@@ -191,7 +191,7 @@ const Status = props => {
                                         <i className={"fa-"+props.fastyle + " fa-search"} aria-hidden="true"></i>
                                     </span>
                                 </p>
-                                <button className="button is-light is-link" onClick={()=>showModalAdd(0)}>
+                                <button className="button is-primary" onClick={()=>showModalAdd(0)}>
                                     <i className={"fa-"+props.fastyle+" fa-plus"}></i>
                                 </button>
                             </div>
@@ -205,7 +205,7 @@ const Status = props => {
                                             {f.label}
                                         </div>
                                         <div>
-                                            <button onClick={()=>showModalDeleteValue(f._id)} className="button is-small is-danger is-light">
+                                            <button onClick={()=>showModalDeleteValue(f._id)} className="button is-small is-danger">
                                                 <i className={"fa-" + props.fastyle + " fa-trash"}/>
                                             </button>
                                         </div>
@@ -225,7 +225,7 @@ const Status = props => {
                         <section className="modal-card-body is-fullwidth">
                             <div className="columns is-fullwidth">
                                 <div className="column">
-                                    <input className="input is-link is-fullwidth" type="text" placeholder="Nom de la propriété" onChange={handleFieldChange} name="label"/>
+                                    <input className="input is-primary is-fullwidth" type="text" placeholder="Nom de la propriété" onChange={handleFieldChange} name="label"/>
                                 </div>
                             </div>
                         </section>

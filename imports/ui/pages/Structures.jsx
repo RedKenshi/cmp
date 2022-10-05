@@ -137,7 +137,7 @@ const Structures = props => {
         </div>
         <div className="column is-narrow">
           <div className="is-fullwidth box">
-            <button className='button is-light is-link' onClick={()=>showModalAdd(0)}>
+            <button className='button is-primary' onClick={()=>showModalAdd(0)}>
                 <i className='fa-regular fa-plus'/>
             </button>
           </div>
@@ -166,12 +166,16 @@ const Structures = props => {
             </section>
             <footer className="modal-card-foot">
                 <button className='button' onClick={closeModalAdd}>
-                    <i className='fa-light fa-arrow-left'/>
-                    Annuler
+                    <span className="icon">
+                      <i className='fa-light fa-arrow-left'/>
+                    </span>
+                    <span>Annuler</span>
                 </button>
                 <button className="button is-primary" onClick={addStructure}>
-                    <i className='fa-light fa-check'/>
-                    Créer
+                    <span>Créer</span>
+                    <span className="icon">
+                      <i className='fa-light fa-check'/>
+                    </span>
                 </button>
             </footer>
         </div>

@@ -65,12 +65,16 @@ const CrudLayoutTile = props => {
                     </section>
                     <footer className="modal-card-foot">
                         <button className='button' onClick={closeModalOptions}>
-                            <i className='fa-light fa-arrow-left'/>
-                            Annuler
+                            <span className="icon">
+                                <i className='fa-light fa-arrow-left'/>
+                            </span>
+                            <span>Annuler</span>
                         </button>
                         <button className="button is-primary" onClick={setLayout}>
-                            <i className='fa-light fa-check'/>
-                            Confirmer
+                            <span>Confirmer</span>
+                            <span className="icon">
+                                <i className='fa-light fa-check'/>
+                            </span>
                         </button>
                     </footer>
                 </div>

@@ -176,7 +176,7 @@ const Pages = props => {
         </div>
         <div className="column is-narrow">
           <div className="is-fullwidth box">
-            <button className='button is-light is-link' onClick={()=>showModalAdd(0)}>
+            <button className='button is-primary' onClick={()=>showModalAdd(0)}>
                 <i className='fa-regular fa-plus'/>
             </button>
           </div>
@@ -190,14 +190,14 @@ const Pages = props => {
                 <button className="delete" aria-label="close" onClick={closeModalAdd}/>
             </header>
             <section className="modal-card-body">
-              <div className="field center-field">
+              <div className="field">
                 <label className="label">Title</label>
                 <div className="control">
                   <input className="input" type="text" onChange={handleFormChange} name="title"/>
                 </div>
               </div>
               {(currentParentUID == 0 ?
-                <div className="field center-field">
+                <div className="field">
                   <label className="label">Icon</label>
                   <div className="control">
                     <FontAwesomePicker selectIcon={selectIcon} />

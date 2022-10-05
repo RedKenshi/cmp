@@ -39,6 +39,9 @@ const Demo = props => {
             props.toastQRM(data.data.factoryReset)
         });
     }
+    const generateDummyData = () => {
+        
+    }
 
     return (
         <div className="demo-actions-container">

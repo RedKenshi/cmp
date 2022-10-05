@@ -858,6 +858,15 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   height: 50vh;
 }
 
+.modal-card-body .field {
+  margin: auto;
+  max-width: 24rem;
+}
+
+.modal-card-foot {
+  justify-content: space-between;
+}
+
 .basic-crud-search-layout {
   height: 100%;
   display: grid;
@@ -888,11 +897,6 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 }
 .box:not(:last-child), .panel:not(:last-child) {
   margin-bottom: 0.5rem;
-}
-
-.center-field {
-  margin: auto;
-  max-width: 24rem;
 }
 
 .column {

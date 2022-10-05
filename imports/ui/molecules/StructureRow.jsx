@@ -23,12 +23,12 @@ export const StructureRow = props => {
                     </div>
                     <div className="details-and-actions columns">
                         <div className="details column is-justify-content-space-between">
-                            <i className="tag is-small is-link is-light">0 instances</i>
+                            <i className="tag is-small is-primary is-light">0 instances</i>
                             <div className="actions column is-half">
-                                <button className="button is-small is-danger is-light" onClick={()=>props.showModalDelete(props.structure._id)}>
+                                <button className="button is-small is-danger" onClick={()=>props.showModalDelete(props.structure._id)}>
                                     <i className={"fa-" + props.fastyle + " fa-trash"}></i>
                                 </button>
-                                <button className="button is-small is-link is-light" onClick={()=>navigate(props.structure.entityUID.toString())} >
+                                <button className="button is-small is-link" onClick={()=>navigate(props.structure.entityUID.toString())} >
                                     <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
                                 </button>
                             </div>

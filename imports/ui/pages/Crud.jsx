@@ -192,7 +192,7 @@ export const Crud = props => {
                     <input className='input' type="text"/>
                 </div>
                 <div>
-                    <button className='button is-light is-link' onClick={()=>setOpenModalAdd(true)}>
+                    <button className='button is-primary' onClick={()=>setOpenModalAdd(true)}>
                         <i className='fa-regular fa-plus'/>
                     </button>
                 </div>
@@ -268,7 +268,7 @@ export const Crud = props => {
                                             <p>{f.label} : </p>
                                         </div>
                                         <div className='column is-half'>
-                                            <span class="tag is-light is-medium">
+                                            <span class="tag is-medium">
                                                 {deleteTarget.columns.filter(c=>c.fieldId == f._id)[0].value}
                                             </span>
                                         </div>
