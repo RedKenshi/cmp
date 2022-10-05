@@ -42,7 +42,9 @@ export const Navbar = props => {
         <ul className="navbar-nav navbar-logo">
           <li className="logo">
             <a className="nav-link nav-link-logo" key={"logout"}>
-              <span className="link-text">CMP</span>
+              <span className="link-text">
+                <h1 className='cmp-logo text-center'>CMP</h1>
+              </span>
               <i className={"fa-"+props.fastylenav+" fa-chevrons-right"} color="blue"/>
             </a>
           </li>

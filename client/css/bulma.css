@@ -2370,10 +2370,10 @@ div.icon-text {
   width: 100%;
 }
 .table.is-hoverable tbody tr:not(.is-selected):hover {
-  background-color: hsl(230deg, 100%, 95%);
+  background-color: hsl(37deg, 90%, 96%);
 }
 .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover {
-  background-color: hsl(230deg, 100%, 95%);
+  background-color: hsl(37deg, 90%, 96%);
 }
 .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover:nth-child(even) {
   background-color: hsl(230deg, 100%, 95%);
