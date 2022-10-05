@@ -43,8 +43,9 @@ const Demo = props => {
     return (
         <div className="demo-actions-container">
             <div className="box">
-                <button className="button is-danger is-large" onClick={resetDB}>Reset Database</button>
-                <button className="button is-danger is-large" onClick={factoryReset}>Factory Reset</button>
+                <button className="button is-primary is-large" onClick={generateDummyData}>Generate Dummy Data</button>
+                <button className="button is-danger is-large" onClick={resetDB}>Reset Content</button>
+                <button className="button is-danger is-large" onClick={factoryReset}>Reset Platform</button>
             </div>
         </div>
     )

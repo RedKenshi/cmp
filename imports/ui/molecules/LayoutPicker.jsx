@@ -1,5 +1,6 @@
 import React from "react";
 import CrudLayoutTile from "./layoutTiles/CrudLayoutTile";
+import DashboardLayoutTile from "./layoutTiles/DashboardLayoutTile";
 
 const LayoutPicker = props => {
 
@@ -20,8 +21,13 @@ const LayoutPicker = props => {
                     Sélectionnez un type de page pour commencer à utiliser cette page.
                 </div>
                 </article>
-                <div className="layout-picker is-fullwidth">
-                    <CrudLayoutTile setLayout={setLayout}/>
+                <div className="layout-picker is-fullwidth columns">
+                    <div className="column">
+                        <CrudLayoutTile setLayout={setLayout}/>
+                    </div>
+                    <div className="column">
+                        <DashboardLayoutTile setLayout={setLayout}/>
+                    </div>
                 </div>
             </div>
         </div>
