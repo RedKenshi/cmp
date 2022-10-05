@@ -20,9 +20,6 @@ export const StructureRow = props => {
                         <div className="column flex align">
                             <h3>{props.structure.label}</h3>
                         </div>
-                        <div className="is-narrow column flex align">
-                            <i className={"fa fa-"+props.fastyle+" fa-"+props.structure.icon}/>
-                        </div>
                     </div>
                     <div className="details-and-actions columns">
                         <div className="details column is-justify-content-space-between">

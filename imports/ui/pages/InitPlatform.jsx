@@ -131,9 +131,10 @@ const InitPlarform = props => {
     }
 
     return (
-        <div className="landing-container columns">
+        <div className="initialize-container columns">
             <div className='column children-spaced is-half'>
                 <div className="form box children-spaced">
+                    <h1>Customizable Management Platform</h1>
                     <article className="message is-info">
                         <div className="message-header">
                             <p>This platform is yet to initialize</p>

@@ -6,7 +6,6 @@ import AdministrationMenu from "../molecules/AdministrationMenu";
 import _ from 'lodash';
 
 const Structure = props => {
-
     const { uid } = useParams();
     const [loading, setLoading] = useState(true)
     const [modalActiveFieldType, setModalActiveFieldType] = useState("basic")

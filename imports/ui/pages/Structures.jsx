@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
 import StructureRow from "../molecules/StructureRow";
-import FontAwesomePicker from "../atoms/FontAwesomePicker";
 import AdministrationMenu from "../molecules/AdministrationMenu";
 import _ from 'lodash';
 import { Fragment } from "react/cjs/react.production.min";
@@ -12,8 +11,7 @@ const Structures = props => {
   const [structureFilter, setStructureFilter] = useState('');
   const [formValues, setFormValues] = useState({
         label:'',
-        name:'',
-        icon:''
+        name:''
   });
   const [deleteTargetId, setDeleteTargetId] = useState("");
   const [openModalAdd,setOpenModalAdd] = useState(false);
@@ -24,7 +22,6 @@ const Structures = props => {
     structures {
       _id
       entityUID
-      icon
       fields{
         _id
         label
@@ -35,8 +32,8 @@ const Structures = props => {
       name
     }
   }`;
-  const addStructureQuery = gql`mutation addStructure($label: String, $name: String, $icon: String){
-    addStructure(label:$label,name:$name,icon:$icon){
+  const addStructureQuery = gql`mutation addStructure($label: String, $name: String){
+    addStructure(label:$label,name:$name){
         status
         message
     }
@@ -47,13 +44,6 @@ const Structures = props => {
         message
     }
   }`;
-
-const selectIcon = icon => {
-  setFormValues({
-    ...formValues,
-    icon : icon
-  })
-}
   const handleFormChange = e => {
     setFormValues({
         ...formValues,
@@ -65,8 +55,7 @@ const selectIcon = icon => {
         mutation:addStructureQuery,
         variables:{
             label:formValues.label,
-            name:formValues.name,
-            icon:formValues.icon
+            name:formValues.name
         }
     }).then((data)=>{
         loadStructures();
@@ -116,6 +105,21 @@ const selectIcon = icon => {
       setStructuresRaw(data.structures);
     })
   }
+  const getStructures = () => {
+    if(structuresRaw.length > 0){
+      return(
+        <ul className="is-fullwidth">
+          {structuresRaw.filter(a=> a.label.toLowerCase().includes(structureFilter.toLowerCase())).map((s,i) => <StructureRow key={s._id} loadStructures={loadStructures} showModalDelete={showModalDelete} index={i} structure={s}/>)}
+        </ul>
+      )
+    }else{
+      return(
+        <div className="is-fullwidth box">
+          No structure created yet
+        </div>
+      )
+    }
+  }
   useEffect(() => {
     loadStructures();
   })
@@ -128,7 +132,7 @@ const selectIcon = icon => {
         </div>
         <div className="column">
           <ul className="is-fullwidth">
-            {structures().map((s,i) => <StructureRow key={s._id} loadStructures={loadStructures} addSubStructure={addSubStructure} showModalDelete={showModalDelete} structure={s} index={i}/>)}
+            {getStructures()}
           </ul>
         </div>
         <div className="column is-narrow">
@@ -159,12 +163,6 @@ const selectIcon = icon => {
                   <input className="input" type="text" onChange={handleFormChange} name="name"/>
                 </div>
               </div>
-              <div className="field">
-                  <label className="label">Icon</label>
-                  <div className="control">
-                    <FontAwesomePicker selectIcon={selectIcon} />
-                  </div>
-                </div>
             </section>
             <footer className="modal-card-foot">
                 <button className='button' onClick={closeModalAdd}>

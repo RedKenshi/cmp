@@ -23,18 +23,26 @@
     }
     .icons-preview{
         display:grid;
-        grid-template-columns:repeat(8,auto);
+        place-content: center;
+        grid-template-columns:repeat(5,auto);
         grid-template-rows:repeat(2,auto);
         width:100%;
         margin-top:.75rem;
         gap:.75rem .5rem;
         .icon-tile{
             cursor: pointer;
-            font-size: 1.5rem;
-            padding: .25rem;
+            font-size: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
             border-radius: .25rem;
             &:hover{
                 background: #0002;
+            }
+            & .fa-light{
+                margin: .25rem;
             }
         }
     }

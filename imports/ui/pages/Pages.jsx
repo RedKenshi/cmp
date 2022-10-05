@@ -145,6 +145,21 @@ const Pages = props => {
       setPagesRaw(data.pagesTree);
     })
   }
+  const getPages = () => {
+    if(pagesRaw.length > 0){
+      return(
+        <ul className="is-fullwidth box">
+          {pagesRaw.filter(a=> a.title.toLowerCase().includes(pageFilter.toLowerCase())).map((p,i) => <PageRow key={p._id} loadPages={loadPages} addSubPage={addSubPage} showModalDelete={showModalDelete} page={p} index={i}/>)}
+        </ul>
+      )
+    }else{
+      return(
+        <div className="is-fullwidth box">
+          No page created yet
+        </div>
+      )
+    }
+  }
   useEffect(() => {
     loadPages();
   })
@@ -156,9 +171,8 @@ const Pages = props => {
           <AdministrationMenu active="pages"/>
         </div>
         <div className="column">
-          <ul className="is-fullwidth box">
-            {pages().map((p,i) => <PageRow key={p._id} loadPages={loadPages} addSubPage={addSubPage} showModalDelete={showModalDelete} page={p} index={i}/>)}
-          </ul>
+          
+            {getPages()}
         </div>
         <div className="column is-narrow">
           <div className="is-fullwidth box">
@@ -176,14 +190,14 @@ const Pages = props => {
                 <button className="delete" aria-label="close" onClick={closeModalAdd}/>
             </header>
             <section className="modal-card-body">
-              <div className="field">
+              <div className="field center-field">
                 <label className="label">Title</label>
                 <div className="control">
                   <input className="input" type="text" onChange={handleFormChange} name="title"/>
                 </div>
               </div>
               {(currentParentUID == 0 ?
-                <div className="field">
+                <div className="field center-field">
                   <label className="label">Icon</label>
                   <div className="control">
                     <FontAwesomePicker selectIcon={selectIcon} />

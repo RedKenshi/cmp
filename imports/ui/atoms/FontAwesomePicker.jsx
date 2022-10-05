@@ -3152,10 +3152,10 @@ export const FontAwesomePicker = props => {
     const getPreviews = () => {
         let res = [];
         if(search.length > 0){
-            icons.filter(i=> i.code.includes(search)).slice(0,16).map(x=>{
+            icons.filter(i=> i.code.includes(search)).slice(0,10).map(x=>{
                 res.push(
-                    <div className="icon-tile">
-                        <i className={'fa-light fa-fw fa-'+x.code} onClick={()=>{selectIcon(x.code)}}></i>
+                    <div className="icon-tile" onClick={()=>{selectIcon(x.code)}}>
+                        <i className={'fa-light fa-'+x.code}></i>
                     </div>
                 )
             })

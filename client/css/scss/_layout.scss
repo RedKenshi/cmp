@@ -42,6 +42,48 @@
         }
     }
 }
+.initialize-container{
+    width: 100vw;
+    max-width: 64rem;
+    padding: 1rem;
+    margin: auto;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    & h1 {
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    & > .column{
+        min-width: 16rem;
+        max-width: 36rem;
+        padding: 2rem;
+        margin: auto;
+        & > * {
+            margin: auto;
+        }
+        padding: 2rem 0 !important;
+        & .inputs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            & .steps{
+                display: flex;
+                gap: 1rem;
+                flex-grow: 1;
+                flex-shrink: 1;
+                & .tag{
+                    flex-grow: 1;
+                }
+            }
+            & > button {
+                flex: 1 1 50%;
+                margin: auto;
+            }
+        }
+    }
+}
 .main-container-navbar{
     display: block;
     height: 100%;
@@ -295,6 +337,10 @@
     &:not(:last-child){
         margin-bottom: .5rem;
     }
+}
+.center-field{
+    margin: auto;
+    max-width: 24rem;
 }
 .column {
     padding: 0.25rem !important;
