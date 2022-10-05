@@ -857,6 +857,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   align-items: center;
   height: 50vh;
 }
+.demo-actions-container .box {
+  flex-direction: column;
+  display: flex;
+}
 
 .modal-card-body .field,
 .modal-card-body .row {

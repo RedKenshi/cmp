@@ -99,24 +99,24 @@ const InitPlarform = props => {
         if(step == 1){
             return(
                 <Fragment>
-                    <input className="input is-primary" key="mail" name="mail" placeholder="Mail address" onChange={handleChange}/>
-                    <input className="input is-primary" key="mailconfirm" name="mailconfirm" placeholder="Confirm mail address" onChange={handleChange}/>
+                    <input className="input" key="mail" name="mail" placeholder="Mail address" onChange={handleChange}/>
+                    <input className="input" key="mailconfirm" name="mailconfirm" placeholder="Confirm mail address" onChange={handleChange}/>
                 </Fragment>
             )
         }
         if(step == 2){
             return(
                 <Fragment>
-                    <input className="input is-primary" key="firstname" name="firstname" placeholder="Your first name" onChange={handleChange}/>
-                    <input className="input is-primary" key="lastname" name="lastname" placeholder="Your last name" onChange={handleChange}/>
+                    <input className="input" key="firstname" name="firstname" placeholder="Your first name" onChange={handleChange}/>
+                    <input className="input" key="lastname" name="lastname" placeholder="Your last name" onChange={handleChange}/>
                 </Fragment>
             )
         }
         if(step == 3){
             return(
                 <Fragment>
-                    <input type="password" className="input is-primary" key="pass" name="pass" placeholder="Your password" onChange={handleChange}/>
-                    <input type="password" className="input is-primary" key="passconfirm" name="passconfirm" placeholder="Confirm your password" onChange={handleChange}/>
+                    <input type="password" className="input" key="pass" name="pass" placeholder="Your password" onChange={handleChange}/>
+                    <input type="password" className="input" key="passconfirm" name="passconfirm" placeholder="Confirm your password" onChange={handleChange}/>
                 </Fragment>
             )
         }
@@ -135,7 +135,7 @@ const InitPlarform = props => {
             <div className='column children-spaced is-half'>
                 <div className="form box children-spaced">
                     <h1>Customizable Management Platform</h1>
-                    <article className="message is-primary">
+                    <article className="message">
                         <div className="message-header">
                             <p>This platform is yet to initialize</p>
                         </div>
@@ -152,9 +152,9 @@ const InitPlarform = props => {
                     </div>
                     <div className='inputs'>
                         <div className='steps'>
-                            <span className={'tag is-large is-primary ' + (step >= 1 ? "" : "is-light")} icon={"fa-"+props.fastyle + " fa-arrow-right"}>{(step > 1 ? <i className="fa-duotone fa-check"/> : "1")}</span>
-                            <span className={'tag is-large is-primary ' + (step >= 2 ? "" : "is-light")} icon={"fa-"+props.fastyle + " fa-arrow-right"}>{(step > 2 ? <i className="fa-duotone fa-check"/> : "2")}</span>
-                            <span className={'tag is-large is-primary ' + (step >= 3 ? "" : "is-light")} icon={"fa-"+props.fastyle + " fa-arrow-right"}>{(step > 3 ? <i className="fa-duotone fa-check"/> : "3")}</span>
+                            <span className={'tag is-large ' + (step >= 1 ? "" : "is-light")} icon={"fa-"+props.fastyle + " fa-arrow-right"}>{(step > 1 ? <i className="fa-duotone fa-check"/> : "1")}</span>
+                            <span className={'tag is-large ' + (step >= 2 ? "" : "is-light")} icon={"fa-"+props.fastyle + " fa-arrow-right"}>{(step > 2 ? <i className="fa-duotone fa-check"/> : "2")}</span>
+                            <span className={'tag is-large ' + (step >= 3 ? "" : "is-light")} icon={"fa-"+props.fastyle + " fa-arrow-right"}>{(step > 3 ? <i className="fa-duotone fa-check"/> : "3")}</span>
                         </div>
                         {getMainButton()}
                     </div>

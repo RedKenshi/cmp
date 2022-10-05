@@ -304,6 +304,10 @@
     justify-content: center;
     align-items: center;
     height: 50vh;
+    & .box {
+        flex-direction: column;
+        display: flex;
+    }
 }
 //REUSABLE
 .modal-card-body .field,
