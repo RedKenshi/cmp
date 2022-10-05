@@ -107,15 +107,23 @@ const Structure = props => {
         })
     }
     const resetFieldsValue = () => {
-        document.getElementById("fieldCreationRequired").checked = false;
-        document.getElementById("searchable").checked = false;
+        if(document.getElementById("fieldCreationRequired")){
+            document.getElementById("fieldCreationRequired").checked = false;
+        }
+        if(document.getElementById("searchable")){
+            document.getElementById("searchable").checked = false;
+        }
+        if(document.getElementById("tableview")){
+            document.getElementById("tableview").checked = false;
+        }
         setModalAddStep(0)
         setFieldValues({
             label:'',
             name:'',
             type:'string',
             requiredAtCreation: "off",
-            searchable: "off"
+            searchable: "off",
+            tableview: "off"
         })
     }
     const deleteStructure = () => {
@@ -130,7 +138,7 @@ const Structure = props => {
             props.toastQRM(data.data.deleteStructure)
         })
     }
-    const showModalAdd = uid => {
+    const showModalAdd = () => {
         setOpenModalAdd(true)
     }
     const closeModalAdd = () => {
@@ -250,6 +258,12 @@ const Structure = props => {
                                 Searchable
                             </label>
                         </div>
+                        <div className="row flex">
+                            <label className="checkbox flex align">
+                                <input className="checkbox" type="checkbox" onChange={handleFieldChange} name="tableview" id="tableview"/>
+                                Display in table view
+                            </label>
+                        </div>
                     </div>
                 </section>
             )
@@ -303,7 +317,7 @@ const Structure = props => {
                                         <i className={"fa-"+props.fastyle + " fa-search"} aria-hidden="true"></i>
                                     </span>
                                 </p>
-                                <button className="button is-primary" onClick={()=>showModalAdd(0)}>
+                                <button className="button is-primary" onClick={showModalAdd}>
                                     <i className={"fa-"+props.fastyle+" fa-plus"}></i>
                                 </button>
                             </div>
@@ -334,7 +348,7 @@ const Structure = props => {
                         </nav>
                     </div>
                 </div>
-                <div className={"modal" + (openModalAdd != false ? " is-active" : "")}>
+                <div className={"modal" + (openModalAdd ? " is-active" : "")}>
                     <div className="modal-background"></div>
                     <div className="modal-card">
                         <header className="modal-card-head">
