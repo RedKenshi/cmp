@@ -307,7 +307,7 @@ const Structure = props => {
                             <h1 className="block title is-1" >{structureRaw.label}</h1>
                         </div>
                         <nav className="panel is-primary">
-                            <p className="panel-heading has-background-link-light has-text-link">
+                            <p className="panel-heading has-background-info-light has-text-info">
                                 Propriétés
                             </p>
                             <div className="panel-block">
@@ -326,18 +326,18 @@ const Structure = props => {
                                     <a className={"panel-block flex flex-between"}>
                                         <div className="flex align center">
                                             <span className="panel-icon">
-                                                <i className={"fa-"+props.fastyle+" fa-brackets-curly" + (f.requiredAtCreation ? " has-text-primary" : " has-text-link")} aria-hidden="true"></i>
+                                                <i className={"fa-"+props.fastyle+" fa-brackets-curly" + (f.requiredAtCreation ? " has-text-info" : " has-text-link")} aria-hidden="true"></i>
                                             </span>
                                             {f.label}
                                             {
                                                 f.requiredAtCreation ? 
-                                                <i className={"margined-left8" + (f.requiredAtCreation ? " has-text-primary" : " has-text-link") + " fa-" + props.fastyle + " fa-circle-exclamation"} />
+                                                <i className={"margined-left8" + (f.requiredAtCreation ? " has-text-info" : " has-text-link") + " fa-" + props.fastyle + " fa-circle-exclamation"} />
                                                 :
                                                 ""
                                             }
                                         </div>
                                         <div className="flex align">
-                                            <span className={"tag" + (f.requiredAtCreation ? " has-text-primary" : " has-text-link") + " is-light"}>{props.getFieldTypeLabel(f.type)}</span>
+                                            <span className={"tag" + (f.requiredAtCreation ? " has-text-info" : " has-text-link") + " is-light"}>{props.getFieldTypeLabel(f.type)}</span>
                                             <button onClick={()=>showModalDeleteField(f._id)} className="button is-small is-danger is-light">
                                                 <i className={"fa-" + props.fastyle + " fa-trash"}/>
                                             </button>

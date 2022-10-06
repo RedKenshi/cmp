@@ -1,6 +1,7 @@
 @import '../../../node_modules/bulma/sass/utilities/initial-variables.sass';
 @import '../../../node_modules/bulma/sass/helpers/color.sass';
-@import 'variables';
+
+@import '../scss/colors';
 
 .waves{
     margin-bottom: -0.5rem;
