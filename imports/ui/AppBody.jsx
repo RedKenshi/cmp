@@ -29,7 +29,7 @@ export const AppBody = props => {
         props.pagesTree.map(p=>{
             routes.push(...extractSubRoutes(p));
         })
-        console.log(routes.map(r=>r.props.path))// - UNCOMMENT TO CONSOLE LOG AVAILABLE ROUTES
+        //console.log(routes.map(r=>r.props.path))// - UNCOMMENT TO CONSOLE LOG AVAILABLE ROUTES
         return routes;
     }
     const extractSubRoutes = p => {

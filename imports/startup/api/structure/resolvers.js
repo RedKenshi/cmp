@@ -49,8 +49,9 @@ export default {
             })
             return is;   
         },
-        async structureInstance(obj,{instance},{user}){
-            return {};
+        async structureInstance(obj,{structureId,instanceId},{user}){
+            let structureInstance = getCol(structureId).findOne(new Mongo.ObjectID(instanceId));
+            return structureInstance;
         }
     },
     Mutation:{

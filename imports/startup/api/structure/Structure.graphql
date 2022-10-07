@@ -27,8 +27,8 @@ type StructureInstance{
 type Query{
     structure(_id:String): Structure
     structures : [Structure]
+    structureInstance(structureId:String!,instanceId:String!): StructureInstance
     structureInstances(_id:String): [StructureInstance]
-    structureInstance(_id:String): StructureInstance
 }
 
 type Mutation{

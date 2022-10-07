@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import { useParams } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import CrudEntityRow from '../molecules/CrudEntityRow';
 import ModalGenericDatePicker from '../atoms/ModalDatePicker';
@@ -6,6 +7,7 @@ import { gql } from 'graphql-tag';
 
 export const CrudEntityDetails = props => {
     
+    const { _id } = useParams();
     const fieldTypes = [
         {
             typeName:"required",
@@ -21,12 +23,12 @@ export const CrudEntityDetails = props => {
         }
     ]
     const [modalActiveFieldType, setModalActiveFieldType] = useState("required")
-    const [structureInstancesRaw,setStructureInstancesRaw] = useState([]);
+    const [structureInstanceRaw,setStructureInstanceRaw] = useState([]);
     const [structureInstanceFieldValues,setStructureInstanceFieldValues] = useState([]);
     const [structureRaw,setStructureRaw] = useState([]);
     const [structureId,setStructureId] = useState([]);
     const [loadingStructure,setLoadingStructure] = useState(true);
-    const [loadingInstances,setLoadingInstances] = useState(true);
+    const [loadingInstance,setLoadingInstance] = useState(true);
     const [openModalDate,setOpenModalDate] = useState(false);
     const [openModalAdd,setOpenModalAdd] = useState(false);
     const [openModalDelete,setOpenModalDelete] = useState(false);
@@ -49,19 +51,13 @@ export const CrudEntityDetails = props => {
             name
         }
     }`;
-    const structureInstancesQuery = gql` query structureInstances($_id:String) {
-        structureInstances(_id:$_id) {
+    const structureInstanceQuery = gql` query structureInstance($structureId:String!,$instanceId:String!) {
+        structureInstance(structureId:$structureId,instanceId:$instanceId) {
             _id
             columns{
                 fieldId
                 value
             }
-        }
-    }`;
-    const addStructureInstanceQuery = gql` mutation addStructureInstance($structureId:String,$columns:[String]) {
-        addStructureInstance(structureId:$structureId,columns:$columns) {
-            status
-            message
         }
     }`;
     const deleteStructureInstanceQuery = gql` mutation deleteStructureInstance($structureId:String!,$instanceId:String!) {
@@ -88,10 +84,8 @@ export const CrudEntityDetails = props => {
     const closeModalDelete = () => {
         setOpenModalDelete(false)
     }
-    const showModalDelete = target => {
+    const showModalDelete = () => {
         setOpenModalDelete(true)
-        setDeleteTargetId(target)
-        setDeleteTarget(structureInstancesRaw.filter(si=>si._id == target)[0])
     }
     const loadStructure = () => {
         props.client.query({
@@ -110,16 +104,17 @@ export const CrudEntityDetails = props => {
             setLoadingStructure(false)
         })
     }
-    const loadStructureInstances = _id => {
+    const loadStructureInstance = () => {
         props.client.query({
-            query:structureInstancesQuery,
+            query:structureInstanceQuery,
             fetchPolicy:"network-only",
             variables:{
-                _id:_id
+                structureId:props.layoutOptions.structureId,
+                instanceId:_id
             }
         }).then(({data})=>{
-            setStructureInstancesRaw(data.structureInstances);
-            setLoadingInstances(false)
+            setStructureInstanceRaw(data.structureInstance);
+            setLoadingInstance(false)
         })
     }
     const getFieldTypeMenu = () => {
@@ -139,19 +134,6 @@ export const CrudEntityDetails = props => {
                 })}
             </ul>
         )
-    }
-    const addStructureInstance = () => {
-        props.client.mutate({
-            mutation:addStructureInstanceQuery,
-            variables:{
-                structureId:structureRaw._id,
-                columns:JSON.stringify(structureInstanceFieldValues)
-            }
-        }).then((data)=>{
-            props.toastQRM(data.data.addStructureInstance)
-            loadStructureInstances(structureId)
-            closeModalAdd()
-        })
     }
     const deleteStructureInstance = () => {
         props.client.mutate({
@@ -176,12 +158,19 @@ export const CrudEntityDetails = props => {
         }
     }
     useEffect(()=>{
-        loadStructure()
+        loadStructure();
+        loadStructureInstance();
     },[])
 
     return (
         <Fragment>
-            HEY CRUD ENTITY DETAILS
+            <div className="box">
+                {JSON.stringify(structureRaw)}
+                <br/>
+                <br/>
+                <br/>
+                {JSON.stringify(structureInstanceRaw)}
+            </div>
             <ModalGenericDatePicker open={openModalDate} close={closeModalDate} headerLabel={"Header here"} selected={new Date()}onValidate={onValidateDatePicker} target={"datePickerTarget"}/>
             <div className={"modal" + (openModalAdd != false ? " is-active" : "")}>
                 <div className="modal-background"></div>
@@ -209,7 +198,7 @@ export const CrudEntityDetails = props => {
                             <i className='fa-light fa-arrow-left'/>
                             Annuler
                         </button>
-                        <button className="button is-primary" onClick={addStructureInstance}>
+                        <button className="button is-primary">
                             <i className='fa-light fa-check'/>
                             Créer
                         </button>
