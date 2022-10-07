@@ -17,8 +17,7 @@ const CustomPage = props => {
   const pageAndSubsQuery = gql` query pageAndSubs($url: String!) {
     pageAndSubs(url: $url) {
       _id
-      entityUID
-      parentUID
+      parentId
       title
       name
       url
@@ -29,8 +28,7 @@ const CustomPage = props => {
       layoutOptions
       sub{
         _id
-        entityUID
-        parentUID
+        parentId
         title
         name
         url
@@ -43,8 +41,7 @@ const CustomPage = props => {
   const parentsPageToTopQuery = gql` query parentsPageToTop($url: String!) {
     parentsPageToTop(url: $url) {
       _id
-      entityUID
-      parentUID
+      parentId
       title
       url
       fullpath
@@ -56,7 +53,6 @@ const CustomPage = props => {
       message
     }
   }`;
-
   const loadPageAndSubs = () => {
     props.client.query({
       query:pageAndSubsQuery,
@@ -83,6 +79,7 @@ const CustomPage = props => {
   }
   const setLayout = (layout,layoutOptions) => {
     let input = layoutOptions.map(lo=>JSON.stringify(lo))
+    console.log(input)
     props.client.mutate({
       mutation:setLayoutQuery,
       variables:{
@@ -97,15 +94,12 @@ const CustomPage = props => {
   }
   const getContent = () => {
     if(pageRaw.layout == null){
-      return (
-        <LayoutPicker setLayout={setLayout}/>
-      )
+      return <LayoutPicker setLayout={setLayout}/>
     }else{
       if(pageRaw.layout == "crud"){
         return <Crud layoutOptions={pageRaw.layoutOptions} />
       }
     }
-    return "THIS IS PICKED LAYOUT";
   }
   const getBreadcrumbs = () => {
     if(loadingBreadcrumbs){
@@ -128,7 +122,7 @@ const CustomPage = props => {
   useEffect(() => {
     loadBreadcrumbs()
     loadPageAndSubs();
-  })
+  },[])
 
   if(loading){
     return("loading...")

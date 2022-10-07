@@ -1,7 +1,6 @@
 type Page{
     _id: String
-    entityUID: Int
-    parentUID: Int
+    parentId: String!
     sub: [Page]
     title: String
     icon: String
@@ -23,7 +22,7 @@ type Query{
 }
 
 type Mutation{
-    addPage(title: String, parentUID: Int, icon: String): [QueryResultMessage]
+    addPage(title: String, parentId: String!, icon: String): [QueryResultMessage]
     toggleActive(_id: String!): [QueryResultMessage]
     deletePage(_id: String!): [QueryResultMessage]
     setLayout(_id:String!,layout:String!,layoutOptions:[String]): [QueryResultMessage]

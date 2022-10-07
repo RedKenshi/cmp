@@ -31,8 +31,8 @@ const loadFields = structure => {
 
 export default {
     Query : {
-        async structure(obj, {uid}, { user }){
-            let structure = Structures.findOne({entityUID:uid});
+        async structure(obj, {_id}, { user }){
+            let structure = Structures.findOne(new Mongo.ObjectID(_id));
             return loadFields(structure);
         },
         async structures(obj, args){
@@ -58,7 +58,6 @@ export default {
             if(user._id){
                 Structures.insert({
                     _id:new Mongo.ObjectID(),
-                    entityUID: Math.floor(Math.random()*999999),
                     label: label,
                     name: name.toLowerCase().replace(" ","-")
                 });

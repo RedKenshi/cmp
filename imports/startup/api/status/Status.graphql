@@ -1,6 +1,5 @@
 type Status{
     _id: String
-    entityUID: Int
     values: [StatusValue]
     label: String
     name: String
@@ -12,7 +11,7 @@ type StatusValue{
 }
 
 type Query{
-    status(uid:Int): Status
+    status(_id:String): Status
     statuses : [Status]
 }
 

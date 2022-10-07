@@ -10,8 +10,8 @@ const loadValues = status => {
 
 export default {
     Query : {
-        async status(obj, {uid}, { user }){
-            let status = Statuses.findOne({entityUID:uid});
+        async status(obj, {_id}, { user }){
+            let status = Statuses.findOne(new Mongo.ObjectID(_id));
             return loadValues(status)
         },
         async statuses(obj, args){
@@ -23,7 +23,6 @@ export default {
             if(user._id){
                 Statuses.insert({
                     _id:new Mongo.ObjectID(),
-                    entityUID: Math.floor(Math.random()*999999),
                     label: label,
                     name: label.toLowerCase().replace(" ","-")
                 });

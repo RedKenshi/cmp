@@ -12,10 +12,9 @@ const StructurePicker = props => {
     //GRAPHQL QUERIES AND MUTATIONS
     const structuresQuery = gql` query structures {
         structures {
-        _id
-        entityUID
-        label
-        name
+            _id
+            label
+            name
         }
     }`;
     //LIFECYCLE
@@ -46,7 +45,7 @@ const StructurePicker = props => {
                 <option value="" selected disabled hidden>Choisir une structure ...</option>
                 {structuresRaw.map(x=>{
                     return(
-                        <option value={x.entityUID}>
+                        <option key={x._id} value={x._id}>
                             {x.label}
                         </option>
                     )

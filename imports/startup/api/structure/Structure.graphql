@@ -1,6 +1,5 @@
 type Structure{
     _id: String
-    entityUID: Int
     fields: [StructureField]
     label: String
     name: String
@@ -26,7 +25,7 @@ type StructureInstance{
 }
 
 type Query{
-    structure(uid:Int): Structure
+    structure(_id:String): Structure
     structures : [Structure]
     structureInstances(_id:String): [StructureInstance]
     structureInstance(_id:String): StructureInstance

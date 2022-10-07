@@ -28,7 +28,7 @@ export const StructureRow = props => {
                                 <button className="button is-small is-danger" onClick={()=>props.showModalDelete(props.structure._id)}>
                                     <i className={"fa-" + props.fastyle + " fa-trash"}></i>
                                 </button>
-                                <button className="button is-small is-link" onClick={()=>navigate(props.structure.entityUID.toString())} >
+                                <button className="button is-small is-link" onClick={()=>navigate(props.structure._id)} >
                                     <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
                                 </button>
                             </div>

@@ -1,20 +1,20 @@
 import Pages from './pages.js';
 import { Mongo } from 'meteor/mongo';
 
-const getFullPath = (parentUID,url) => {
-    if(parentUID == 0){
+const getFullPath = (parentId,url) => {
+    if(parentId == "root"){
         return url;
     }else{
-        let parent = Pages.findOne({entityUID:parentUID});
+        let parent = Pages.findOne(new Mongo.ObjectID(parentId))
         let fullpath = parent.url + url;
-        return getFullPath(parent.parentUID,fullpath)
+        return getFullPath(parent.parentId,fullpath)
     }
 }
 
 //RECURSIVE
 const loadPagesSubpagesTree = pages => {
     pages.forEach(page => {
-        let subs = Pages.find({parentUID:page.entityUID}).fetch() || {};
+        let subs = Pages.find({parentId:page._id._str}).fetch() || {};
         if(subs.length > 0){
             subs = loadPagesSubpagesTree(subs);
             page.sub = subs;
@@ -26,7 +26,7 @@ const loadPagesSubpagesTree = pages => {
 }
 //RECURSIVE
 const loadPageSubpagesTree = page => {
-    let subs = Pages.find({parentUID:page.entityUID}).fetch() || {};
+    let subs = Pages.find({parentId:page._id._str}).fetch() || {};
     if(subs.length > 0){
         subs = loadPagesSubpagesTree(subs);
         page.sub = subs;
@@ -37,7 +37,7 @@ const loadPageSubpagesTree = page => {
 }
 //NOT RECURSIVE
 const loadPageSubpages = page => {
-    let subs = Pages.find({parentUID:page.entityUID}).fetch() || {};
+    let subs = Pages.find({parentId:page._id._str}).fetch() || {};
     if(subs.length > 0){
         page.sub = subs.filter(s=>s.active);
     }else{
@@ -49,13 +49,13 @@ const loadPageSubpages = page => {
 export default {
     Query : {
         async page(obj, {_id}, { user }){
-            return Pages.findOne(_id);
+            return Pages.findOne(new Mongo.ObjectID(_id));
         },
         async pages(obj, args){
             return Pages.find({}).fetch() || {};
         },
         async pagesTree(obj, args){
-            let pages = Pages.find({parentUID:0}).fetch() || {};
+            let pages = Pages.find({parentId:"root"}).fetch() || {};
             pages = loadPagesSubpagesTree(pages);
             return pages;
         },
@@ -71,28 +71,27 @@ export default {
         },
         async parentsPageToTop(obj,{url},{user}){
             let page = Pages.findOne({fullpath:url}) || {};
+            let currentParentId = page.parentId;
             let pages = [page];
-            let currentParentUID = page.parentUID;
-            while (currentParentUID != 0){
-                let parent = Pages.findOne({entityUID:pages[pages.length-1].parentUID}) || {};
-                currentParentUID = parent.parentUID
+            while (currentParentId != "root"){                
+                let parent = Pages.findOne(new Mongo.ObjectID(pages[pages.length-1].parentId)) || {};
+                currentParentId = parent.parentId
                 pages.push(parent);
             }
             return pages.reverse();
         }
     },
     Mutation:{
-        async addPage(obj,{title,icon,parentUID},{user}){
+        async addPage(obj,{title,icon,parentId},{user}){
             if(user._id){
                 const url = "/"+title.toLowerCase().replace(" ","-");
                 Pages.insert({
                     _id:new Mongo.ObjectID(),
-                    entityUID: Math.floor(Math.random()*999999),
-                    parentUID: parentUID,
+                    parentId: parentId,
                     title: title,
                     icon: icon,
                     url: url,
-                    fullpath:getFullPath(parentUID,url),
+                    fullpath:getFullPath(parentId,url),
                     active: false,
                     name: title.toLowerCase().replace(" ","-"),
                     layout:null

@@ -28,7 +28,7 @@ export const StatusRow = props => {
                                 <button className="button is-small is-danger" onClick={()=>props.showModalDelete(props.status._id)}>
                                     <i className={"fa-" + props.fastyle + " fa-trash"}></i>
                                 </button>
-                                <button className="button is-small is-link" onClick={()=>navigate(props.status.entityUID.toString())} >
+                                <button className="button is-small is-link" onClick={()=>navigate(props.status._id)} >
                                     <i className={"fa-" + props.fastyle + " fa-magnifying-glass"}></i>
                                 </button>
                             </div>

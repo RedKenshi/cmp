@@ -21,7 +21,6 @@ const Structures = props => {
   const structuresQuery = gql` query structures {
     structures {
       _id
-      entityUID
       fields{
         _id
         label
@@ -81,7 +80,7 @@ const Structures = props => {
   const handleFilter = value => {
     setStructureFilter(value);
   }
-  const showModalAdd = uid => {
+  const showModalAdd = () => {
     setOpenModalAdd(true)
   }
   const closeModalAdd = () => {
@@ -93,9 +92,6 @@ const Structures = props => {
   }
   const closeModalDelete = () => {
     setOpenModalDelete(false)
-  }
-  const addSubStructure = uid => {
-    showModalAdd(uid);
   }
   const loadStructures = () => {
     props.client.query({

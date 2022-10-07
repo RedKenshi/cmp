@@ -4,19 +4,18 @@ import { Mongo } from 'meteor/mongo';
 export default {
     Query : {
         async layout(obj, {_id}, { user }){
-            return Layouts.findOne(_id);
+            return Layouts.findOne(new Mongo.ObjectID(_id));
         },
         async layouts(obj, args){
             return Layouts.find({}).fetch() || {};
         }
     },
     Mutation:{
-        async addLayout(obj,{title,icon,parentUID},{user}){
+        async addLayout(obj,{title,icon,parentId},{user}){
             if(user._id){
                 Layouts.insert({
                     _id:new Mongo.ObjectID(),
-                    entityUID: Math.floor(Math.random()*999999),
-                    parentUID: parentUID,
+                    parentId: parentId,
                     title: title,
                     icon: icon,
                     url: "/"+title.toLowerCase().replace(" ","-"),//need to concat with parent url

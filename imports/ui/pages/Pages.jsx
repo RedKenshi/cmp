@@ -14,7 +14,7 @@ const Pages = props => {
         title:'',
         icon:''
   });
-  const [currentParentUID, setCurrentParentUID] = useState(0);
+  const [currentParentId, setCurrentParentId] = useState("root");
   const [deleteTargetId, setDeleteTargetId] = useState("");
   const [openModalAdd,setOpenModalAdd] = useState(false);
   const [openModalDelete,setOpenModalDelete] = useState(false);
@@ -23,8 +23,7 @@ const Pages = props => {
   const pagesTreeQuery = gql` query pagesTree {
     pagesTree {
       _id
-      entityUID
-      parentUID
+      parentId
       title
       name
       url
@@ -32,8 +31,7 @@ const Pages = props => {
       active
       sub{
         _id
-        entityUID
-        parentUID
+        parentId
         title
         name
         url
@@ -41,8 +39,7 @@ const Pages = props => {
         active
         sub{
           _id
-          entityUID
-          parentUID
+          parentId
           title
           name
           url
@@ -50,8 +47,7 @@ const Pages = props => {
           active
           sub{
             _id
-            entityUID
-            parentUID
+            parentId
             title
             name
             url
@@ -62,8 +58,8 @@ const Pages = props => {
       }
     }
   }`;
-  const addPageQuery = gql`mutation addPage($title:String!,$icon:String!,$parentUID:Int!){
-    addPage(title:$title,icon:$icon,parentUID: $parentUID){
+  const addPageQuery = gql`mutation addPage($title:String!,$icon:String!,$parentId:String!){
+    addPage(title:$title,icon:$icon,parentId: $parentId){
         status
         message
     }
@@ -93,7 +89,7 @@ const Pages = props => {
         variables:{
             title:formValues.title,
             icon:formValues.icon,
-            parentUID:currentParentUID
+            parentId:currentParentId
         }
     }).then((data)=>{
         loadPages();
@@ -120,8 +116,8 @@ const Pages = props => {
   const handleFilter = value => {
     setPageFilter(value);
   }
-  const showModalAdd = uid => {
-    setCurrentParentUID(uid);
+  const showModalAdd = _id => {
+    setCurrentParentId(_id);
     setOpenModalAdd(true)
   }
   const closeModalAdd = () => {
@@ -133,9 +129,6 @@ const Pages = props => {
   }
   const closeModalDelete = () => {
     setOpenModalDelete(false)
-  }
-  const addSubPage = uid => {
-    showModalAdd(uid);
   }
   const loadPages = () => {
     props.client.query({
@@ -149,7 +142,7 @@ const Pages = props => {
     if(pagesRaw.length > 0){
       return(
         <ul className="is-fullwidth box">
-          {pagesRaw.filter(a=> a.title.toLowerCase().includes(pageFilter.toLowerCase())).map((p,i) => <PageRow key={p._id} loadPages={loadPages} addSubPage={addSubPage} showModalDelete={showModalDelete} page={p} index={i}/>)}
+          {pagesRaw.filter(a=> a.title.toLowerCase().includes(pageFilter.toLowerCase())).map((p,i) => <PageRow key={p._id} loadPages={loadPages} showModalAdd={showModalAdd} showModalDelete={showModalDelete} page={p} index={i}/>)}
         </ul>
       )
     }else{
@@ -171,12 +164,11 @@ const Pages = props => {
           <AdministrationMenu active="pages"/>
         </div>
         <div className="column">
-          
             {getPages()}
         </div>
         <div className="column is-narrow">
           <div className="is-fullwidth box">
-            <button className='button is-primary' onClick={()=>showModalAdd(0)}>
+            <button className='button is-primary' onClick={()=>showModalAdd('root')}>
                 <i className='fa-regular fa-plus'/>
             </button>
           </div>
@@ -196,7 +188,7 @@ const Pages = props => {
                   <input className="input" type="text" onChange={handleFormChange} name="title"/>
                 </div>
               </div>
-              {(currentParentUID == 0 ?
+              {(currentParentId == "root" ?
                 <div className="field">
                   <label className="label">Icon</label>
                   <div className="control">

@@ -37,7 +37,7 @@ const PageRow = props => {
                 <ul className="subs is-fullwidth">
                     {
                         props.page.sub.map((p,i) =>
-                            <PageRowContext key={p._id} loadPages={props.loadPages} addSubPage={props.addSubPage} showModalDelete={props.showModalDelete} page={p} index={i}/>
+                            <PageRowContext key={p._id} loadPages={props.loadPages} showModalAdd={props.showModalAdd} showModalDelete={props.showModalDelete} page={p} index={i}/>
                         )
                     }
                 </ul>
@@ -65,7 +65,7 @@ const PageRow = props => {
                             <p>{props.page.title}</p>
                         </div>
                         <div className="page-row-actions">
-                            <button onClick={()=>props.addSubPage(props.page.entityUID)} className="button is-small is-info">
+                            <button onClick={()=>props.showModalAdd(props.page._id)} className="button is-small is-info">
                                 <i className="fa-light fa-fw fa-plus"></i>
                             </button>
                             <button onClick={toggleActive} className={"button is-small" +(props.page.active ? " is-warning" : " is-success")}>
@@ -74,7 +74,6 @@ const PageRow = props => {
                             <button onClick={()=>props.showModalDelete(props.page._id)} className="button is-small is-danger">
                                 <i className="fa-light fa-fw fa-trash"></i>
                             </button>
-
                         </div>
                     </div>
                     {getSubPages()}

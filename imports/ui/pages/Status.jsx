@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 const Status = props => {
 
-    const { uid } = useParams();
+    const { _id } = useParams();
     const [loading, setLoading] = useState(true)
     const [formValues, setFormValues] = useState({
         label:'',
@@ -23,10 +23,9 @@ const Status = props => {
     const [deleteFieldTarget,setDeleteFieldTarget] = useState(false);
     const [statusRaw, setStatusRaw] = useState(null);
 
-    const statusQuery = gql` query status($uid: Int!) {
-        status(uid:$uid) {
+    const statusQuery = gql` query status($_id: String!) {
+        status(_id:$_id) {
             _id
-            entityUID
             values{
                 _id
                 label
@@ -108,7 +107,7 @@ const Status = props => {
             props.toastQRM(data.data.deleteStatus)
         })
     }
-    const showModalAdd = uid => {
+    const showModalAdd = () => {
         setOpenModalAdd(true)
     }
     const closeModalAdd = () => {
@@ -134,7 +133,7 @@ const Status = props => {
             query:statusQuery,
             fetchPolicy:"network-only",
             variables:{
-                uid:parseInt(uid),
+                _id:_id,
             }
         }).then(({data})=>{
             setStatusRaw(data.status);

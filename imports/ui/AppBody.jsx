@@ -43,7 +43,7 @@ export const AppBody = props => {
             if(p.layout == "crud"){
                 routes.push(
                     <Route exact path={p.fullpath+"/:id"} key={p.fullpath} element={withNavbar(()=>
-                        <CrudEntityDetails layout={p.layout} layoutOptions={JSON.parse(p.layoutOptions)} structureUID={p.entityUID} location={p.fullpath} />
+                        <CrudEntityDetails layout={p.layout} layoutOptions={JSON.parse(p.layoutOptions)} _id={p._id} location={p.fullpath} />
                     )({...props})}/>
                 )
             }
@@ -70,9 +70,9 @@ export const AppBody = props => {
                     {(props.isAdmin ? <Route exact path="/admin" element={withNavbar(Pages)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/pages" element={withNavbar(Pages)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/structures" element={withNavbar(Structures)({...props})}/> : "")}
-                    {(props.isAdmin ? <Route exact path="/admin/structures/:uid" element={withNavbar(Structure)({...props})}/> : "")}
+                    {(props.isAdmin ? <Route exact path="/admin/structures/:_id" element={withNavbar(Structure)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/status" element={withNavbar(Statuses)({...props})}/> : "")}
-                    {(props.isAdmin ? <Route exact path="/admin/status/:uid" element={withNavbar(Status)({...props})}/> : "")}
+                    {(props.isAdmin ? <Route exact path="/admin/status/:_id" element={withNavbar(Status)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/accounts" element={withNavbar(Accounts)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/demo" element={withNavbar(Demo)({...props})}/> : "")}
                     <Route path="*" element={withNavbar(Home)({...props})} />

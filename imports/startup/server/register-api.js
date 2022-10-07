@@ -28,7 +28,7 @@ import PlatformResolvers from '../api/platform/resolvers.js';
 import DemoSchema from '../api/demo/Demo.graphql';
 import DemoResolvers from '../api/demo/resolvers.js';
 
-// #0643
+// #0646
 
 const typeDefs = [
     UserSchema,
@@ -69,7 +69,7 @@ await server.start().then(() => {
 });
 server.applyMiddleware({ app });
 await new Promise(resolve => httpServer.listen({ port: 4000 }, resolve));
-console.log(`🚀 Server ready at http://localhost:3000${server.graphqlPath}`);
+console.log(`Server ready at http://localhost:3000${server.graphqlPath}`);
 const corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true

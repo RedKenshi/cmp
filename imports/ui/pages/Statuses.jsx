@@ -22,7 +22,6 @@ const Statuses = props => {
   const statusesQuery = gql` query statuses {
     statuses {
       _id
-      entityUID
       values{
         _id
         label
@@ -78,7 +77,7 @@ const Statuses = props => {
   const handleFilter = value => {
     setStatusFilter(value);
   }
-  const showModalAdd = uid => {
+  const showModalAdd = () => {
     setOpenModalAdd(true)
   }
   const closeModalAdd = () => {
@@ -91,8 +90,8 @@ const Statuses = props => {
   const closeModalDelete = () => {
     setOpenModalDelete(false)
   }
-  const addSubStatus = uid => {
-    showModalAdd(uid);
+  const addSubStatus = _id => {
+    showModalAdd(_id);
   }
   const loadStatuses = () => {
     props.client.query({

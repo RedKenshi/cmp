@@ -6,6 +6,7 @@ import { gql } from 'graphql-tag';
 
 export const Crud = props => {
     
+    console.log(props)
     const fieldTypes = [
         {
             typeName:"required",
@@ -37,10 +38,9 @@ export const Crud = props => {
     const [deleteTargetId,setDeleteTargetId] = useState("");
     const [fieldsOrder,setFieldsOrder] = useState([])
 
-    const structureQuery = gql` query structure($uid: Int!) {
-        structure(uid:$uid) {
+    const structureQuery = gql` query structure($_id: String!) {
+        structure(_id:$_id) {
             _id
-            entityUID
             icon
             fields{
                 _id
@@ -117,7 +117,7 @@ export const Crud = props => {
             query:structureQuery,
             fetchPolicy:"network-only",
             variables:{
-                uid:parseInt(layoutOptions.structureEntityUID),
+                _id:layoutOptions.structureId,
             }
         }).then(({data})=>{
             setFieldsOrder(data.structure.fields.map(f=>{

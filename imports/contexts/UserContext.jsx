@@ -35,8 +35,7 @@ export const UserProvider = props => {
     const pagesTreeQuery = gql` query pagesTree {
         pagesTree {
             _id
-            entityUID
-            parentUID
+            parentId
             layout
             layoutOptions
             title
@@ -47,8 +46,7 @@ export const UserProvider = props => {
             active
             sub{
                 _id
-                entityUID
-                parentUID
+                parentId
                 layout
                 layoutOptions
                 title
@@ -59,8 +57,7 @@ export const UserProvider = props => {
                 active
                 sub{
                     _id
-                    entityUID
-                    parentUID
+                    parentId
                     layout
                     layoutOptions
                     title
@@ -71,8 +68,7 @@ export const UserProvider = props => {
                     active
                     sub{
                         _id
-                        entityUID
-                        parentUID
+                        parentId
                         layout
                         layoutOptions
                         title

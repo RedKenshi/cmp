@@ -34,10 +34,9 @@ export const CrudEntityDetails = props => {
     const [deleteTargetId,setDeleteTargetId] = useState("");
     const [fieldsOrder,setFieldsOrder] = useState([])
 
-    const structureQuery = gql` query structure($uid: Int!) {
-        structure(uid:$uid) {
+    const structureQuery = gql` query structure($_id: String!) {
+        structure(_id:$_id) {
             _id
-            entityUID
             icon
             fields{
                 _id
@@ -99,7 +98,7 @@ export const CrudEntityDetails = props => {
             query:structureQuery,
             fetchPolicy:"network-only",
             variables:{
-                uid:parseInt(props.layoutOptions.structureEntityUID),
+                _id:props.layoutOptions.structureId,
             }
         }).then(({data})=>{
             setFieldsOrder(data.structure.fields.map(f=>{

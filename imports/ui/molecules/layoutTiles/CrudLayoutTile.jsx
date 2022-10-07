@@ -9,7 +9,7 @@ const CrudLayoutTile = props => {
     const handleStructureChange = e => {
         setLayoutOptions([
             ...layoutOptions,
-            {structureEntityUID:e.target.value}
+            {structureId:e.target.value}
         ])
     }
     const setLayout = () => {

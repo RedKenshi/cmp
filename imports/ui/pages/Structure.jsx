@@ -6,7 +6,7 @@ import AdministrationMenu from "../molecules/AdministrationMenu";
 import _ from 'lodash';
 
 const Structure = props => {
-    const { uid } = useParams();
+    const { _id } = useParams();
     const [loading, setLoading] = useState(true)
     const [modalActiveFieldType, setModalActiveFieldType] = useState("basic")
     const [formValues, setFormValues] = useState({
@@ -29,10 +29,9 @@ const Structure = props => {
     const [deleteFieldTarget,setDeleteFieldTarget] = useState(false);
     const [structureRaw, setStructureRaw] = useState(null);
 
-    const structureQuery = gql` query structure($uid: Int!) {
-        structure(uid:$uid) {
+    const structureQuery = gql` query structure($_id: String!) {
+        structure(_id:$_id) {
             _id
-            entityUID
             icon
             fields{
                 _id
@@ -164,7 +163,7 @@ const Structure = props => {
             query:structureQuery,
             fetchPolicy:"network-only",
             variables:{
-                uid:parseInt(uid),
+                _id:_id,
             }
         }).then(({data})=>{
             setStructureRaw(data.structure);
