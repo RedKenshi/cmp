@@ -29,7 +29,7 @@ export const AppBody = props => {
         props.pagesTree.map(p=>{
             routes.push(...extractSubRoutes(p));
         })
-        //console.log(routes.map(r=>r.props.path))// - UNCOMMENT TO CONSOLE LOG AVAILABLE ROUTES
+        console.log(routes.map(r=>r.props.path))// - UNCOMMENT TO CONSOLE LOG AVAILABLE ROUTES
         return routes;
     }
     const extractSubRoutes = p => {
@@ -42,7 +42,7 @@ export const AppBody = props => {
             )
             if(p.layout == "crud"){
                 routes.push(
-                    <Route exact path={p.fullpath+"/:id"} key={p.fullpath} element={withNavbar(()=>
+                    <Route exact path={p.fullpath+"/:_id"} key={p.fullpath} element={withNavbar(()=>
                         <CrudEntityDetails layout={p.layout} layoutOptions={JSON.parse(p.layoutOptions)} _id={p._id} location={p.fullpath} />
                     )({...props})}/>
                 )

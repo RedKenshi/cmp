@@ -6,7 +6,6 @@ import { gql } from 'graphql-tag';
 
 export const Crud = props => {
     
-    console.log(props)
     const fieldTypes = [
         {
             typeName:"required",

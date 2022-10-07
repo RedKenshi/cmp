@@ -79,7 +79,6 @@ const CustomPage = props => {
   }
   const setLayout = (layout,layoutOptions) => {
     let input = layoutOptions.map(lo=>JSON.stringify(lo))
-    console.log(input)
     props.client.mutate({
       mutation:setLayoutQuery,
       variables:{
