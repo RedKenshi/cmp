@@ -29,6 +29,8 @@ const Pages = props => {
       url
       icon
       active
+      layout
+      layoutOptions
       sub{
         _id
         parentId
@@ -37,6 +39,8 @@ const Pages = props => {
         url
         icon
         active
+        layout
+        layoutOptions
         sub{
           _id
           parentId
@@ -45,6 +49,8 @@ const Pages = props => {
           url
           icon
           active
+          layout
+          layoutOptions
           sub{
             _id
             parentId
@@ -53,6 +59,8 @@ const Pages = props => {
             url
             icon
             active
+            layout
+            layoutOptions
           }
         }
       }
@@ -70,7 +78,6 @@ const Pages = props => {
         message
     }
   }`;
-
   const handleFormChange = e => {
     setFormValues({
         ...formValues,
@@ -142,7 +149,9 @@ const Pages = props => {
     if(pagesRaw.length > 0){
       return(
         <ul className="is-fullwidth box">
-          {pagesRaw.filter(a=> a.title.toLowerCase().includes(pageFilter.toLowerCase())).map((p,i) => <PageRow key={p._id} loadPages={loadPages} showModalAdd={showModalAdd} showModalDelete={showModalDelete} page={p} index={i}/>)}
+          {pagesRaw.filter(a=> a.title.toLowerCase().includes(pageFilter.toLowerCase())).map((p,i) => {
+            return (<PageRow key={p._id} loadPages={loadPages} showModalAdd={showModalAdd} showModalDelete={showModalDelete} page={p} layoutOptions={props.parseLayoutOptions(p.layoutOptions)} index={i}/>)
+          })}
         </ul>
       )
     }else{

@@ -21,6 +21,7 @@ import Statuses from './pages/Statuses.jsx';
 import Status from './pages/Status.jsx';
 import Accounts from './pages/Accounts.jsx';
 import Demo from './pages/Demo.jsx';
+import LayoutLab from './pages/LayoutLab';
 
 export const AppBody = props => {
 
@@ -44,6 +45,11 @@ export const AppBody = props => {
                 routes.push(
                     <Route exact path={p.fullpath+"/:_id"} key={p.fullpath} element={withNavbar(()=>
                         <CrudEntityDetails layout={p.layout} layoutOptions={JSON.parse(p.layoutOptions)} _id={p._id} location={p.fullpath} />
+                    )({...props})}/>
+                )
+                routes.push(
+                    <Route exact path={p.fullpath+"/:_id/lab"} key={p.fullpath} element={withoutNavbar(()=>
+                        <LayoutLab layout={p.layout} layoutOptions={JSON.parse(p.layoutOptions)} _id={p._id} location={p.fullpath} />
                     )({...props})}/>
                 )
             }

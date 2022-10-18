@@ -8,7 +8,7 @@ const PageRow = props => {
 
     //HOOK STATE
     const [displaySubs, setDisplaySubs] = useState(true);
-
+    
     //GRAPHQL QUERIES AND MUTATIONS
     const toggleActiveQuery = gql`mutation toggleActive($_id:String!){
         toggleActive(_id:$_id){
@@ -53,7 +53,14 @@ const PageRow = props => {
             return ""
         }
     }
-
+    const getLayoutInfos = () => {
+        return(
+            <div class="tags has-addons">
+                <span className={"tag is-dark"}>{props.layoutLabels.filter(x=>x.layout == props.page.layout)[0].label}</span>
+                <span className={"tag is-primary"}>{props.layoutOptions.structureLabel}</span>
+            </div>
+        )
+    }
     return (
         <Fragment>
             <li>
@@ -63,6 +70,7 @@ const PageRow = props => {
                             {getDisplaySubsButton()}
                             <i className={(props.page.active ? "has-text-success " : "has-text-warning ") + "fa-duotone fa-file"}/>
                             <p>{props.page.title}</p>
+                            {getLayoutInfos()}
                         </div>
                         <div className="page-row-actions">
                             <button onClick={()=>props.showModalAdd(props.page._id)} className="button is-small is-info">

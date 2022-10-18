@@ -1,0 +1,26 @@
+.lab{
+    &.leftExpanded .leftShelf{width : 12rem}
+    &.leftCollapsed .leftShelf{width : 2rem}
+    &.rightExpanded .rightShelf{width : 12rem}
+    &.rightCollapsed .rightShelf{width : 2rem}
+    & .shelf{
+        padding: 1rem;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        box-shadow: 0 0 .5rem .25rem;
+    }
+    & .leftShelf{
+        left: 0;
+    }
+    & .rightShelf{
+        right: 0;
+    }
+    & .labBody{
+        margin: 2rem;
+    }
+    &.leftExpanded .labBody{margin-left : 14rem}
+    &.leftCollapsed .labBody{margin-left : 4rem}
+    &.rightExpanded .labBody{margin-right : 14rem}
+    &.rightCollapsed .labBody{margin-right : 4rem}
+}

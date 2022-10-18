@@ -17,11 +17,21 @@ export const UserProvider = props => {
     const [initialized, setInitialized] = useState(null);
     const [user, setUser] = useState("loading");
     const [location, setLocation] = useState("");
+    const layoutLabels = [
+        {
+            layout:null,
+            label:"Not layoout affected yet",
+        },{
+            layout:"crud",
+            label:"Administration d'entité",
+        }
+    ];
     const [isActivated, setIsActivated] = useState("loading");
     const [isAdmin, setIsAdmin] = useState("loading");
     const [isOwner, setIsOwner] = useState("loading");
     const [avatar, setAvatar] = useState("loading");
     const [pagesTree, setPagesTree] = useState([]);
+    const [structuresNames, setStructuresNames] = useState([]);
     const userQuery = gql` query user {user {
         _id
         firstname
@@ -32,6 +42,13 @@ export const UserProvider = props => {
         avatar
         activated
     }}`
+    const structuresQuery = gql` query structures {
+        structures {
+            _id
+            label
+            name
+        }
+    }`;
     const pagesTreeQuery = gql` query pagesTree {
         pagesTree {
             _id
@@ -211,6 +228,14 @@ export const UserProvider = props => {
             }
         })
     }
+    const loadStructures = () => {
+        props.client.query({
+            query:structuresQuery,
+            fetchPolicy:"network-only"
+        }).then(({data})=>{
+            setStructuresNames(data.structures)
+        })
+    }
     const loadPages = () => {
         props.client.query({
             query:pagesTreeQuery,
@@ -228,10 +253,23 @@ export const UserProvider = props => {
             setInitialized(data.platform.initialized)
         })
     }
+    const parseLayoutOptions = options => {
+        let parsedOptions = {};
+        if(options){
+            options.map(o=>{
+                Object.assign(parsedOptions,JSON.parse(o))
+                if(Object.keys(JSON.parse(o)[0] == "crud")){
+                    Object.assign(parsedOptions,{"structureLabel":structuresNames.filter(s=>s._id == parsedOptions.structureId)[0].label})
+                }
+            });
+        }
+        return parsedOptions;
+    }
 
     useEffect (()=>{
         loadUser();
         loadPages();
+        loadStructures();
         loadPlatformSettings();
     });
 
@@ -247,6 +285,9 @@ export const UserProvider = props => {
             initialized:initialized,
             avatar: avatar,
             fieldTypes: fieldTypes,
+            layoutLabels:layoutLabels,
+            structuresNames:structuresNames,
+            parseLayoutOptions:parseLayoutOptions,
             getFieldTypeLabel: getFieldTypeLabel,
             getFieldTypeInput: getFieldTypeInput,
             loadUser: loadUser,

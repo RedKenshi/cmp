@@ -205,6 +205,47 @@
   font-weight: 900;
   font-style: italic;
 }
+.lab.leftExpanded .leftShelf {
+  width: 12rem;
+}
+.lab.leftCollapsed .leftShelf {
+  width: 2rem;
+}
+.lab.rightExpanded .rightShelf {
+  width: 12rem;
+}
+.lab.rightCollapsed .rightShelf {
+  width: 2rem;
+}
+.lab .shelf {
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  box-shadow: 0 0 0.5rem 0.25rem;
+}
+.lab .leftShelf {
+  left: 0;
+}
+.lab .rightShelf {
+  right: 0;
+}
+.lab .labBody {
+  margin: 2rem;
+}
+.lab.leftExpanded .labBody {
+  margin-left: 14rem;
+}
+.lab.leftCollapsed .labBody {
+  margin-left: 4rem;
+}
+.lab.rightExpanded .labBody {
+  margin-right: 14rem;
+}
+.lab.rightCollapsed .labBody {
+  margin-right: 4rem;
+}
+
 .has-text-white {
   color: hsl(210deg, 29%, 100%) !important;
 }
