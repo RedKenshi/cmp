@@ -26,6 +26,8 @@ export const LayoutLab = props => {
             label:"Champs optionnels"
         }
     ]
+    const [tabsSwitch,setTabsSwitch] = useState(false);
+    const [tabActive,setTabActive] = useState("AAA");
     const [structureRaw,setStructureRaw] = useState([]);
     const [structureLoaded,setStructureLoaded] = useState(false);
     const [rightShelfExpanded,setRightShelfExpanded] = useState(true);
@@ -48,6 +50,9 @@ export const LayoutLab = props => {
         }
     }`;
 
+    //CONTROLS
+    const toggleTabs = () => {setTabsSwitch(!tabsSwitch)}
+
     //DB READ AND WRITE
     const loadStructure = () => {
         props.client.query({
@@ -68,7 +73,16 @@ export const LayoutLab = props => {
             return (
                 <div className='shelf-section'>
                     <h4 className='shelf-section-title'>Required</h4>
-                    {structureRaw.fields.filter(f=>f.requiredAtCreation).map(f=><i className='tag is-primary'>{f.label}</i>)}
+                    {structureRaw.fields.filter(f=>f.requiredAtCreation).map(f=>
+                        <div class="control">
+                            <div class="grabbable tags has-addons">
+                                <span class="tag is-dark">
+                                    <i className='fa-solid fa-bars'></i>
+                                </span>
+                                <span class="tag is-success">{f.label}</span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )
         }
@@ -78,7 +92,16 @@ export const LayoutLab = props => {
             return (
                 <div className='shelf-section'>
                     <h4 className='shelf-section-title'>Optional</h4>
-                    {structureRaw.fields.filter(f=>!f.requiredAtCreation).map(f=><i className='tag is-secondary'>{f.label}</i>)}
+                    {structureRaw.fields.filter(f=>!f.requiredAtCreation).map(f=>
+                        <div class="control">
+                            <div class="grabbable tags has-addons">
+                                <span class="tag is-dark">
+                                    <i className='fa-solid fa-bars'></i>
+                                </span>
+                                <span class="tag is-success">{f.label}</span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             )
         }
@@ -90,8 +113,16 @@ export const LayoutLab = props => {
                     <i className={'fa-light ' + (leftShelfExpanded ? "fa-chevron-left" : "fa-chevron-right")}/>
                 </button>
                 <h3 className='shelf-title'>Data</h3>
-                {getRequiredFields()}
-                {getOptionalFields()}
+                <div className='available-data'>
+                    {getRequiredFields()}
+                    {getOptionalFields()}
+                </div>
+                <button class="back-button button is-dark" onClick={()=>navigate(-1)}>
+                    <span class="icon is-small">
+                    <i class="fa-light fa-chevron-left"></i>
+                    </span>
+                    <span>Go back</span>
+                </button>
             </div>
         )
     }
@@ -101,11 +132,10 @@ export const LayoutLab = props => {
                 <button className="button collapse-control is-small is-round is-dark" onClick={()=>setRightShelfExpanded(!rightShelfExpanded)}>
                     <i className={'fa-light ' + (rightShelfExpanded ? "fa-chevron-right" : "fa-chevron-left")}/>
                 </button>
-                <h3 className='shelf-title'>Disposition</h3>
-                <div className='shelf-section'>
-                    <h4 className='shelf-section-title'></h4>
-                    <button className='button is-dark is-small'>Hey</button>
-                    <button className='button is-dark is-small'>Hey</button>
+                <h3 className='shelf-title'>Layout</h3>
+                <div class="flex center">
+                    <input onClick={toggleTabs} id="tabsSwitch" type="checkbox" name="switchExample" class="switch" checked={tabsSwitch ? "checked" : ""} />
+                    <label for="tabsSwitch">Tabs</label>
                 </div>
                 <div className='shelf-section'>
                     <h4 className='shelf-section-title'></h4>
@@ -117,24 +147,27 @@ export const LayoutLab = props => {
     }
     const getLabBody = () => {
         return(
-            <div className='labBody'>
-                <div className='columns'>
-                    <div className='column'>
-                        <div className='box'></div>
-                    </div>
-                    <div className='column'>
-                        <div className='box'></div>
-                    </div>
-                    <div className='column'>
-                        <div className='box'></div>
-                    </div>
-                    <div className='column'>
-                        <div className='box'></div>
-                    </div>
+            <div className={'lab-body' + (tabsSwitch ? " subtabs" : " notabs")}>
+                {getTabs()}
+                <div className='lab-content empty'>
+                    Grab something and place it here
                 </div>
-                <button className="button is-dark" onClick={()=>navigate(-1)}>Go back</button>
             </div>
         )
+    }
+    const getTabs = () => {
+        if(tabsSwitch){
+            return(
+                <div className="subtabsbox box">
+                    <ul className="menu-list">
+                        <li onClick={()=>setTabActive("AAA")}>
+                            <a className={tabActive == "AAA" ? "is-active" : ""}>AAA</a>
+                        </li>
+                    </ul>
+                    <button className='add-tab button is-small is-light'><i className='fa-solid fa-plus'/></button>
+                </div>
+            )
+        }
     }
 
     //COMPONENT LIFECYCLE

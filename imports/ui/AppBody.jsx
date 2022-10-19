@@ -22,6 +22,7 @@ import Status from './pages/Status.jsx';
 import Accounts from './pages/Accounts.jsx';
 import Demo from './pages/Demo.jsx';
 import LayoutLab from './pages/LayoutLab';
+import Palette from './pages/Palette';
 
 export const AppBody = props => {
 
@@ -80,6 +81,7 @@ export const AppBody = props => {
                     {(props.isAdmin ? <Route exact path="/admin/status" element={withNavbar(Statuses)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/status/:_id" element={withNavbar(Status)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/accounts" element={withNavbar(Accounts)({...props})}/> : "")}
+                    {(props.isAdmin ? <Route exact path="/admin/palette" element={withNavbar(Palette)({...props})}/> : "")}
                     {(props.isAdmin ? <Route exact path="/admin/demo" element={withNavbar(Demo)({...props})}/> : "")}
                     <Route path="*" element={withNavbar(Home)({...props})} />
                 </Routes>

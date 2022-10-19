@@ -24,6 +24,9 @@ const AdministrationMenu = props => {
                 <li onClick={()=>navigate("/admin/accounts")}>
                     <a className={props.active == "accounts" ? "is-active" : ""}>User Accounts</a>
                 </li>
+                <li onClick={()=>navigate("/admin/palette")}>
+                    <a className={props.active == "palette" ? "is-active" : ""}>Colors palette</a>
+                </li>
                 <li onClick={()=>navigate("/admin/demo")}>
                     <a className={props.active == "demo" ? "is-active" : ""}>Demo</a>
                 </li>
