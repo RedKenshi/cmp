@@ -1,4 +1,20 @@
 .lab{
+    & .button.is-round{
+        border-radius: 50%;
+        aspect-ratio: 1;
+        height: 2rem;
+        width: 2rem;
+        position: absolute;
+        margin: 0;
+    }
+    & .leftShelf .button{
+        transform: translateX(50%);
+        right: 0;
+    }
+    & .rightShelf .button{
+        transform: translateX(-50%);
+        left: 0;
+    }
     &.leftExpanded .leftShelf{width : 12rem}
     &.leftCollapsed .leftShelf{width : 2rem}
     &.rightExpanded .rightShelf{width : 12rem}
@@ -19,8 +35,8 @@
     & .labBody{
         margin: 2rem;
     }
-    &.leftExpanded .labBody{margin-left : 14rem}
-    &.leftCollapsed .labBody{margin-left : 4rem}
-    &.rightExpanded .labBody{margin-right : 14rem}
-    &.rightCollapsed .labBody{margin-right : 4rem}
+    &.leftExpanded .labBody{margin-left : 15rem}
+    &.leftCollapsed .labBody{margin-left : 6rem}
+    &.rightExpanded .labBody{margin-right : 15rem}
+    &.rightCollapsed .labBody{margin-right : 6rem}
 }

@@ -15,8 +15,8 @@ export const LayoutLab = props => {
     const getLeftShelf = () => {
         return(
             <div className='leftShelf shelf'>
-                <button onClick={()=>setLeftShelfExpanded(!leftShelfExpanded)}>
-                    <i className={'fa-light ' + (leftShelfExpanded ? "fa-minimize" : "fa-maximize")}/>
+                <button className="button is-small is-round is-dark" onClick={()=>setLeftShelfExpanded(!leftShelfExpanded)}>
+                    <i className={'fa-light ' + (leftShelfExpanded ? "fa-chevron-left" : "fa-chevron-right")}/>
                 </button>
             </div>
         )
@@ -24,8 +24,8 @@ export const LayoutLab = props => {
     const getRightShelf = () => {
         return(
             <div className='rightShelf shelf'>
-                <button onClick={()=>setRightShelfExpanded(!rightShelfExpanded)}>
-                    <i className={'fa-light ' + (rightShelfExpanded ? "fa-minimize" : "fa-maximize")}/>
+                <button className="button is-small is-round is-dark" onClick={()=>setRightShelfExpanded(!rightShelfExpanded)}>
+                    <i className={'fa-light ' + (rightShelfExpanded ? "fa-chevron-right" : "fa-chevron-left")}/>
                 </button>
             </div>
         )

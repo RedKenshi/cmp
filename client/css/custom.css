@@ -205,6 +205,22 @@
   font-weight: 900;
   font-style: italic;
 }
+.lab .button.is-round {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  margin: 0;
+}
+.lab .leftShelf .button {
+  transform: translateX(50%);
+  right: 0;
+}
+.lab .rightShelf .button {
+  transform: translateX(-50%);
+  left: 0;
+}
 .lab.leftExpanded .leftShelf {
   width: 12rem;
 }
@@ -234,16 +250,16 @@
   margin: 2rem;
 }
 .lab.leftExpanded .labBody {
-  margin-left: 14rem;
+  margin-left: 15rem;
 }
 .lab.leftCollapsed .labBody {
-  margin-left: 4rem;
+  margin-left: 6rem;
 }
 .lab.rightExpanded .labBody {
-  margin-right: 14rem;
+  margin-right: 15rem;
 }
 .lab.rightCollapsed .labBody {
-  margin-right: 4rem;
+  margin-right: 6rem;
 }
 
 .has-text-white {
