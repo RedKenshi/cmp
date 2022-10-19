@@ -213,11 +213,11 @@
   position: absolute;
   margin: 0;
 }
-.lab .leftShelf .button {
+.lab .leftShelf .collapse-control {
   transform: translateX(50%);
   right: 0;
 }
-.lab .rightShelf .button {
+.lab .rightShelf .collapse-control {
   transform: translateX(-50%);
   left: 0;
 }
@@ -238,7 +238,34 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  box-shadow: 0 0 0.5rem 0.25rem;
+  box-shadow: 0 0 0.5rem 0.25rem rgba(0, 0, 0, 0.2666666667);
+  transition: width 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.lab .shelf > *:not(.collapse-control) {
+  visibility: collapse;
+}
+.lab .shelf.expanded > *:not(.collapse-control) {
+  visibility: visible;
+  animation: 0.2s linear expandContent forwards;
+  color: #444;
+}
+.lab .shelf h3.shelf-title {
+  text-transform: uppercase;
+  letter-spacing: 0.3ch;
+  margin: 1rem 0;
+  padding: 0 1rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-bottom: 1px solid #555;
+}
+.lab .shelf div.shelf-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  gap: 0.5rem;
 }
 .lab .leftShelf {
   left: 0;
@@ -247,21 +274,33 @@
   right: 0;
 }
 .lab .labBody {
-  margin: 2rem;
+  padding: 2rem;
+  transition: padding 0.5s ease-in-out;
 }
 .lab.leftExpanded .labBody {
-  margin-left: 15rem;
+  padding-left: 15rem;
 }
 .lab.leftCollapsed .labBody {
-  margin-left: 6rem;
+  padding-left: 6rem;
 }
 .lab.rightExpanded .labBody {
-  margin-right: 15rem;
+  padding-right: 15rem;
 }
 .lab.rightCollapsed .labBody {
-  margin-right: 6rem;
+  padding-right: 6rem;
 }
 
+@keyframes expandContent {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1 !important;
+  }
+}
 .has-text-white {
   color: hsl(210deg, 29%, 100%) !important;
 }

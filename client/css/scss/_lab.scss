@@ -7,36 +7,69 @@
         position: absolute;
         margin: 0;
     }
-    & .leftShelf .button{
+    & .leftShelf .collapse-control{
         transform: translateX(50%);
         right: 0;
     }
-    & .rightShelf .button{
+    & .rightShelf .collapse-control{
         transform: translateX(-50%);
         left: 0;
     }
     &.leftExpanded .leftShelf{width : 12rem}
-    &.leftCollapsed .leftShelf{width : 2rem}
+    &.leftCollapsed .leftShelf{width : 2rem;}
     &.rightExpanded .rightShelf{width : 12rem}
-    &.rightCollapsed .rightShelf{width : 2rem}
+    &.rightCollapsed .rightShelf{width : 2rem;}
     & .shelf{
         padding: 1rem;
         position: absolute;
         top: 0;
         bottom: 0;
-        box-shadow: 0 0 .5rem .25rem;
+        box-shadow: 0 0 .5rem .25rem #0004;
+        transition: width .5s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        & > *:not(.collapse-control) {
+            visibility: collapse;
+        }
+        &.expanded > *:not(.collapse-control) {
+            visibility: visible;
+            animation: .2s linear expandContent forwards;
+            color: #444;
+        }
+        & h3.shelf-title{
+            text-transform: uppercase;
+            letter-spacing: .3ch;
+            margin: 1rem 0;
+            padding: 0 1rem;
+            font-size: .75rem;
+            font-weight: bold;
+            border-bottom: 1px solid #555;
+        }
+        & div.shelf-section{
+            display: flex;
+            flex-direction: column;
+            padding: .5rem;
+            gap: .5rem;
+            & h4.shelf-section-title{
+
+            }
+        }
     }
-    & .leftShelf{
-        left: 0;
-    }
-    & .rightShelf{
-        right: 0;
-    }
+    & .leftShelf{left: 0;}
+    & .rightShelf{right: 0;}
     & .labBody{
-        margin: 2rem;
+        padding: 2rem;
+        transition: padding .5s ease-in-out;
     }
-    &.leftExpanded .labBody{margin-left : 15rem}
-    &.leftCollapsed .labBody{margin-left : 6rem}
-    &.rightExpanded .labBody{margin-right : 15rem}
-    &.rightCollapsed .labBody{margin-right : 6rem}
+    &.leftExpanded .labBody{padding-left : 15rem}
+    &.leftCollapsed .labBody{padding-left : 6rem}
+    &.rightExpanded .labBody{padding-right : 15rem}
+    &.rightCollapsed .labBody{padding-right : 6rem}
+}
+
+@keyframes expandContent {
+    from {opacity: 0;}
+    50% {opacity: 0;}
+    to {opacity: 1 !important;}
 }
