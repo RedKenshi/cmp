@@ -1,11 +1,14 @@
 .lab{
-    & .button.is-round{
+    & .button.collapse-control{
         border-radius: 50%;
         aspect-ratio: 1;
         height: 2rem;
         width: 2rem;
         position: absolute;
+        z-index: 10;
         margin: 0;
+        padding: 0;
+        top: 1rem;
     }
     & .leftShelf .collapse-control{
         transform: translateX(50%);
@@ -20,7 +23,10 @@
     &.rightExpanded .rightShelf{width : 12rem}
     &.rightCollapsed .rightShelf{width : 2rem;}
     & .shelf{
-        padding: 1rem;
+        & > * {
+            padding: 0 2rem;
+        }
+        gap: 1rem;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -41,18 +47,17 @@
             text-transform: uppercase;
             letter-spacing: .3ch;
             margin: 1rem 0;
-            padding: 0 1rem;
+            padding: .5rem 1.5rem;
             font-size: .75rem;
             font-weight: bold;
-            border-bottom: 1px solid #555;
         }
         & div.shelf-section{
             display: flex;
             flex-direction: column;
+            background: #0001;
             padding: .5rem;
             gap: .5rem;
             & h4.shelf-section-title{
-
             }
         }
     }

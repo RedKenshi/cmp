@@ -8,10 +8,81 @@ import { gql } from 'graphql-tag';
 
 export const LayoutLab = props => {
     
+    //HOOKS
     const navigate = useNavigate();
+
+    //STATES
+    const fieldTypes = [
+        {
+            typeName:"required",
+            color:"primary",
+            icon:"circle-exclamation",
+            label:"Champs requis"
+        },
+        {
+            typeName:"optional",
+            color:"link",
+            icon:"brackets-curly",
+            label:"Champs optionnels"
+        }
+    ]
+    const [structureRaw,setStructureRaw] = useState([]);
+    const [structureLoaded,setStructureLoaded] = useState(false);
     const [rightShelfExpanded,setRightShelfExpanded] = useState(true);
     const [leftShelfExpanded,setLeftShelfExpanded] = useState(true);
 
+    //GQL QUERIES
+    const structureQuery = gql` query structure($_id: String!) {
+        structure(_id:$_id) {
+            _id
+            icon
+            fields{
+                _id
+                label
+                name
+                type
+                requiredAtCreation
+            }
+            label
+            name
+        }
+    }`;
+
+    //DB READ AND WRITE
+    const loadStructure = () => {
+        props.client.query({
+            query:structureQuery,
+            fetchPolicy:"network-only",
+            variables:{
+                _id:props.layoutOptions.structureId,
+            }
+        }).then(({data})=>{
+            setStructureRaw(data.structure);
+            setStructureLoaded(true)
+        })
+    }
+
+    //CONTENT GETTER
+    const getRequiredFields = () => {
+        if(structureLoaded){
+            return (
+                <div className='shelf-section'>
+                    <h4 className='shelf-section-title'>Required</h4>
+                    {structureRaw.fields.filter(f=>f.requiredAtCreation).map(f=><i className='tag is-primary'>{f.label}</i>)}
+                </div>
+            )
+        }
+    }
+    const getOptionalFields = () => {
+        if(structureLoaded){
+            return (
+                <div className='shelf-section'>
+                    <h4 className='shelf-section-title'>Optional</h4>
+                    {structureRaw.fields.filter(f=>!f.requiredAtCreation).map(f=><i className='tag is-secondary'>{f.label}</i>)}
+                </div>
+            )
+        }
+    }
     const getLeftShelf = () => {
         return(
             <div className={'leftShelf shelf' + (leftShelfExpanded ? " expanded" : " collapsed ")}>
@@ -19,16 +90,8 @@ export const LayoutLab = props => {
                     <i className={'fa-light ' + (leftShelfExpanded ? "fa-chevron-left" : "fa-chevron-right")}/>
                 </button>
                 <h3 className='shelf-title'>Data</h3>
-                <div className='shelf-section'>
-                    <h4 className='shelf-section-title'></h4>
-                    <button className='button is-dark is-small'>Hey</button>
-                    <button className='button is-dark is-small'>Hey</button>
-                </div>
-                <div className='shelf-section'>
-                    <h4 className='shelf-section-title'></h4>
-                    <button className='button is-dark is-small'>Hey</button>
-                    <button className='button is-dark is-small'>Hey</button>
-                </div>
+                {getRequiredFields()}
+                {getOptionalFields()}
             </div>
         )
     }
@@ -73,6 +136,11 @@ export const LayoutLab = props => {
             </div>
         )
     }
+
+    //COMPONENT LIFECYCLE
+    useEffect(()=>{
+        loadStructure();
+    },[])
 
     return(
         <div className={"lab" + (leftShelfExpanded ? " leftExpanded" : " leftCollapsed ") + (rightShelfExpanded ? " rightExpanded" : " rightCollapsed")}>
