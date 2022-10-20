@@ -26,12 +26,18 @@ export const LayoutLab = props => {
             label:"Champs optionnels"
         }
     ]
-    const [tabsSwitch,setTabsSwitch] = useState(false);
+    const [tabsType,setTabsType] = useState("none");
+
+    const [addingTab,setAddingTab] = useState(false);
+    const [tabs,setTabs] = useState(["AAA"]);
     const [tabActive,setTabActive] = useState("AAA");
     const [structureRaw,setStructureRaw] = useState([]);
     const [structureLoaded,setStructureLoaded] = useState(false);
     const [rightShelfExpanded,setRightShelfExpanded] = useState(true);
     const [leftShelfExpanded,setLeftShelfExpanded] = useState(true);
+    const [formValues, setFormValues] = useState({
+        newtabname:''
+    });
 
     //GQL QUERIES
     const structureQuery = gql` query structure($_id: String!) {
@@ -51,7 +57,20 @@ export const LayoutLab = props => {
     }`;
 
     //CONTROLS
-    const toggleTabs = () => {setTabsSwitch(!tabsSwitch)}
+    const toggleAddingTab = () => {setAddingTab(!addingTab)}
+    const handleChange = e => {
+        setFormValues({
+            ...formValues,
+            [e.target.name] : e.target.value
+        })
+    }
+    const handleTabsTypeChange = type => {
+        if(tabsType == type){
+            setTabsType("none")
+        }else{
+            setTabsType(type)
+        }
+    }
 
     //DB READ AND WRITE
     const loadStructure = () => {
@@ -66,6 +85,9 @@ export const LayoutLab = props => {
             setStructureLoaded(true)
         })
     }
+    const addTab = () => {
+        setTabs([...tabs,formValues.newtabname])
+    }
 
     //CONTENT GETTER
     const getRequiredFields = () => {
@@ -76,10 +98,10 @@ export const LayoutLab = props => {
                     {structureRaw.fields.filter(f=>f.requiredAtCreation).map(f=>
                         <div class="control">
                             <div class="grabbable tags has-addons">
+                                <span class="tag is-success">{f.label}</span>
                                 <span class="tag is-dark">
                                     <i className='fa-solid fa-bars'></i>
                                 </span>
-                                <span class="tag is-success">{f.label}</span>
                             </div>
                         </div>
                     )}
@@ -95,10 +117,10 @@ export const LayoutLab = props => {
                     {structureRaw.fields.filter(f=>!f.requiredAtCreation).map(f=>
                         <div class="control">
                             <div class="grabbable tags has-addons">
+                                <span class="tag is-success">{f.label}</span>
                                 <span class="tag is-dark">
                                     <i className='fa-solid fa-bars'></i>
                                 </span>
-                                <span class="tag is-success">{f.label}</span>
                             </div>
                         </div>
                     )}
@@ -133,21 +155,42 @@ export const LayoutLab = props => {
                     <i className={'fa-light ' + (rightShelfExpanded ? "fa-chevron-right" : "fa-chevron-left")}/>
                 </button>
                 <h3 className='shelf-title'>Layout</h3>
-                <div class="flex center">
-                    <input onClick={toggleTabs} id="tabsSwitch" type="checkbox" name="switchExample" class="switch" checked={tabsSwitch ? "checked" : ""} />
-                    <label for="tabsSwitch">Tabs</label>
+                <div className='shelf-section'>
+                    <h4 className='shelf-section-title'>Options</h4>
+                </div>
+                <div class="flex margined-left16">
+                    <input onClick={()=>handleTabsTypeChange("side")} id="sideTabsSwitch" type="checkbox" name="switchExample" class="switch" checked={tabsType == "side" ? "checked" : ""} />
+                    <label for="sideTabsSwitch">Tabs on side</label>
+                </div>
+                <div class="flex margined-left16">
+                    <input onClick={()=>handleTabsTypeChange("top")} id="topTabsSwitch" type="checkbox" name="switchExample" class="switch" checked={tabsType == "top" ? "checked" : ""} />
+                    <label for="topTabsSwitch">Tabs on top</label>
                 </div>
                 <div className='shelf-section'>
-                    <h4 className='shelf-section-title'></h4>
-                    <button className='button is-dark is-small'>Hey</button>
-                    <button className='button is-dark is-small'>Hey</button>
+                    <h4 className='shelf-section-title'>Container</h4>
+                    <div class="control">
+                        <div class="grabbable tags has-addons">
+                            <span class="tag is-dark">
+                                <i className='fa-solid fa-bars'></i>
+                            </span>
+                            <span class="tag is-info">50% / 50%</span>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="grabbable tags has-addons">
+                            <span class="tag is-dark">
+                                <i className='fa-solid fa-bars'></i>
+                            </span>
+                            <span class="tag is-info">30% / 70%</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
     }
     const getLabBody = () => {
         return(
-            <div className={'lab-body' + (tabsSwitch ? " subtabs" : " notabs")}>
+            <div className={'lab-body ' + tabsType + "-tabs"}>
                 {getTabs()}
                 <div className='lab-content empty'>
                     Grab something and place it here
@@ -156,16 +199,59 @@ export const LayoutLab = props => {
         )
     }
     const getTabs = () => {
-        if(tabsSwitch){
+        if(tabsType == "side"){
             return(
                 <div className="subtabsbox box">
                     <ul className="menu-list">
-                        <li onClick={()=>setTabActive("AAA")}>
-                            <a className={tabActive == "AAA" ? "is-active" : ""}>AAA</a>
-                        </li>
+                        {tabs.map(t=>{
+                            return(
+                                <li onClick={()=>setTabActive(t)}>
+                                    <a className={tabActive == t ? "is-active" : ""}>{t}</a>
+                                </li>
+                            )
+                        })}
                     </ul>
-                    <button className='add-tab button is-small is-light'><i className='fa-solid fa-plus'/></button>
+                    <input name="newtabname" onChange={handleChange} className={"input tab-name" + (addingTab ? "" : " hidden")}></input>
+                    {getAddTabControls()}
                 </div>
+            )
+        }
+        if(tabsType == "top"){
+            return(
+                <div class="tabs is-primary">
+                    <ul>
+                        {tabs.map(t=>{
+                            return(
+                                <li className={tabActive == t ? "is-active" : ""} onClick={()=>setTabActive(t)}>
+                                    <a>{t}</a>
+                                </li>
+                            )
+                        })}
+                        <li>
+                            <input name="newtabname" onChange={handleChange} className={"input tab-name" + (addingTab ? "" : " hidden")}></input>
+                            {getAddTabControls()}
+                        </li>    
+                    </ul>
+                </div>
+                    
+            )
+        }
+    }
+    const getAddTabControls = () => {
+        if(addingTab){
+            return(
+                <Fragment>
+                    <button class="button is-danger is-light" onClick={toggleAddingTab}>
+                        <span class="icon is-small"><i className='fa-solid fa-xmark'/></span>
+                    </button>
+                    <button class="button is-success is-light" onClick={addTab}>
+                        <span class="icon is-small"><i className='fa-solid fa-check'/></span>
+                    </button>
+                </Fragment>
+            )
+        }else{
+            return(
+                <button className='add-tab button is-small is-light' onClick={toggleAddingTab}><i className='fa-solid fa-plus'/></button>
             )
         }
     }

@@ -297,6 +297,9 @@
   flex-grow: 1;
   gap: 1rem;
 }
+.lab .leftShelf .shelf-section {
+  align-items: flex-end;
+}
 .lab .leftShelf .back-button {
   margin: 0 1rem;
 }
@@ -305,18 +308,31 @@
 }
 .lab .lab-body {
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr;
   gap: 0.5rem;
   padding: 2rem;
   transition: padding 0.5s ease-in-out;
   min-height: 100vh;
   place-content: stretch;
 }
-.lab .lab-body.subtabs .lab-content {
+.lab .lab-body.side-tabs {
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+}
+.lab .lab-body.side-tabs .lab-content {
   grid-column-start: 2;
 }
-.lab .lab-body.notabs .lab-content {
+.lab .lab-body.top-tabs {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+.lab .lab-body.top-tabs .lab-content {
+  grid-row-start: 2;
+}
+.lab .lab-body.none-tabs {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+.lab .lab-body.none-tabs .lab-content {
   grid-column-end: span 2;
 }
 .lab .lab-body .subtabsbox {
@@ -339,16 +355,16 @@
   align-items: center;
 }
 .lab.leftExpanded .lab-body {
-  padding-left: 13.5rem;
+  padding-left: 13rem;
 }
 .lab.leftCollapsed .lab-body {
-  padding-left: 6rem;
+  padding-left: 4rem;
 }
 .lab.rightExpanded .lab-body {
-  padding-right: 13.5rem;
+  padding-right: 14rem;
 }
 .lab.rightCollapsed .lab-body {
-  padding-right: 6rem;
+  padding-right: 5rem;
 }
 
 @keyframes expandContent {
@@ -1445,6 +1461,14 @@ ul, li {
   margin: 0 4px;
 }
 
+.buttons.has-addons .button:not(:first-child) {
+  margin-left: 0;
+  border-left: none;
+}
+.buttons.has-addons .button:not(:last-child) {
+  margin-right: 0;
+}
+
 .table td {
   vertical-align: middle;
 }
@@ -1802,6 +1826,17 @@ ul, li {
 
 input.checkbox {
   margin: 0 0.5rem;
+}
+
+.menu-list a {
+  padding: 0.5em 0.75em;
+  font-size: 0.875rem;
+}
+
+.tabs.is-primary li.is-active a {
+  font-weight: bold;
+  border-bottom-color: hsl(37deg, 90%, 64%);
+  color: hsl(37deg, 90%, 64%);
 }
 
 /*COLORS FROM FLAT UI COLOR PALETTE 1*/

@@ -19,6 +19,8 @@
         height: 2rem;
         width: 2rem;
     }
+    
+
     & .leftShelf .collapse-control{
         transform: translateX(50%);
         right: 0;
@@ -82,18 +84,36 @@
             flex-grow: 1;
             gap: 1rem;
         }
-        .back-button{
+        & .shelf-section{
+            align-items: flex-end;
+        }
+        & .back-button{
             margin: 0 1rem;
         }
     }
     & .rightShelf{right: 0;}
     & .lab-body{
-        &.subtabs .lab-content {
-            grid-column-start: 2;
+        &.side-tabs{
+            grid-template-columns: auto 1fr;
+            grid-template-rows: 1fr;
+            & .lab-content {
+                grid-column-start: 2;
+            }
         }
-        &.notabs .lab-content {
-            grid-column-end: span 2;
+        &.top-tabs{
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 1fr;
+            & .lab-content {
+                grid-row-start: 2;
+            }
         }
+        &.none-tabs{
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            & .lab-content {
+                grid-column-end: span 2;
+            }
+        } 
         & .subtabsbox{
             display: flex;
             flex-direction: column;
@@ -102,8 +122,6 @@
             align-self:self-start;
         }
         display: grid;
-        grid-template-columns: auto 1fr;
-        grid-template-rows: 1fr;
         gap:.5rem;
         padding: 2rem;
         transition: padding .5s ease-in-out;
@@ -122,10 +140,10 @@
             }
         }
     }
-    &.leftExpanded .lab-body{padding-left : 13.5rem}
-    &.leftCollapsed .lab-body{padding-left : 6rem}
-    &.rightExpanded .lab-body{padding-right : 13.5rem}
-    &.rightCollapsed .lab-body{padding-right : 6rem}
+    &.leftExpanded .lab-body{padding-left : 13rem}
+    &.leftCollapsed .lab-body{padding-left : 4rem}
+    &.rightExpanded .lab-body{padding-right : 14rem}
+    &.rightCollapsed .lab-body{padding-right : 5rem}
 }
 
 @keyframes expandContent {

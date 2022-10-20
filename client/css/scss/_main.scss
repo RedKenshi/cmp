@@ -90,6 +90,15 @@ ul,li { margin:0; padding:0; }
 .button{
     margin: 0 4px
 }
+.buttons.has-addons .button{
+    &:not(:first-child){
+        margin-left: 0;
+        border-left: none;
+    }
+    &:not(:last-child){
+        margin-right: 0;
+    }
+}
 .table td{
     vertical-align: middle;
 }
@@ -260,4 +269,15 @@ ul,li { margin:0; padding:0; }
 
 input.checkbox{
     margin: 0 .5rem;
+}
+
+.menu-list a{
+    padding: 0.5em 0.75em;
+    font-size: .875rem;
+}
+
+.tabs.is-primary li.is-active a {
+    font-weight: bold;
+    border-bottom-color: $primary;
+    color: $primary;
 }
