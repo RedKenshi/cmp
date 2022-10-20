@@ -153,14 +153,26 @@ export const LayoutLab = props => {
                                     return(
                                         <Draggable key={f._id} draggableId={f._id} index={i}>
                                             {(provided, snapshot) => (
-                                                <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                    <div className="grabbable tags has-addons">
-                                                        <span className="tag is-info">{f.label}</span>
-                                                        <span className="tag is-dark">
-                                                            <i className='fa-solid fa-bars'></i>
-                                                        </span>
+                                                <Fragment>
+                                                    <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
+                                                        <div className="grabbable tags has-addons">
+                                                            <span className="tag is-info">{f.label}</span>
+                                                            <span className="tag is-dark">
+                                                                <i className='fa-solid fa-bars'></i>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    {snapshot.isDragging && (
+                                                        <div className="control">
+                                                            <div className="grabbable tags has-addons">
+                                                                <span className="tag is-info">{f.label}</span>
+                                                                <span className="tag is-dark">
+                                                                    <i className='fa-solid fa-bars'></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </Fragment>
                                             )}
                                         </Draggable>
                                     )
@@ -184,14 +196,26 @@ export const LayoutLab = props => {
                                     return(
                                         <Draggable key={f._id} draggableId={f._id} index={i}>
                                             {(provided, snapshot) => (
-                                                <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                    <div className="grabbable tags has-addons">
-                                                        <span className="tag is-info">{f.label}</span>
-                                                        <span className="tag is-dark">
-                                                            <i className='fa-solid fa-bars'></i>
-                                                        </span>
+                                                <Fragment>
+                                                    <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
+                                                        <div className="grabbable tags has-addons">
+                                                            <span className="tag is-info">{f.label}</span>
+                                                            <span className="tag is-dark">
+                                                                <i className='fa-solid fa-bars'></i>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    {snapshot.isDragging && (
+                                                        <div className="control">
+                                                            <div className="grabbable tags has-addons">
+                                                                <span className="tag is-info">{f.label}</span>
+                                                                <span className="tag is-dark">
+                                                                    <i className='fa-solid fa-bars'></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </Fragment>
                                             )}
                                         </Draggable>
                                     )
