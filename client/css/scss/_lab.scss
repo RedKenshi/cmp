@@ -14,7 +14,7 @@
         top: 1rem;
     }
     & .button.add-tab{
-        border-radius: 50%;
+        border-radius: .5rem;
         aspect-ratio: 1;
         height: 2rem;
         width: 2rem;
@@ -129,7 +129,7 @@
         place-content: stretch;
         & .lab-content{
             display: grid;
-            &.empty{
+            &.dropzone{
                 background: #00226616;
                 border: .25rem dashed #0004;
                 border-radius: 1rem;
@@ -140,10 +140,19 @@
             }
         }
     }
-    &.leftExpanded .lab-body{padding-left : 13rem}
+    &.leftExpanded .lab-body{padding-left : 14rem}
     &.leftCollapsed .lab-body{padding-left : 4rem}
-    &.rightExpanded .lab-body{padding-right : 14rem}
+    &.rightExpanded .lab-body{padding-right : 15rem}
     &.rightCollapsed .lab-body{padding-right : 5rem}
+
+    //
+    & .tabs li.flex{
+        display: flex !important;
+    }
+    & .newtabname.input,
+    & .add-tab.button{
+        margin: 0 1rem;
+    }
 }
 
 @keyframes expandContent {

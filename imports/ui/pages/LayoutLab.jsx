@@ -86,6 +86,7 @@ export const LayoutLab = props => {
         })
     }
     const addTab = () => {
+        toggleAddingTab()
         setTabs([...tabs,formValues.newtabname])
     }
 
@@ -98,7 +99,7 @@ export const LayoutLab = props => {
                     {structureRaw.fields.filter(f=>f.requiredAtCreation).map(f=>
                         <div class="control">
                             <div class="grabbable tags has-addons">
-                                <span class="tag is-success">{f.label}</span>
+                                <span class="tag is-info">{f.label}</span>
                                 <span class="tag is-dark">
                                     <i className='fa-solid fa-bars'></i>
                                 </span>
@@ -117,7 +118,7 @@ export const LayoutLab = props => {
                     {structureRaw.fields.filter(f=>!f.requiredAtCreation).map(f=>
                         <div class="control">
                             <div class="grabbable tags has-addons">
-                                <span class="tag is-success">{f.label}</span>
+                                <span class="tag is-info">{f.label}</span>
                                 <span class="tag is-dark">
                                     <i className='fa-solid fa-bars'></i>
                                 </span>
@@ -167,7 +168,7 @@ export const LayoutLab = props => {
                     <label for="topTabsSwitch">Tabs on top</label>
                 </div>
                 <div className='shelf-section'>
-                    <h4 className='shelf-section-title'>Container</h4>
+                    <h4 className='shelf-section-title'>Disposition</h4>
                     <div class="control">
                         <div class="grabbable tags has-addons">
                             <span class="tag is-dark">
@@ -185,6 +186,25 @@ export const LayoutLab = props => {
                         </div>
                     </div>
                 </div>
+                <div className='shelf-section'>
+                    <h4 className='shelf-section-title'>Container</h4>
+                    <div class="control">
+                        <div class="grabbable tags has-addons">
+                            <span class="tag is-dark">
+                                <i className='fa-solid fa-bars'></i>
+                            </span>
+                            <span class="tag is-info">Main ID</span>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <div class="grabbable tags has-addons">
+                            <span class="tag is-dark">
+                                <i className='fa-solid fa-bars'></i>
+                            </span>
+                            <span class="tag is-info">Simple Box</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -192,7 +212,7 @@ export const LayoutLab = props => {
         return(
             <div className={'lab-body ' + tabsType + "-tabs"}>
                 {getTabs()}
-                <div className='lab-content empty'>
+                <div className='lab-content dropzone'>
                     Grab something and place it here
                 </div>
             </div>
@@ -211,7 +231,7 @@ export const LayoutLab = props => {
                             )
                         })}
                     </ul>
-                    <input name="newtabname" onChange={handleChange} className={"input tab-name" + (addingTab ? "" : " hidden")}></input>
+                    <input name="newtabname" onChange={handleChange} className={"input is-small tab-name" + (addingTab ? "" : " hidden")}></input>
                     {getAddTabControls()}
                 </div>
             )
@@ -227,8 +247,8 @@ export const LayoutLab = props => {
                                 </li>
                             )
                         })}
-                        <li>
-                            <input name="newtabname" onChange={handleChange} className={"input tab-name" + (addingTab ? "" : " hidden")}></input>
+                        <li className={"flex " + (tabsType == "side" ? " flex-column" : " nowrap" )}>
+                            <input name="newtabname" onChange={handleChange} className={"newtabname input is-small tab-name" + (addingTab ? "" : " hidden")}></input>
                             {getAddTabControls()}
                         </li>    
                     </ul>
@@ -240,14 +260,14 @@ export const LayoutLab = props => {
     const getAddTabControls = () => {
         if(addingTab){
             return(
-                <Fragment>
-                    <button class="button is-danger is-light" onClick={toggleAddingTab}>
-                        <span class="icon is-small"><i className='fa-solid fa-xmark'/></span>
+                <div className="flex nowrap">
+                    <button class="button is-small is-danger is-light" onClick={toggleAddingTab}>
+                        <span class="icon"><i className='fa-solid fa-xmark'/></span>
                     </button>
-                    <button class="button is-success is-light" onClick={addTab}>
-                        <span class="icon is-small"><i className='fa-solid fa-check'/></span>
+                    <button class="button is-small is-success is-light" onClick={addTab}>
+                        <span class="icon"><i className='fa-solid fa-check'/></span>
                     </button>
-                </Fragment>
+                </div>
             )
         }else{
             return(

@@ -220,7 +220,7 @@
   top: 1rem;
 }
 .lab .button.add-tab {
-  border-radius: 50%;
+  border-radius: 0.5rem;
   aspect-ratio: 1;
   height: 2rem;
   width: 2rem;
@@ -345,7 +345,7 @@
 .lab .lab-body .lab-content {
   display: grid;
 }
-.lab .lab-body .lab-content.empty {
+.lab .lab-body .lab-content.dropzone {
   background: rgba(0, 34, 102, 0.0862745098);
   border: 0.25rem dashed rgba(0, 0, 0, 0.2666666667);
   border-radius: 1rem;
@@ -355,16 +355,22 @@
   align-items: center;
 }
 .lab.leftExpanded .lab-body {
-  padding-left: 13rem;
+  padding-left: 14rem;
 }
 .lab.leftCollapsed .lab-body {
   padding-left: 4rem;
 }
 .lab.rightExpanded .lab-body {
-  padding-right: 14rem;
+  padding-right: 15rem;
 }
 .lab.rightCollapsed .lab-body {
   padding-right: 5rem;
+}
+.lab .tabs li.flex {
+  display: flex !important;
+}
+.lab .newtabname.input, .lab .add-tab.button {
+  margin: 0 1rem;
 }
 
 @keyframes expandContent {
