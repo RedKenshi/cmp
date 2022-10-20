@@ -71,6 +71,11 @@
                 font-size: .75rem;
                 font-weight: bold;
             }
+            & .shelf-section-items-list{
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+            }
         }
     }
     & .leftShelf{
@@ -84,7 +89,8 @@
             flex-grow: 1;
             gap: 1rem;
         }
-        & .shelf-section{
+        & .shelf-section,
+        & .shelf-section-items-list {
             align-items: flex-end;
         }
         & .back-button{

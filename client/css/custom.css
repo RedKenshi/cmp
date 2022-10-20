@@ -285,6 +285,11 @@
   font-size: 0.75rem;
   font-weight: bold;
 }
+.lab .shelf div.shelf-section .shelf-section-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 .lab .leftShelf {
   left: 0;
 }
@@ -297,7 +302,7 @@
   flex-grow: 1;
   gap: 1rem;
 }
-.lab .leftShelf .shelf-section {
+.lab .leftShelf .shelf-section, .lab .leftShelf .shelf-section-items-list {
   align-items: flex-end;
 }
 .lab .leftShelf .back-button {
