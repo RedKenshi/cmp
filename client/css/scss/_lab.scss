@@ -74,6 +74,7 @@
             & .shelf-section-items-list{
                 display: flex;
                 flex-direction: column;
+                width: 100%;
                 gap: .5rem;
             }
         }
@@ -89,9 +90,11 @@
             flex-grow: 1;
             gap: 1rem;
         }
-        & .shelf-section,
-        & .shelf-section-items-list {
+        & .shelf-section{
             align-items: flex-end;
+        }
+        & .shelf-section-items-list .tags.grabtag .tag:not(.handle){
+            
         }
         & .back-button{
             margin: 0 1rem;
@@ -181,6 +184,13 @@
         & .row{
             flex-grow: 1;
             flex-shrink: 1;
+        }
+    }
+    & .tags.grabtag{
+        justify-content: space-between;
+        & .tag:not(.handle){
+            flex-grow: 1;
+            justify-content: flex-start;
         }
     }
 }

@@ -449,6 +449,7 @@
 }
 .box, .panel {
     box-shadow: 0 0.5rem 1rem -0.125rem #0001, 0 0px .5rem .125rem #0001;
+    padding: .75rem;
     margin: 0 .5rem .5rem .5rem;
     &:not(:last-child){
         margin-bottom: .5rem;

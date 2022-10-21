@@ -288,6 +288,7 @@
 .lab .shelf div.shelf-section .shelf-section-items-list {
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 0.5rem;
 }
 .lab .leftShelf {
@@ -302,7 +303,7 @@
   flex-grow: 1;
   gap: 1rem;
 }
-.lab .leftShelf .shelf-section, .lab .leftShelf .shelf-section-items-list {
+.lab .leftShelf .shelf-section {
   align-items: flex-end;
 }
 .lab .leftShelf .back-button {
@@ -398,6 +399,13 @@
 .lab .rows .row {
   flex-grow: 1;
   flex-shrink: 1;
+}
+.lab .tags.grabtag {
+  justify-content: space-between;
+}
+.lab .tags.grabtag .tag:not(.handle) {
+  flex-grow: 1;
+  justify-content: flex-start;
 }
 
 @keyframes expandContent {
@@ -1199,6 +1207,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 
 .box, .panel {
   box-shadow: 0 0.5rem 1rem -0.125rem rgba(0, 0, 0, 0.0666666667), 0 0px 0.5rem 0.125rem rgba(0, 0, 0, 0.0666666667);
+  padding: 0.75rem;
   margin: 0 0.5rem 0.5rem 0.5rem;
 }
 .box:not(:last-child), .panel:not(:last-child) {
@@ -1534,6 +1543,9 @@ ul, li {
 }
 .flex.gap {
   gap: 1rem;
+}
+.flex.halfgap {
+  gap: 0.5rem;
 }
 .flex.center {
   justify-content: center;

@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
+import _ from 'lodash';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { toast } from 'react-toastify';
 
@@ -19,7 +20,7 @@ export const LayoutLab = props => {
         let cell = {
             type:type,
             content:[],
-            uiid:uuid(),
+            uuid:uuid(),
             x:x,
             y:y,
             height:height,
@@ -153,7 +154,6 @@ export const LayoutLab = props => {
                 for (let i = 0; i < gridW; i++) {
                     newRow.push(newCell("placeholder",i,gridH,1,1))
                 }
-                console.log(newRow)
                 clonedGrid.push(newRow);
                 setGrid(clonedGrid)
             }else{
@@ -163,13 +163,22 @@ export const LayoutLab = props => {
             props.toast({message:"Grid dimensions are locked when it's not empty",type:"warning"})
         }
     }
-    const placeInGrid = (item,coord) => {
+    const placeContainer = (item,coord) => {
         const y = coord.split("-")[coord.split("-").length-1]
         const x = coord.split("-")[coord.split("-").length-2]
         let clonedGrid = JSON.parse(JSON.stringify(grid));
         let cell = clonedGrid[x][y]
         cell.type = item;
         clonedGrid[x][y] = cell;
+        setGrid(clonedGrid);
+    }
+    const placeData = (item,container) => {
+        console.log(container)
+        let field = {id:item,label:structureRaw.fields.filter(f=>f._id == item)[0].label}
+        let clonedGrid = JSON.parse(JSON.stringify(grid));
+        console.log(_.flatten(clonedGrid))
+        let target = _.flatten(clonedGrid).filter(x=>x.uuid == container)[0];
+        clonedGrid[target.y][target.x].content.push(field);
         setGrid(clonedGrid);
     }
     const onDragEnd = result => {
@@ -180,41 +189,16 @@ export const LayoutLab = props => {
                 break;
             case 'required-data':
             case 'optional-data':
+                placeData(draggableId,destination.droppableId);
+                break;
             case 'container-items':
             case 'layout-items':
-                console.log(result)
-                placeInGrid(draggableId,destination.droppableId)
+                placeContainer(draggableId,destination.droppableId);
                 break;
             default:
-                console.log("not implemented")
                 break;
         }
     }
-
-    const reorder = (list, startIndex, endIndex) => {
-        const result = Array.from(list);
-        const [removed] = result.splice(startIndex, 1);
-        result.splice(endIndex, 0, removed);
-
-        return result;
-    };
-    const copy = (source, destination, droppableSource, droppableDestination) => {
-        const sourceClone = Array.from(source);
-        const destClone = Array.from(destination);
-        const item = sourceClone[droppableSource.index];
-        destClone.splice(droppableDestination.index, 0, { ...item, id: uuid() });
-        return destClone;
-    };
-    const move = (source, destination, droppableSource, droppableDestination) => {
-        const sourceClone = Array.from(source);
-        const destClone = Array.from(destination);
-        const [removed] = sourceClone.splice(droppableSource.index, 1);
-        destClone.splice(droppableDestination.index, 0, removed);
-        const result = {};
-        result[droppableSource.droppableId] = sourceClone;
-        result[droppableDestination.droppableId] = destClone;
-        return result;
-    };
 
     //DB READ AND WRITE
     const loadStructure = () => {
@@ -249,18 +233,18 @@ export const LayoutLab = props => {
                                             {(provided, snapshot) => (
                                                 <Fragment>
                                                     <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                        <div className="grabbable tags has-addons">
+                                                        <div className="grabtag grabbable tags has-addons">
                                                             <span className="tag is-info">{f.label}</span>
-                                                            <span className="tag is-dark">
+                                                            <span className="tag is-dark handle">
                                                                 <i className='fa-solid fa-bars'></i>
                                                             </span>
                                                         </div>
                                                     </div>
                                                     {snapshot.isDragging && (
                                                         <div className="control">
-                                                            <div className="grabbable tags has-addons">
+                                                            <div className="grabtag grabbable tags has-addons">
                                                                 <span className="tag is-info">{f.label}</span>
-                                                                <span className="tag is-dark">
+                                                                <span className="tag is-dark handle">
                                                                     <i className='fa-solid fa-bars'></i>
                                                                 </span>
                                                             </div>
@@ -292,18 +276,18 @@ export const LayoutLab = props => {
                                             {(provided, snapshot) => (
                                                 <Fragment>
                                                     <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                        <div className="grabbable tags has-addons">
+                                                        <div className="grabtag grabbable tags has-addons">
                                                             <span className="tag is-info">{f.label}</span>
-                                                            <span className="tag is-dark">
+                                                            <span className="tag is-dark handle">
                                                                 <i className='fa-solid fa-bars'></i>
                                                             </span>
                                                         </div>
                                                     </div>
                                                     {snapshot.isDragging && (
                                                         <div className="control">
-                                                            <div className="grabbable tags has-addons">
+                                                            <div className="grabtag grabbable tags has-addons">
                                                                 <span className="tag is-info">{f.label}</span>
-                                                                <span className="tag is-dark">
+                                                                <span className="tag is-dark handle">
                                                                     <i className='fa-solid fa-bars'></i>
                                                                 </span>
                                                             </div>
@@ -383,8 +367,8 @@ export const LayoutLab = props => {
                                     {(provided, snapshot) => (
                                         <Fragment>
                                             <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                <div className="grabbable tags has-addons">
-                                                    <span className="tag is-dark">
+                                                <div className="grabtag grabbable tags has-addons">
+                                                    <span className="tag is-dark handle">
                                                         <i className='fa-solid fa-heading'></i>
                                                     </span>
                                                     <span className="tag is-info">Bold title</span>
@@ -392,8 +376,8 @@ export const LayoutLab = props => {
                                             </div>
                                             {snapshot.isDragging && (
                                                 <div className="control">
-                                                    <div className="grabbable tags has-addons">
-                                                        <span className="tag is-dark">
+                                                    <div className="grabtag grabbable tags has-addons">
+                                                        <span className="tag is-dark handle">
                                                             <i className='fa-solid fa-heading'></i>
                                                         </span>
                                                         <span className="tag is-info">Bold title</span>
@@ -407,8 +391,8 @@ export const LayoutLab = props => {
                                     {(provided, snapshot) => (
                                         <Fragment>
                                             <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                <div className="grabbable tags has-addons">
-                                                    <span className="tag is-dark">
+                                                <div className="grabtag grabbable tags has-addons">
+                                                    <span className="tag is-dark handle">
                                                         <i className='fa-light fa-square'></i>
                                                     </span>
                                                     <span className="tag is-info">Simple Box</span>
@@ -416,8 +400,8 @@ export const LayoutLab = props => {
                                             </div>
                                             {snapshot.isDragging && (
                                                 <div className="control">
-                                                    <div className="grabbable tags has-addons">
-                                                        <span className="tag is-dark">
+                                                    <div className="grabtag grabbable tags has-addons">
+                                                        <span className="tag is-dark handle">
                                                             <i className='fa-light fa-square'></i>
                                                         </span>
                                                         <span className="tag is-info">Simple Box</span>
@@ -461,6 +445,18 @@ export const LayoutLab = props => {
             </Fragment>
         )
     }
+    const getDataTag = e => {
+        return(
+            <div className="control">
+                <div className="grabtag grabtag grabbable tags has-addons">
+                    <span className="tag is-dark handle">
+                        <i className='fa-light fa-bars'></i>
+                    </span>
+                    <span className="tag is-info">{e.label}</span>
+                </div>
+            </div>
+        )
+    }
     const getCellContent = (c,i,y) => {
         switch(c.type){
             case "placeholder" :
@@ -469,7 +465,7 @@ export const LayoutLab = props => {
                         {(provided, snapshot) => {
                             return(
                                 <div className='placeholder-square' ref={provided.innerRef}>
-                                    placeholder
+                                    
                                 </div>
                             )
                         }}
@@ -478,11 +474,11 @@ export const LayoutLab = props => {
                 break;
             case "simplebox" :
                 return(
-                    <Droppable droppableId={c.type+"-"+i+"-"+y} isDropDisabled={false}>
+                    <Droppable id={c.uuid} droppableId={c.uuid} isDropDisabled={false}>
                         {(provided, snapshot) => {
                             return(
-                                <div className='box' ref={provided.innerRef}>
-                                    Box
+                                <div className='box flex flex-column halfgap' ref={provided.innerRef}>
+                                    {c.content.map(e=>getDataTag(e))}
                                 </div>
                             )
                         }}
