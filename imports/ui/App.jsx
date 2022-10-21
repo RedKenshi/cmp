@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => (
   <Fragment>
-    <ToastContainer position="bottom-right" position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop rtl/>
+    <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} pauseOnFocusLoss={false} newestOnTop rtl/>
     <AppBody/>
   </Fragment>
 );

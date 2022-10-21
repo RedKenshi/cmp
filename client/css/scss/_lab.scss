@@ -134,15 +134,19 @@
         min-height: 100vh;
         place-content: stretch;
         & .lab-content{
-            display: grid;
-            &.dropzone{
+            & .placeholder-square{
+                background: linear-gradient(150deg, #f8f8f8, #f5f5f5);
+                border-radius: .25rem;
+                min-height: 2rem;
+                min-width: 2rem;
+                height: 100%;
+                width: 100%;
+            }
+            &.adz{
                 background: #00226616;
                 border: .25rem dashed #0004;
                 border-radius: 1rem;
-                display: flex;
                 padding: 2rem;
-                justify-content: center;
-                align-items: center;
             }
         }
     }
@@ -158,6 +162,16 @@
     & .newtabname.input,
     & .add-tab.button{
         margin: 0 1rem;
+    }
+    & .columns{
+        margin: 0;
+    }
+    & .rows{
+        display: flex;
+        flex-direction: column;
+        & .row{
+            flex: 1 1 50%;
+        }
     }
 }
 

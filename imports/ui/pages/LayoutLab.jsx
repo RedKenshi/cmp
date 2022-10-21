@@ -6,6 +6,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { lowerCase } from 'lodash';
+import { toast } from 'react-toastify';
 
 export const LayoutLab = props => {
     
@@ -28,7 +30,8 @@ export const LayoutLab = props => {
         }
     ]
     const [tabsType,setTabsType] = useState("none");
-
+    const [gridW,setGridW] = useState(6);
+    const [gridH,setGridH] = useState(1);
     const [addingTab,setAddingTab] = useState(false);
     const [tabs,setTabs] = useState(["AAA"]);
     const [tabActive,setTabActive] = useState("AAA");
@@ -70,6 +73,35 @@ export const LayoutLab = props => {
             setTabsType("none")
         }else{
             setTabsType(type)
+        }
+    }
+    
+    const remCol = () => {
+        if(gridW>1){
+            setGridW(gridW-1)
+        }else{
+            props.toast({message:"At least 1 column is needed",type:"warning"})
+        }
+    }
+    const addCol = () => {
+        if(gridW<12){
+            setGridW(gridW+1)
+        }else{
+            props.toast({message:"A maxium of 12 column are available",type:"warning"})
+        }
+    }
+    const remRow = () => {
+        if(gridH>1){
+            setGridH(gridH-1)
+        }else{
+            props.toast({message:"At least 1 row is needed",type:"warning"})
+        }
+    }
+    const addRow = () => {
+        if(gridH<6){
+            setGridH(gridH+1)
+        }else{
+            props.toast({message:"A maximum of 6 row are available",type:"warning"})
         }
     }
     const onDragEnd = result => {
@@ -266,6 +298,21 @@ export const LayoutLab = props => {
                     <label for="topTabsSwitch">Tabs on top</label>
                 </div>
                 <div className='shelf-section'>
+                    <h4 className='shelf-section-title'>Grid {gridH}<span style={{textTransform:"lowerCase"}}>x</span>{gridW} </h4>
+                    <div className='flex flex-column gap'>
+                        <div className='flex center align gap'>
+                            <span onClick={remCol} className='tag pointable is-outlined is-danger'>-</span>
+                            <i style={{fontSize:"1.5rem"}} className='fa-solid fa-columns'/>
+                            <span onClick={addCol} className='tag pointable is-outlined is-success'>+</span>
+                        </div>
+                        <div className='flex center align gap'>
+                            <span onClick={remRow} className='tag pointable is-outlined is-danger'>-</span>
+                            <i style={{fontSize:"1.5rem"}} className='fa-solid fa-rows'/>
+                            <span onClick={addRow} className='tag pointable is-outlined is-success'>+</span>
+                        </div>
+                    </div>
+                </div>
+                <div className='shelf-section'>
                     <h4 className='shelf-section-title'>Layout</h4>
                     <Droppable droppableId="layout-items" isDropDisabled={true}>
                         {(provided, snapshot) => (
@@ -386,14 +433,30 @@ export const LayoutLab = props => {
         return(
             <div className={'lab-body ' + tabsType + "-tabs"}>
                 {getTabs()}
-                <Droppable droppableId="body" isDropDisabled={false}>
+                <Droppable droppableId="lab-body" isDropDisabled={false}>
                     {(provided, snapshot) => (
-                        <div className='lab-content dropzone' ref={provided.innerRef}>
-                            To begin, grab a layout and drop it here
+                        <div className='lab-content dropzone rows' ref={provided.innerRef}>
+                            {getGrid()}
                         </div>
                     )}
                 </Droppable>
             </div>
+        )
+    }
+    const getGrid = () => {
+        let grid = Array(gridH).fill(null).map(x => Array(gridW).fill(null))
+        return (
+            <Fragment>
+                {grid.map((r,i) => {
+                    return (
+                        <div className="row columns" key={i}>
+                            {r.map((c,y) =>
+                                <div key={y} className='column'><div className='placeholder-square'></div></div>
+                            )}
+                        </div>
+                    )
+                })}
+            </Fragment>
         )
     }
     const getTabs = () => {

@@ -27,6 +27,7 @@
     }
   }
 html {
+    overflow: auto;
     height: -webkit-fill-available;
 }
 body {
@@ -122,10 +123,10 @@ ul,li { margin:0; padding:0; }
 .flex{
     display: flex;
     flex-wrap: wrap;
+    &.gap{gap: 1rem;}
     &.center{justify-content: center;}
     &.even{justify-content: space-evenly;}
     &.flex-between{justify-content:space-between;}
-
     &.align{align-items:center;}
     &.flex-column{
         flex-direction: column;
