@@ -354,6 +354,9 @@
   min-width: 2rem;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .lab .lab-body .lab-content.adz {
   background: rgba(0, 34, 102, 0.0862745098);
@@ -382,12 +385,19 @@
 .lab .columns {
   margin: 0;
 }
+.lab .columns .column {
+  display: grid;
+}
+.lab .columns .column > * {
+  place-self: stetch;
+}
 .lab .rows {
   display: flex;
   flex-direction: column;
 }
 .lab .rows .row {
-  flex: 1 1 50%;
+  flex-grow: 1;
+  flex-shrink: 1;
 }
 
 @keyframes expandContent {

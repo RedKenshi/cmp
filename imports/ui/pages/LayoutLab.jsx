@@ -29,9 +29,10 @@ export const LayoutLab = props => {
         }
     ]
     const [gridDimensionLocked,setGridDimensionLocked] = useState(false);
-    const [tabsType,setTabsType] = useState("none");
-    const [gridW,setGridW] = useState(6);
-    const [gridH,setGridH] = useState(1);
+    const [tabsType,setTabsType] = useState("top");
+    const [gridW,setGridW] = useState(3);
+    const [gridH,setGridH] = useState(2);
+    const [grid,setGrid] = useState(Array(gridH).fill("empty").map(x => Array(gridW).fill("empty")))
     const [addingTab,setAddingTab] = useState(false);
     const [tabs,setTabs] = useState(["AAA"]);
     const [tabActive,setTabActive] = useState("AAA");
@@ -80,6 +81,9 @@ export const LayoutLab = props => {
         if(!gridDimensionLocked){
             if(gridW>1){
                 setGridW(gridW-1)
+                let clonedGrid = JSON.parse(JSON.stringify(grid));
+                clonedGrid.forEach(row => row.splice(row.length-1,1));
+                setGrid(clonedGrid)
             }else{
                 props.toast({message:"At least 1 column is needed",type:"warning"})
             }
@@ -91,6 +95,9 @@ export const LayoutLab = props => {
         if(!gridDimensionLocked){
             if(gridW<12){
                 setGridW(gridW+1)
+                let clonedGrid = JSON.parse(JSON.stringify(grid));
+                clonedGrid.forEach(row => row.push("empty"));
+                setGrid(clonedGrid)
             }else{
                 props.toast({message:"A maxium of 12 column are available",type:"warning"})
             }
@@ -102,6 +109,9 @@ export const LayoutLab = props => {
         if(!gridDimensionLocked){
             if(gridH>1){
                 setGridH(gridH-1)
+                let clonedGrid = JSON.parse(JSON.stringify(grid));
+                clonedGrid.splice(clonedGrid.length-1,1);
+                setGrid(clonedGrid)
             }else{
                 props.toast({message:"At least 1 row is needed",type:"warning"})
             }
@@ -113,6 +123,9 @@ export const LayoutLab = props => {
         if(!gridDimensionLocked){
             if(gridH<6){
                 setGridH(gridH+1)
+                let clonedGrid = JSON.parse(JSON.stringify(grid));
+                clonedGrid.push(Array(gridW).fill("empty"));
+                setGrid(clonedGrid)
             }else{
                 props.toast({message:"A maximum of 6 row are available",type:"warning"})
             }
@@ -120,28 +133,36 @@ export const LayoutLab = props => {
             props.toast({message:"Grid dimensions are locked when it's not empty",type:"warning"})
         }
     }
+    const placeInGrid = (item,coord) => {
+        const y = coord.split("-")[coord.split("-").length-1]
+        const x = coord.split("-")[coord.split("-").length-2]
+        console.log(item + " goes in " + x + " " + y)
+        let clonedGrid = JSON.parse(JSON.stringify(grid));
+        console.log(clonedGrid)
+        console.log(clonedGrid[x])
+        console.log(clonedGrid[x][y])
+        console.log(item)
+        clonedGrid[x][y] = item;
+        setGrid(clonedGrid);
+    }
     const onDragEnd = result => {
-        const { source, destination } = result;
+        const { source, destination, draggableId } = result;
         console.log('==> result', result);
         // dropped outside the list
         if (!destination) {return;}
         switch (source.droppableId) {
             case destination.droppableId:
-                console.log("source == destination")
                 break;
             case 'required-data':
             case 'optional-data':
             case 'container-items':
             case 'layout-items':
-                console.log("this comes from the shelfs")
+                placeInGrid(draggableId,destination.droppableId)
                 break;
             default:
-                console.log("default")
+                console.log("not implemented")
                 break;
         }
-
-
-        console.log("onDragEnd")
     }
 
     const reorder = (list, startIndex, endIndex) => {
@@ -392,31 +413,58 @@ export const LayoutLab = props => {
         return(
             <div className={'lab-body ' + tabsType + "-tabs"}>
                 {getTabs()}
-                <Droppable droppableId="lab-body" isDropDisabled={false}>
-                    {(provided, snapshot) => (
-                        <div className='lab-content dropzone rows' ref={provided.innerRef}>
-                            {getGrid()}
-                        </div>
-                    )}
-                </Droppable>
+                <div className='lab-content dropzone rows'>
+                    {getGrid()}
+                </div>
             </div>
         )
     }
     const getGrid = () => {
-        let grid = Array(gridH).fill(null).map(x => Array(gridW).fill(null))
         return (
             <Fragment>
                 {grid.map((r,i) => {
                     return (
                         <div className="row columns" key={i}>
-                            {r.map((c,y) =>
-                                <div key={y} className='column'><div className='placeholder-square'></div></div>
+                            {r.map((c,j) =>
+                                <div key={j} className='column'>
+                                    {getCellContent(c,i,j)}
+                                </div>
                             )}
                         </div>
                     )
                 })}
             </Fragment>
         )
+    }
+    const getCellContent = (c,i,y) => {
+        switch(c){
+            case "empty" :
+                return(
+                    <Droppable droppableId={c+"-"+i+"-"+y} isDropDisabled={false}>
+                        {(provided, snapshot) => {
+                            return(
+                                <div className='placeholder-square' ref={provided.innerRef}>
+                                    empty
+                                </div>
+                            )
+                        }}
+                    </Droppable>
+                )
+                break;
+            case "simple-box" :
+                return(
+                    <Droppable droppableId={c+"-"+i+"-"+y} isDropDisabled={false}>
+                        {(provided, snapshot) => {
+                            return(
+                                <div className='box' ref={provided.innerRef}>
+                                    Box
+                                </div>
+                            )
+                        }}
+                    </Droppable>
+                )
+                break;
+        }
     }
     const getTabs = () => {
         if(tabsType == "side"){

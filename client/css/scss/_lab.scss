@@ -141,6 +141,9 @@
                 min-width: 2rem;
                 height: 100%;
                 width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
             &.adz{
                 background: #00226616;
@@ -165,12 +168,19 @@
     }
     & .columns{
         margin: 0;
+        & .column{
+            display: grid;
+            & > *{
+                place-self: stetch;
+            }
+        }
     }
     & .rows{
         display: flex;
         flex-direction: column;
         & .row{
-            flex: 1 1 50%;
+            flex-grow: 1;
+            flex-shrink: 1;
         }
     }
 }
