@@ -2,11 +2,10 @@
 
 
 import React, { useState, useEffect, Fragment } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { lowerCase } from 'lodash';
 import { toast } from 'react-toastify';
 
 export const LayoutLab = props => {
@@ -29,6 +28,7 @@ export const LayoutLab = props => {
             label:"Champs optionnels"
         }
     ]
+    const [gridDimensionLocked,setGridDimensionLocked] = useState(false);
     const [tabsType,setTabsType] = useState("none");
     const [gridW,setGridW] = useState(6);
     const [gridH,setGridH] = useState(1);
@@ -77,31 +77,47 @@ export const LayoutLab = props => {
     }
     
     const remCol = () => {
-        if(gridW>1){
-            setGridW(gridW-1)
+        if(!gridDimensionLocked){
+            if(gridW>1){
+                setGridW(gridW-1)
+            }else{
+                props.toast({message:"At least 1 column is needed",type:"warning"})
+            }
         }else{
-            props.toast({message:"At least 1 column is needed",type:"warning"})
+            props.toast({message:"Grid dimensions are locked when it's not empty",type:"warning"})
         }
     }
     const addCol = () => {
-        if(gridW<12){
-            setGridW(gridW+1)
+        if(!gridDimensionLocked){
+            if(gridW<12){
+                setGridW(gridW+1)
+            }else{
+                props.toast({message:"A maxium of 12 column are available",type:"warning"})
+            }
         }else{
-            props.toast({message:"A maxium of 12 column are available",type:"warning"})
+            props.toast({message:"Grid dimensions are locked when it's not empty",type:"warning"})
         }
     }
     const remRow = () => {
-        if(gridH>1){
-            setGridH(gridH-1)
+        if(!gridDimensionLocked){
+            if(gridH>1){
+                setGridH(gridH-1)
+            }else{
+                props.toast({message:"At least 1 row is needed",type:"warning"})
+            }
         }else{
-            props.toast({message:"At least 1 row is needed",type:"warning"})
+            props.toast({message:"Grid dimensions are locked when it's not empty",type:"warning"})
         }
     }
     const addRow = () => {
-        if(gridH<6){
-            setGridH(gridH+1)
+        if(!gridDimensionLocked){
+            if(gridH<6){
+                setGridH(gridH+1)
+            }else{
+                props.toast({message:"A maximum of 6 row are available",type:"warning"})
+            }
         }else{
-            props.toast({message:"A maximum of 6 row are available",type:"warning"})
+            props.toast({message:"Grid dimensions are locked when it's not empty",type:"warning"})
         }
     }
     const onDragEnd = result => {
@@ -311,63 +327,6 @@ export const LayoutLab = props => {
                             <span onClick={addRow} className='tag pointable is-outlined is-success'>+</span>
                         </div>
                     </div>
-                </div>
-                <div className='shelf-section'>
-                    <h4 className='shelf-section-title'>Layout</h4>
-                    <Droppable droppableId="layout-items" isDropDisabled={true}>
-                        {(provided, snapshot) => (
-                            <div className="shelf-section-items-list" ref={provided.innerRef}>
-                                <Draggable draggableId="layout-5050" index={0}>
-                                    {(provided, snapshot) => (
-                                        <Fragment>
-                                            <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                <div className="grabbable tags has-addons">
-                                                    <span className="tag is-dark">
-                                                        <i className='fa-solid fa-table-layout'></i>
-                                                    </span>
-                                                    <span className="tag is-info">50% / 50%</span>
-                                                </div>
-                                            </div>
-                                            {snapshot.isDragging && (
-                                                <div className="control">
-                                                    <div className="grabbable tags has-addons">
-                                                        <span className="tag is-dark">
-                                                            <i className='fa-solid fa-table-layout'></i>
-                                                        </span>
-                                                        <span className="tag is-info">50% / 50%</span>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </Fragment>
-                                    )}
-                                </Draggable>
-                                <Draggable draggableId="layout-3070" index={1}>
-                                    {(provided, snapshot) => (
-                                        <Fragment>
-                                            <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
-                                                <div className="grabbable tags has-addons">
-                                                    <span className="tag is-dark">
-                                                        <i className='fa-solid fa-table-layout'></i>
-                                                    </span>
-                                                    <span className="tag is-info">30% / 70%</span>
-                                                </div>
-                                            </div>
-                                            {snapshot.isDragging && (
-                                                <div className="control">
-                                                    <div className="grabbable tags has-addons">
-                                                        <span className="tag is-dark">
-                                                            <i className='fa-solid fa-table-layout'></i>
-                                                        </span>
-                                                        <span className="tag is-info">30% / 70%</span>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </Fragment>
-                                    )}
-                                </Draggable>
-                            </div>
-                        )}
-                    </Droppable>
                 </div>
                 <div className='shelf-section'>
                     <h4 className='shelf-section-title'>Container</h4>
