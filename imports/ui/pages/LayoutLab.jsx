@@ -2,6 +2,7 @@
 
 
 import React, { useState, useEffect, Fragment } from 'react';
+import { v4 as uuid } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { gql } from 'graphql-tag';
@@ -12,6 +13,31 @@ export const LayoutLab = props => {
     
     //HOOKS
     const navigate = useNavigate();
+
+    //BUSINESS MANIPULATION
+    const newCell = (type,x,y,height,width) => {
+        let cell = {
+            type:type,
+            content:[],
+            uiid:uuid(),
+            x:x,
+            y:y,
+            height:height,
+            width:width
+        };
+        return cell;
+    }
+    const generateEmptyGrid = (height,width) => {
+        let grid = [];
+        for (let y = 0; y < height; y++) {
+            let row = [];
+            for (let x = 0; x < width; x++) {
+                row.push(newCell("placeholder",x,y,1,1))
+            }
+            grid[y] = row;
+        }
+        return grid
+    }
 
     //STATES
     const fieldTypes = [
@@ -32,7 +58,7 @@ export const LayoutLab = props => {
     const [tabsType,setTabsType] = useState("top");
     const [gridW,setGridW] = useState(3);
     const [gridH,setGridH] = useState(2);
-    const [grid,setGrid] = useState(Array(gridH).fill("empty").map(x => Array(gridW).fill("empty")))
+    const [grid,setGrid] = useState(generateEmptyGrid(gridH,gridW))
     const [addingTab,setAddingTab] = useState(false);
     const [tabs,setTabs] = useState(["AAA"]);
     const [tabActive,setTabActive] = useState("AAA");
@@ -76,7 +102,6 @@ export const LayoutLab = props => {
             setTabsType(type)
         }
     }
-    
     const remCol = () => {
         if(!gridDimensionLocked){
             if(gridW>1){
@@ -96,7 +121,7 @@ export const LayoutLab = props => {
             if(gridW<12){
                 setGridW(gridW+1)
                 let clonedGrid = JSON.parse(JSON.stringify(grid));
-                clonedGrid.forEach(row => row.push("empty"));
+                clonedGrid.forEach((row,i) => row.push(newCell("placeholder",gridW,i,1,1)));
                 setGrid(clonedGrid)
             }else{
                 props.toast({message:"A maxium of 12 column are available",type:"warning"})
@@ -124,7 +149,12 @@ export const LayoutLab = props => {
             if(gridH<6){
                 setGridH(gridH+1)
                 let clonedGrid = JSON.parse(JSON.stringify(grid));
-                clonedGrid.push(Array(gridW).fill("empty"));
+                let newRow = [];
+                for (let i = 0; i < gridW; i++) {
+                    newRow.push(newCell("placeholder",i,gridH,1,1))
+                }
+                console.log(newRow)
+                clonedGrid.push(newRow);
                 setGrid(clonedGrid)
             }else{
                 props.toast({message:"A maximum of 6 row are available",type:"warning"})
@@ -136,19 +166,14 @@ export const LayoutLab = props => {
     const placeInGrid = (item,coord) => {
         const y = coord.split("-")[coord.split("-").length-1]
         const x = coord.split("-")[coord.split("-").length-2]
-        console.log(item + " goes in " + x + " " + y)
         let clonedGrid = JSON.parse(JSON.stringify(grid));
-        console.log(clonedGrid)
-        console.log(clonedGrid[x])
-        console.log(clonedGrid[x][y])
-        console.log(item)
-        clonedGrid[x][y] = item;
+        let cell = clonedGrid[x][y]
+        cell.type = item;
+        clonedGrid[x][y] = cell;
         setGrid(clonedGrid);
     }
     const onDragEnd = result => {
         const { source, destination, draggableId } = result;
-        console.log('==> result', result);
-        // dropped outside the list
         if (!destination) {return;}
         switch (source.droppableId) {
             case destination.droppableId:
@@ -157,6 +182,7 @@ export const LayoutLab = props => {
             case 'optional-data':
             case 'container-items':
             case 'layout-items':
+                console.log(result)
                 placeInGrid(draggableId,destination.droppableId)
                 break;
             default:
@@ -173,7 +199,6 @@ export const LayoutLab = props => {
         return result;
     };
     const copy = (source, destination, droppableSource, droppableDestination) => {
-        console.log(destination);
         const sourceClone = Array.from(source);
         const destClone = Array.from(destination);
         const item = sourceClone[droppableSource.index];
@@ -378,7 +403,7 @@ export const LayoutLab = props => {
                                         </Fragment>
                                     )}
                                 </Draggable>
-                                <Draggable draggableId="simple-box" index={1}>
+                                <Draggable draggableId="simplebox" index={1}>
                                     {(provided, snapshot) => (
                                         <Fragment>
                                             <div className="control" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} isDragging={snapshot.isDragging}>
@@ -437,23 +462,23 @@ export const LayoutLab = props => {
         )
     }
     const getCellContent = (c,i,y) => {
-        switch(c){
-            case "empty" :
+        switch(c.type){
+            case "placeholder" :
                 return(
-                    <Droppable droppableId={c+"-"+i+"-"+y} isDropDisabled={false}>
+                    <Droppable droppableId={c.type+"-"+i+"-"+y} isDropDisabled={false}>
                         {(provided, snapshot) => {
                             return(
                                 <div className='placeholder-square' ref={provided.innerRef}>
-                                    empty
+                                    placeholder
                                 </div>
                             )
                         }}
                     </Droppable>
                 )
                 break;
-            case "simple-box" :
+            case "simplebox" :
                 return(
-                    <Droppable droppableId={c+"-"+i+"-"+y} isDropDisabled={false}>
+                    <Droppable droppableId={c.type+"-"+i+"-"+y} isDropDisabled={false}>
                         {(provided, snapshot) => {
                             return(
                                 <div className='box' ref={provided.innerRef}>
