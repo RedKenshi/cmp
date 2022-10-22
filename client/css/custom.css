@@ -402,6 +402,7 @@
 }
 .lab .tags.grabtag {
   justify-content: space-between;
+  flex-wrap: nowrap;
 }
 .lab .tags.grabtag .tag:not(.handle) {
   flex-grow: 1;

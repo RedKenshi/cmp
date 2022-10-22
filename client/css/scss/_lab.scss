@@ -188,6 +188,7 @@
     }
     & .tags.grabtag{
         justify-content: space-between;
+        flex-wrap: nowrap;
         & .tag:not(.handle){
             flex-grow: 1;
             justify-content: flex-start;

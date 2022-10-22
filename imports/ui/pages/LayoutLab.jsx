@@ -12,6 +12,8 @@ import { toast } from 'react-toastify';
 
 export const LayoutLab = props => {
     
+    const DEFAULT_GRID_WIDTH = 3;
+    const DEFAULT_GRID_HEIGHT = 2;
     //HOOKS
     const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ export const LayoutLab = props => {
         return cell;
     }
     const generateEmptyGrid = (height,width) => {
-        let grid = [];
+        let grid = [{}];
         for (let y = 0; y < height; y++) {
             let row = [];
             for (let x = 0; x < width; x++) {
@@ -37,8 +39,29 @@ export const LayoutLab = props => {
             }
             grid[y] = row;
         }
-        return grid
+        return grid;
     }
+    const generateEmptyTab = index => {
+        return({
+            content: generateEmptyGrid(DEFAULT_GRID_HEIGHT,DEFAULT_GRID_WIDTH),
+            tabLabel:"Tab " + parseInt(index+1).toString(),
+            tabIndex:index
+        });
+    }
+    const generateEmptyPage = nTabs => {
+        let page = [];
+        for (let t = 0; t < nTabs; t++) {
+            page[t] = generateEmptyTab(t)
+        }
+        return page
+    }
+    const setTabContent = (tabIndex,tabContent) => {
+        let clonedPage = JSON.parse(JSON.stringify(page));
+        clonedPage[tabIndex] = tabContent;
+        console.log(page)
+        setPage(clonedPage);
+    }
+
 
     //STATES
     const fieldTypes = [
@@ -59,10 +82,9 @@ export const LayoutLab = props => {
     const [tabsType,setTabsType] = useState("top");
     const [gridW,setGridW] = useState(3);
     const [gridH,setGridH] = useState(2);
-    const [grid,setGrid] = useState(generateEmptyGrid(gridH,gridW))
+    const [page,setPage] = useState(generateEmptyPage(1))
     const [addingTab,setAddingTab] = useState(false);
-    const [tabs,setTabs] = useState(["AAA"]);
-    const [tabActive,setTabActive] = useState("AAA");
+    const [tabActive,setTabActive] = useState(0);
     const [structureRaw,setStructureRaw] = useState([]);
     const [structureLoaded,setStructureLoaded] = useState(false);
     const [rightShelfExpanded,setRightShelfExpanded] = useState(true);
@@ -164,22 +186,24 @@ export const LayoutLab = props => {
         }
     }
     const placeContainer = (item,coord) => {
+        console.log(item,coord);
         const y = coord.split("-")[coord.split("-").length-1]
         const x = coord.split("-")[coord.split("-").length-2]
-        let clonedGrid = JSON.parse(JSON.stringify(grid));
-        let cell = clonedGrid[x][y]
+        let clonedGrid = JSON.parse(JSON.stringify(page[tabActive]));
+        let cell = clonedGrid.content[x][y];
         cell.type = item;
-        clonedGrid[x][y] = cell;
-        setGrid(clonedGrid);
+        console.log(clonedGrid)
+        clonedGrid.content[x][y] = cell;
+        setTabContent(tabActive,clonedGrid)
     }
     const placeData = (item,container) => {
-        console.log(container)
         let field = {id:item,label:structureRaw.fields.filter(f=>f._id == item)[0].label}
-        let clonedGrid = JSON.parse(JSON.stringify(grid));
-        console.log(_.flatten(clonedGrid))
-        let target = _.flatten(clonedGrid).filter(x=>x.uuid == container)[0];
-        clonedGrid[target.y][target.x].content.push(field);
-        setGrid(clonedGrid);
+        let clonedGrid = JSON.parse(JSON.stringify(page[tabActive]));
+        console.log(clonedGrid)
+        let target = _.flatten(clonedGrid.content).filter(x=>x.uuid == container)[0];
+        console.log(target)
+        clonedGrid.content[target.y][target.x].content.push(field);
+        setTabContent(tabActive,clonedGrid)
     }
     const onDragEnd = result => {
         const { source, destination, draggableId } = result;
@@ -214,8 +238,8 @@ export const LayoutLab = props => {
         })
     }
     const addTab = () => {
-        toggleAddingTab()
-        setTabs([...tabs,formValues.newtabname])
+        setTabContent(page.length,generateEmptyTab(page.length))
+        //toggleAddingTab()
     }
 
     //CONTENT GETTER
@@ -418,20 +442,10 @@ export const LayoutLab = props => {
             </div>
         )
     }
-    const getLabBody = () => {
-        return(
-            <div className={'lab-body ' + tabsType + "-tabs"}>
-                {getTabs()}
-                <div className='lab-content dropzone rows'>
-                    {getGrid()}
-                </div>
-            </div>
-        )
-    }
     const getGrid = () => {
         return (
             <Fragment>
-                {grid.map((r,i) => {
+                {page[tabActive].content.map((r,i) => {
                     return (
                         <div className="row columns" key={i}>
                             {r.map((c,j) =>
@@ -488,14 +502,15 @@ export const LayoutLab = props => {
         }
     }
     const getTabs = () => {
+        console.log("getting tabs")
         if(tabsType == "side"){
             return(
                 <div className="subtabsbox box">
                     <ul className="menu-list">
-                        {tabs.map(t=>{
+                        {page.map(t=>{
                             return(
-                                <li onClick={()=>setTabActive(t)}>
-                                    <a className={tabActive == t ? "is-active" : ""}>{t}</a>
+                                <li key={t.tabLabel} onClick={()=>setTabActive(t.tabIndex)}>
+                                    <a className={tabActive == t.tabIndex ? "is-active" : ""}>{t.tabLabel}</a>
                                 </li>
                             )
                         })}
@@ -509,10 +524,10 @@ export const LayoutLab = props => {
             return(
                 <div className="tabs is-primary">
                     <ul>
-                        {tabs.map(t=>{
+                        {page.map(t=>{
                             return(
-                                <li className={tabActive == t ? "is-active" : ""} onClick={()=>setTabActive(t)}>
-                                    <a>{t}</a>
+                                <li key={t.tabLabel} className={tabActive == t.tabIndex ? "is-active" : ""} onClick={()=>setTabActive(t.tabIndex)}>
+                                    <a>{t.tabLabel}</a>
                                 </li>
                             )
                         })}
@@ -540,7 +555,7 @@ export const LayoutLab = props => {
             )
         }else{
             return(
-                <button className='add-tab button is-small is-light' onClick={toggleAddingTab}><i className='fa-solid fa-plus'/></button>
+                <button className='add-tab button is-small is-light' onClick={addTab}><i className='fa-solid fa-plus'/></button>
             )
         }
     }
@@ -549,13 +564,21 @@ export const LayoutLab = props => {
     useEffect(()=>{
         loadStructure();
     },[])
+    useEffect(()=>{
+        console.log("update")
+    })
 
     return(
         <DragDropContext onDragEnd={onDragEnd}>
             <div className={"lab" + (leftShelfExpanded ? " leftExpanded" : " leftCollapsed ") + (rightShelfExpanded ? " rightExpanded" : " rightCollapsed")}>
                 {getLeftShelf()}
                 {getRightShelf()}
-                {getLabBody()}
+                <div className={'lab-body ' + tabsType + "-tabs"}>
+                    {getTabs()}
+                    <div className='lab-content dropzone rows'>
+                        {getGrid()}
+                    </div>
+                </div>
             </div>
         </DragDropContext>
     )
